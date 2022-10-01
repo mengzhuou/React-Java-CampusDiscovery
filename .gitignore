@@ -1,6 +1,6 @@
-Frontend/node_modules/
-Fronted/.expo/
-Frontend/dist/
+node_modules/
+.expo/
+dist/
 npm-debug.*
 *.jks
 *.p8
@@ -8,7 +8,7 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
-Frontend/web-build/
+web-build/
 
 # macOS
 .DS_Store
