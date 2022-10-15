@@ -19,7 +19,7 @@ public class Config {
         http.csrf().disable().authorizeRequests().antMatchers("/api/v1/register**","/api/v1/login", "/api/v1/logout").permitAll()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()
                 .and()
-                .rememberMe();
+                .rememberMe(); // todo: remove csrf().disable() after testing
         return http.build();
     }
 }
