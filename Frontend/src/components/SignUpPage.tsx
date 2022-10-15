@@ -45,6 +45,13 @@ function SignUpPage() {
       alert(JSON.stringify(values, null,2))
     }
   })
+
+  const [value, setValue] = React.useState('Student');
+
+  const handleChange = (event:any) => {
+    setValue(event.target.value);
+  };
+
   return (
     <div className="App">
       <Link to="/" className="welcomeLink">Welcome Page</Link>
@@ -63,22 +70,32 @@ function SignUpPage() {
         </section> */}
         <div className="firstName">
           <label htmlFor='firstName'>First Name : </label>
-          <input onChange={formik.handleChange} value={formik.values.email} id='email' name='email'></input>
+          <input onChange={formik.handleChange} value={formik.values.firstName} id='firstName' name='firstName'></input>
           {formik.errors.firstName ? <div>{formik.errors.firstName}</div>: null}
         </div>
         <div className="lastName">
           <label htmlFor='lastName'>Last Name : </label>
-          <input onChange={formik.handleChange} value={formik.values.firstName} id='firstName' name='firstName'></input>
+          <input onChange={formik.handleChange} value={formik.values.lastName} id='lastName' name='lastName'></input>
           {formik.errors.lastName ? <div>{formik.errors.lastName}</div>: null}
         </div>
         <div className="email">
           <label htmlFor='email'>Email Address : </label>
-          <input onChange={formik.handleChange} value={formik.values.lastName} id='lastname' name='lastName'></input>
+          <input onChange={formik.handleChange} value={formik.values.email} id='email' name='email'></input>
           {formik.errors.email ? <div>{formik.errors.email}</div>: null}
         </div>
+        <div>
+          <label htmlFor='Category'>Category : </label>
+            <select value={value} onChange={handleChange}>
+              <option value="Student">Student</option>
+              <option value="Teacher">Teacher</option>
+              <option value="Organizer">Organizer</option>
+            </select>
+            
+        </div>
         
-        <div  className="RegisterButton">
-          <button type="submit">Register</button>
+        <p>Cate is {value}</p>
+        <div >
+          <button className="RegisterButton" type="submit">Register</button>
 
         </div>
       </form>

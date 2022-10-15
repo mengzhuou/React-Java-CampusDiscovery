@@ -30,7 +30,7 @@
     margin-top: 3%;
     position: absolute;
     /* left: 3%; */
-    color: rgb(235, 53, 131);
+    color: rgb(101, 58, 97);
     text-align: center;
     width: 90px;
     height: 20px;
@@ -47,4 +47,18 @@
     height: 400px;
     padding-top: 1%;
     padding-left: 1%;
+}
+
+.RegisterButton{
+    margin-top: 5%;
+    margin-left: 5%;
+    color: rgb(101, 58, 97);
+    background-color:rgb(215, 203, 255);
+    border-radius: 30%;
+    width: 30%;
+    height: 40%;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
 }
