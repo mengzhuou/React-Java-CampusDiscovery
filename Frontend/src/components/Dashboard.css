@@ -1,0 +1,14 @@
+
+.logout{
+    position: absolute;
+    right: 100px;
+    font-size: 20px;
+    
+}
+.header {
+    position: absolute;
+    top: -20px;
+    font-size: 50px;
+    display: flex;
+}
+
