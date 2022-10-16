@@ -1,31 +1,31 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import "./Dashboard.css";
-
+import { logout, getinfo } from '../helpers/connector';
+import { useNavigate } from 'react-router-dom';
   
 function Dashboard() {
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+    const pagelogout = ()=>{
+        logout().then(()=>{
+            navigate("/")
+        }).catch(()=>(alert("logout error")));
+    }
 
-  const goToSecondsComp = () => {
-  
-    // This will navigate to second component
-    navigate('/second'); 
-  };
-  const gotToFirstComp = () => {
-  
-    // This will navigate to first component
-    navigate('/first'); 
-  };
-  
-  return (
+    const display = ()=>{
+        getinfo().then((content)=>{
+            alert(content.data);
+        }).catch(()=>(alert("error getting info")));
+    }
+
+    return (
     <div className="App">
-      <header className="App-header">
-        <p>Welcome</p>
-        <button className="WelcomePageButton" onClick={goToSecondsComp}>ViewUserDetail </button>
-        <button className="WelcomePageButton" onClick={gotToFirstComp}>Sign Up </button>
-      </header>
+        <header className="header">
+        <p>Dashboard</p>
+        </header> 
+        <button className='logout' onClick={pagelogout}>logout</button>
+        <button className='display' onClick={display}>display</button>
     </div>
-  );
+    );
 }
-  
+
 export default Dashboard;

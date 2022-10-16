@@ -1,43 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
-
-.WelcomePageButton{
-  margin-right: 10%;
-  margin-left: 10%;
-  color: rgb(101, 58, 97);
-  background-color:bisque;
-  border-radius: 30%;
-  width: 30%;
-  height: 10%;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
+.header{
+    position: absolute;
+    font-size: 300%;
+    top:-5%;
 }
-
-.App{
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction:column;
-  align-items: center;
-  background-color:coral;
-  font-family: "Neucha", cursive;
+.logout{
+    position: absolute;
+    right: 10%;
+    color: rgb(101, 58, 97);
+    background-color:#ffa8B6;
+    border-radius: 35%;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
 }
-
-.App-header{
-  margin-top: 5%;
-  font-size: 100px;
-  text-transform: uppercase;
-  color:#6e3232;
-  z-index: 1;
-  text-align: center;
-}
-
-.buttonText{
-  font-size: 20px;
-}
-@media (max-width: 800px){
-  .heading{
-    margin: 35px;
-    font-size: 55px;
-  }
+.display{
+    position: absolute;
+    right: 20%;
+    color: rgb(101, 58, 97);
+    background-color:#ffa8B6;
+    border-radius: 35%;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
 }
