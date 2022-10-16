@@ -31,7 +31,8 @@ public class UserAPI {
 
     @GetMapping("/info")
     public String getUser(Principal principal){
-        return principal.getName();
+        User tmp = userService.getUser(principal.getName()).get();
+        return tmp.toString();
     }
 
     @PostMapping("/logout")
@@ -58,7 +59,10 @@ public class UserAPI {
 
     @PostMapping("/register")
     public void addUser(@RequestBody Map<String, String> body){
-        User user = new User(body.get("email"),passwordEncoder.encode(body.get("password")));
+        User user = new User(body.get("email"),
+                passwordEncoder.encode(body.get("password")),
+                body.get("fname"),
+                body.get("lname"));
         userService.addUser(user);
     }
 

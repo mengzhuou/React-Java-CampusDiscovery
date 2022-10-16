@@ -15,14 +15,20 @@ public class User implements UserDetails {
     private String email;
     @NotBlank
     private String password;
+    @NotBlank
+    private String fname;
+    @NotBlank
+    private String lname;
 
     public User(){
 
     }
 
-    public User(String email, String password){
+    public User(String email, String password, String fname, String lname){
         this.email = email;
         this.password = password;
+        this.fname = fname;
+        this.lname = lname;
     }
 
     @Override
@@ -34,7 +40,9 @@ public class User implements UserDetails {
             return false;
         }
         if(this.email.equals(tmp.getUsername()) &&
-                this.password.equals(tmp.getPassword())){
+                this.password.equals(tmp.getPassword()) &&
+                this.fname.equals(tmp.getFname()) &&
+                this.lname.equals(tmp.getLname())){
             return true;
         }
         return false;
@@ -44,6 +52,8 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
+                "Fname='" + fname + '\'' +
+                ", Lname='" + lname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
@@ -62,6 +72,13 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+    public String getLname() {
+        return lname;
     }
 
     @Override
