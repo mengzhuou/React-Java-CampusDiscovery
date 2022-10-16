@@ -6,12 +6,12 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 import { register, login } from '../helpers/connector'
+import { useNavigate } from 'react-router-dom';
 
 
 function SignUpPage() {
   
-
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
       firstName:'',
@@ -33,7 +33,8 @@ function SignUpPage() {
       }else{
         register(values.email, values.password, values.firstName, values.lastName, values.category).then(()=>{
           login(values.email, values.password).then(()=>{
-            alert("logged in")
+            console.log("loggin")
+            navigate("/dashboard")
           }).catch(()=>{
             alert("error1")
           })

@@ -1,17 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { emailValidator } from '../helpers/emailValidator'
+import { passwordValidator } from '../helpers/passwordValidator'
+import { login } from '../helpers/connector'
+import { useNavigate } from 'react-router-dom';
 import "./LoginPage.css";
   
 function LoginPage() {
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
       email:'',
       password:''
     },
     onSubmit: values=>{
-      alert(JSON.stringify(values, null,2))
+      const emailError = emailValidator(values.email)
+      const passwordError = passwordValidator(values.password)
+      if (emailError || passwordError) {
+        alert("invalid name, email or password")
+        return
+      }else{
+          login(values.email, values.password).then(()=>{
+            console.log("loggin")
+            navigate("/dashboard")
+          }).catch(()=>{
+            alert("Error Logging in")
+          })
+      }
     }
   })
 
