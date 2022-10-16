@@ -23,24 +23,28 @@ function SignUpPage() {
     
 
     onSubmit: values=>{
-      const emailError = emailValidator(values.email)
-      const passwordError = passwordValidator(values.password)
-      const fnError = nameValidator(values.firstName)
-      const lnError = nameValidator(values.lastName)
-      if (emailError || passwordError || fnError || lnError) {
-        alert("invalid name, email or password")
-        return
-      }else{
-        register(values.email, values.password, values.firstName, values.lastName, values.category).then(()=>{
-          login(values.email, values.password).then(()=>{
-            console.log("loggin")
-            navigate("/dashboard")
+      var text:string = "Firstname = " + values.firstName + "\nLastname = " + values.lastName + "\nEmail = ";
+      text += values.email + "\nPassword: " + values.password + "\nCategory: " + values.category;
+      if(window.confirm(text)){
+        const emailError = emailValidator(values.email)
+        const passwordError = passwordValidator(values.password)
+        const fnError = nameValidator(values.firstName)
+        const lnError = nameValidator(values.lastName)
+        if (emailError || passwordError || fnError || lnError) {
+          alert("invalid name, email or password")
+          return
+        }else{
+          register(values.email, values.password, values.firstName, values.lastName, values.category).then(()=>{
+            login(values.email, values.password).then(()=>{
+              console.log("loggin")
+              navigate("/dashboard")
+            }).catch(()=>{
+              alert("error1")
+            })
           }).catch(()=>{
-            alert("error1")
+            alert("error2")
           })
-        }).catch(()=>{
-          alert("error2")
-        })
+        }
       }
     }
   })
