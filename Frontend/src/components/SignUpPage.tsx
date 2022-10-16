@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import "./SignUpPage.css";
-import TextField from '@material-ui/core/TextField';
-import Button from '@mui/material/Button';
 import { useFormik } from 'formik';
 
 
