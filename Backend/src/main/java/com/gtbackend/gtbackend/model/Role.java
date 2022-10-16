@@ -1,4 +1,4 @@
-package com.gtbackend.gtbackend;
+package com.gtbackend.gtbackend.model;
 
 public enum Role{
     STUDENT,

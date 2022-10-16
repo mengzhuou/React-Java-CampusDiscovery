@@ -19,16 +19,18 @@ public class User implements UserDetails {
     private String fname;
     @NotBlank
     private String lname;
+    private Role role;
 
     public User(){
 
     }
 
-    public User(String email, String password, String fname, String lname){
+    public User(String email, String password, String fname, String lname, Role role){
         this.email = email;
         this.password = password;
         this.fname = fname;
         this.lname = lname;
+        this.role = role;
     }
 
     @Override
@@ -51,11 +53,12 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "{" +
                 "Fname='" + fname + '\'' +
                 ", Lname='" + lname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 
@@ -79,6 +82,10 @@ public class User implements UserDetails {
     }
     public String getLname() {
         return lname;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     @Override

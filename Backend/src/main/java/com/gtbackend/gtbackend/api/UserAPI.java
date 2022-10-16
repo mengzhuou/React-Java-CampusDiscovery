@@ -1,5 +1,6 @@
 package com.gtbackend.gtbackend.api;
 
+import com.gtbackend.gtbackend.model.Role;
 import com.gtbackend.gtbackend.model.User;
 import com.gtbackend.gtbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,10 +60,17 @@ public class UserAPI {
 
     @PostMapping("/register")
     public void addUser(@RequestBody Map<String, String> body){
+        String category = body.get("role").toLowerCase();
+        Role role = Role.STUDENT;
+        if(category.equals("teacher")){
+            role = Role.TEACHER;
+        }else if(category.equals("organizer")){
+            role = Role.ORGANIZER;
+        }
         User user = new User(body.get("email"),
                 passwordEncoder.encode(body.get("password")),
                 body.get("fname"),
-                body.get("lname"));
+                body.get("lname"), role);
         userService.addUser(user);
     }
 

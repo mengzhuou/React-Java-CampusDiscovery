@@ -2,108 +2,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import "./SignUpPage.css";
 import { useFormik } from 'formik';
-import { useForm, SubmitHandler } from "react-hook-form";
-
-// type Initialinputs = {
-//   firstName: string,
-//   lastName: string,
-//   email: string,
-//   password: string,
-// };
-
-
-// function SignUpPage() {
-//   const {register, handleSubmit, watch, formState: {errors}} = useForm<Initialinputs>();
-
-//   const onSubmit: SubmitHandler<Initialinputs> = data => console.log(data);
-
-//   const onSubmitError: SubmitHandler<Initialinputs> = data => console.log(data);
-
-
-//   // return (
-    
-//   //   <form onSubmit={handleSubmit(onSubmit)}>
-      
-//   //     <input defaultValue="test" {...register("firstName", { required: true })} />
-//   //     {errors.firstName && <span>This field is required</span>}
-      
-//   //     <input {...register("password", { required: true })} type="password"/>
-//   //     {errors.password && <span>This field is required</span>}
-      
-//   //     <input type="submit" />
-//   //   </form>
-//   // );
-
-//   // const formik = useFormik({
-//   //   initialValues:{
-//   //     firstName:'',
-//   //     lastName:'',
-//   //     email:'',
-//   //     password:''
-//   //   },
-    
-//   //   onSubmit: values=>{
-//   //     alert(JSON.stringify(values, null,2))
-//   //   }
-//   // });
-
-//   const options = [
-//     // value is the real value we get passed down
-//     {label: 'Student', value: 'Student'},
-//     {label: 'Teacher', value: 'Teacher'},
-//     {label: 'Organizer', value: 'Organizer'},
-//   ];
-  
-//   const [value, setValue] = React.useState('Student');
-
-//   const handleChange = (event:any) => {
-//     setValue(event.target.value);
-//   };
-
-//   return (
-//     <div className="App">
-//       <Link to="/" className="welcomeLink">Welcome Page</Link>
-//       <header className="SignUp-header">
-//         <p>Please type your information below and submit the form.</p>
-//       </header>
-
-//       <form  className="form" onSubmit={handleSubmit(onSubmit)}>
-//         <div className="hasMargin">
-//           <label htmlFor='firstName'>First Name : </label>
-//           <input defaultValue="" {...register("firstName", { required: true })} />
-//           {errors.firstName && <span>This field is required</span>}
-//         </div>
-//         <div className="hasMargin">
-//           <label htmlFor='lsdtName'>Last Name : </label>
-//           <input defaultValue="" {...register("firstName", { required: true })} />
-//           {errors.firstName && <span>This field is required</span>}
-//         </div>
-//         <div className="hasMargin">
-//           <label htmlFor='firstName'>First Name : </label>
-//           <input defaultValue="" {...register("firstName", { required: true })} />
-//           {errors.firstName && <span>This field is required</span>}
-//         </div>
-//         <div className="hasMargin">
-//           <label htmlFor='email'>Email Address (Username) : </label>
-//           <input {...register("password", { required: true })} type="password"/>
-//           {errors.password && <span>This field is required</span>}
-//           </div>
-//         <div >
-//           <button className="RegisterButton" type="submit">Register</button>
-//         </div>
-//       </form>
-
-      
-//     </div>
-//   );
-// }
-  
-// export default SignUpPage;
-
-
-
-
-
+import { emailValidator } from '../helpers/emailValidator'
+import { passwordValidator } from '../helpers/passwordValidator'
+import { nameValidator } from '../helpers/nameValidator'
+import { register, login } from '../helpers/connector'
 
 
 function SignUpPage() {
@@ -115,40 +17,32 @@ function SignUpPage() {
       firstName:'',
       lastName:'',
       email:'',
-      password:''
+      password:'',
+      category:'student'
     },
     
 
     onSubmit: values=>{
-      alert(JSON.stringify(values, null,2))
+      const emailError = emailValidator(values.email)
+      const passwordError = passwordValidator(values.password)
+      const fnError = nameValidator(values.firstName)
+      const lnError = nameValidator(values.lastName)
+      if (emailError || passwordError || fnError || lnError) {
+        alert("invalid name, email or password")
+        return
+      }else{
+        register(values.email, values.password, values.firstName, values.lastName, values.category).then(()=>{
+          login(values.email, values.password).then(()=>{
+            alert("logged in")
+          }).catch(()=>{
+            alert("error1")
+          })
+        }).catch(()=>{
+          alert("error2")
+        })
+      }
     }
-  });
-
-  // const validate = values:string =>{
-  //   const errors = {}
-  //   if (!values.firstName){
-  //     errors.firstName = 'Required'
-  //   }
-  //   else if (values.firstName.length > 30){
-  //     errors.firstName = 'Please make sure the length is no larger than 30 characters'
-  //   }
-
-  //   if (!values.lastName){
-  //     errors.lastName = 'Required'
-  //   }
-  //   else if (values.lastName.length > 30){
-  //     errors.lastName = 'Please make sure the length is no larger than 30 characters'
-  //   }
-
-  //   if (!values.email){
-  //     errors.email = 'Required'
-  //   }
-  //   else if (values.email.length > 30){
-  //     errors.email = 'Please make sure the length is no larger than 30 characters'
-  //   }
-
-  //   return errors
-  // }
+  })
 
   const options = [
     // value is the real value we get passed down
@@ -161,6 +55,7 @@ function SignUpPage() {
 
   const handleChange = (event:any) => {
     setValue(event.target.value);
+    formik.setFieldValue("category", event.target.value);
   };
 
   return (
