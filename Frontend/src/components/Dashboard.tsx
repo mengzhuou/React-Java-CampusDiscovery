@@ -2,6 +2,7 @@ import React from 'react';
 import "./Dashboard.css";
 import { logout, getinfo } from '../helpers/connector';
 import { useNavigate } from 'react-router-dom';
+import DashboardBox from './DashboardBox';
   
 function Dashboard() {
     const navigate = useNavigate();
@@ -24,7 +25,22 @@ function Dashboard() {
         </header> 
         <button className='logout' onClick={pagelogout}>logout</button>
         <button className='display' onClick={display}>display</button>
+        
+
+        <div className='body'>
+        <div className='column1'>
+         <DashboardBox></DashboardBox>
+         <DashboardBox></DashboardBox>
+        </div>
+
+        <div className='column2'>
+          <DashboardBox></DashboardBox>
+          <DashboardBox></DashboardBox>
+        </div>
+        </div>
     </div>
+
+    
     );
 }
 

@@ -1,0 +1,8 @@
+{
+  "name": "campusdiscovery",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.gatech.edu/CS2340team10/campusdiscovery.git",
+  "author": "Noahs212 <33463005+Noahs212@users.noreply.github.com>",
+  "license": "MIT"
+}
