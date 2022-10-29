@@ -2,8 +2,8 @@ package com.gtbackend.gtbackend.api;
 
 import com.gtbackend.gtbackend.dao.EventRepository;
 import com.gtbackend.gtbackend.model.Event;
-import com.gtbackend.gtbackend.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -32,6 +32,14 @@ public class EventAPI {
     public List<Event> findIdByRange(@RequestParam String page) throws NumberFormatException{
         Integer page_num = Integer.valueOf(page);
 
-        return eventRepository.findEventByIdRange(10*(page_num-1)+1,10*page_num);
+        return eventRepository.findEventByRange(PageRequest.of(page_num-1,10));
+    }
+
+    @DeleteMapping("/removeEvent")
+    @ResponseBody
+    public void removeEvent(@RequestParam String id) throws NumberFormatException{
+        Integer Event_id = Integer.valueOf(id);
+
+        eventRepository.deleteById(Event_id);
     }
 }
