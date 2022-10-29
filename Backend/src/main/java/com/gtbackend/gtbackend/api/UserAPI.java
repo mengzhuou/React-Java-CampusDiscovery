@@ -59,14 +59,9 @@ public class UserAPI {
     }
 
     @PostMapping("/register")
-    public void addUser(@RequestBody Map<String, String> body){
-        String category = body.get("role").toLowerCase();
-        Role role = Role.STUDENT;
-        if(category.equals("teacher")){
-            role = Role.TEACHER;
-        }else if(category.equals("organizer")){
-            role = Role.ORGANIZER;
-        }
+    public void addUser(@RequestBody Map<String, String> body) throws IllegalArgumentException{
+        String category = body.get("role").toUpperCase();
+        Role role = Role.valueOf(category);
         User user = new User(body.get("email"),
                 passwordEncoder.encode(body.get("password")),
                 body.get("fname"),
