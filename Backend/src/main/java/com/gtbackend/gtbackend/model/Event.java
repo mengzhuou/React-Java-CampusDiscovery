@@ -4,20 +4,34 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "event")
+@Table(name = "event_table")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
     @NotBlank
     private String title;
+
     @NotBlank
     private String email;
+    @Lob
     private String description;
     private String location;
     private String time;
 
-    public long getId() {
+    public Event(){
+
+    }
+
+    public Event(String title, String email, String description, String location, String time) {
+        this.title = title;
+        this.email = email;
+        this.description = description;
+        this.location = location;
+        this.time = time;
+    }
+
+    public Integer getId() {
         return id;
     }
 

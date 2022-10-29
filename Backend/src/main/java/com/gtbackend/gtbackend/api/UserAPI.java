@@ -29,7 +29,7 @@ public class UserAPI {
         this.passwordEncoder = passwordEncoder;
     }
 
-
+    //related to User Service
     @GetMapping("/info")
     public String getUser(Principal principal){
         User tmp = userService.getUser(principal.getName()).get();
@@ -71,7 +71,6 @@ public class UserAPI {
 
     @DeleteMapping("/{email}")
     public void deleteUser(@PathVariable("email") String email){
-        System.out.println(email);
         userService.removeUser(email);
     }
 
