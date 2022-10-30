@@ -1,18 +1,33 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
+import { emailValidator } from '../helpers/emailValidator'
+import { passwordValidator } from '../helpers/passwordValidator'
+import { login } from '../helpers/connector'
+import { useNavigate } from 'react-router-dom';
 import "./LoginPage.css";
   
 function LoginPage() {
-
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
-      name:'',
       email:'',
       password:''
     },
     onSubmit: values=>{
-      alert(JSON.stringify(values, null,2))
+      const emailError = emailValidator(values.email)
+      const passwordError = passwordValidator(values.password)
+      if (emailError || passwordError) {
+        alert("invalid name, email or password")
+        return
+      }else{
+          login(values.email, values.password).then(()=>{
+            console.log("loggin")
+            navigate("/dashboard")
+          }).catch(()=>{
+            alert("Error Logging in")
+          })
+      }
     }
   })
 
@@ -22,30 +37,21 @@ function LoginPage() {
       <Link to = "/" className = "welcomeLink"> Welcome Page</Link>
       <header className = "LoginPage-header">
       <form className="loginForm" onSubmit={formik.handleSubmit}>
-        <div className="loginName">
-          <label htmlFor='loginName'>Your name : </label>
-          <input onChange={formik.handleChange} value={formik.values.name} id='loginName' name='loginName'></input>
-          {formik.errors.name ? <div>{formik.errors.name}</div>: null}
-        </div>
-        <div className="loginEmail">
-          <label htmlFor='loginEmail'>Your email : </label>
-          <input onChange={formik.handleChange} value={formik.values.email} id='loginEmail' name='loginEmail'></input>
+        <div className="email">
+          <label htmlFor='email'>Your email : </label>
+          <input onChange={formik.handleChange} value={formik.values.email} id='email' name='email'></input>
           {formik.errors.email ? <div>{formik.errors.email}</div>: null}
         </div>
-        <div className="loginPassword">
-          <label htmlFor ='loginPassword'>Password : </label>
-          <input onChange={formik.handleChange} value = {formik.values.password} id='loginPassword' name='loginPassword'></input>
+        <div className="password">
+          <label htmlFor ='password'>Password : </label>
+          <input onChange={formik.handleChange} value = {formik.values.password} id='password' name='password'></input>
           {formik.errors.password ? <div>{formik.errors.password}</div>: null}
         </div>
-        <div className="loginButton">
-          <button className="LoginButton" type="submit">Login</button>
-        </div>
+        <button className="button" type="submit">Login</button>
         <p>Or don't have an account?</p>
-        <div className="SignupButton">
-          <Link to = "/first" className = "SignUpPage">
-          <button className="SignupButton" type="submit">Sign up</button>
+        <Link to = "/first" className = "button">
+          <button className="button" type="submit">Sign up</button>
           </Link>
-        </div>
       </form>
       </header>
     </div>

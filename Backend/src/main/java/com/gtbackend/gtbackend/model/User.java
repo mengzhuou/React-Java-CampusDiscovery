@@ -1,10 +1,12 @@
 package com.gtbackend.gtbackend.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,14 +17,22 @@ public class User implements UserDetails {
     private String email;
     @NotBlank
     private String password;
+    @NotBlank
+    private String fname;
+    @NotBlank
+    private String lname;
+    private Role role;
 
     public User(){
 
     }
 
-    public User(String email, String password){
+    public User(String email, String password, String fname, String lname, Role role){
         this.email = email;
         this.password = password;
+        this.fname = fname;
+        this.lname = lname;
+        this.role = role;
     }
 
     @Override
@@ -34,7 +44,9 @@ public class User implements UserDetails {
             return false;
         }
         if(this.email.equals(tmp.getUsername()) &&
-                this.password.equals(tmp.getPassword())){
+                this.password.equals(tmp.getPassword()) &&
+                this.fname.equals(tmp.getFname()) &&
+                this.lname.equals(tmp.getLname())){
             return true;
         }
         return false;
@@ -43,15 +55,26 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "{" +
+                "Fname='" + fname + '\'' +
+                ", Lname='" + lname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 '}';
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+
+        if(role.equals(Role.ADMIN)){
+            list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }else{
+            list.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
+        return list;
     }
 
     @Override
@@ -62,6 +85,17 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    public String getFname() {
+        return fname;
+    }
+    public String getLname() {
+        return lname;
+    }
+
+    public Role getRole() {
+        return role;
     }
 
     @Override

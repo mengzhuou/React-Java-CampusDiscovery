@@ -1,5 +1,6 @@
 package com.gtbackend.gtbackend.api;
 
+import com.gtbackend.gtbackend.model.Role;
 import com.gtbackend.gtbackend.model.User;
 import com.gtbackend.gtbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,11 @@ public class UserAPI {
         this.passwordEncoder = passwordEncoder;
     }
 
-
+    //related to User Service
     @GetMapping("/info")
     public String getUser(Principal principal){
-        return principal.getName();
+        User tmp = userService.getUser(principal.getName()).get();
+        return tmp.toString();
     }
 
     @PostMapping("/logout")
@@ -57,14 +59,18 @@ public class UserAPI {
     }
 
     @PostMapping("/register")
-    public void addUser(@RequestBody Map<String, String> body){
-        User user = new User(body.get("email"),passwordEncoder.encode(body.get("password")));
+    public void addUser(@RequestBody Map<String, String> body) throws IllegalArgumentException{
+        String category = body.get("role").toUpperCase();
+        Role role = Role.valueOf(category);
+        User user = new User(body.get("email"),
+                passwordEncoder.encode(body.get("password")),
+                body.get("fname"),
+                body.get("lname"), role);
         userService.addUser(user);
     }
 
     @DeleteMapping("/{email}")
     public void deleteUser(@PathVariable("email") String email){
-        System.out.println(email);
         userService.removeUser(email);
     }
 

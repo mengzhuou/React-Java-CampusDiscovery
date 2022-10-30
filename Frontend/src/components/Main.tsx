@@ -1,19 +1,4 @@
-// import React from 'react'
-
-// interface HomeProps {
-
-// }
-
-// export const Home: React.FC<HomeProps> = ({}) => {
-//         return (
-//             <>
-//                 <div className="App">
-//                     <span className='heading'>Welcome</span>
-//                 </div>
-//             </>
-//         );
-// }
-import React from 'react'
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./Main.css";
 
