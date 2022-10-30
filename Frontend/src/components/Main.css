@@ -21,6 +21,7 @@
   align-items: center;
   background-color:coral;
   font-family: "Neucha", cursive;
+  overflow:auto;
 }
 
 .App-header{

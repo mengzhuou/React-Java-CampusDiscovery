@@ -2,12 +2,13 @@
     position: relative;
     font-size: 300%;
     top:-5%;
+    color: white;
 }
 .logout{
     position: absolute;
     right: 10%;
     color: rgb(101, 58, 97);
-    background-color:#ffa8B6;
+    background-color:#fcfcfc;
     border-radius: 35%;
     font-weight: bold;
     cursor: pointer;
@@ -17,7 +18,7 @@
     position: absolute;
     right: 20%;
     color: rgb(101, 58, 97);
-    background-color:#ffa8B6;
+    background-color:#fffcfc;
     border-radius: 35%;
     font-weight: bold;
     cursor: pointer;
@@ -27,7 +28,7 @@
     position: absolute;
     right: 15%;
     color: rgb(101, 58, 97);
-    background-color:#ffa8B6;
+    background-color:#ffffff;
     border-radius: 35%;
     font-weight: bold;
     cursor: pointer;
