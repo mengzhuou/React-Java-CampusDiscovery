@@ -6,6 +6,7 @@ import Second from "./components/LoginPage";
 import Dashboard from "./components/Dashboard";
 import Main from "./components/Main";
 import EventEditingPage from "./components/EventEditingPage";
+import EventCreationPage from "./components/EventCreationPage";
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/second" element={<Second />}/>
         <Route path="/" element={<Main/>}/>
         <Route path="/eventEditing" element={<EventEditingPage/>}/>
+        <Route path="/eventCreation" element={<EventCreationPage/>}/>
       </Routes>
     </Router>
   );

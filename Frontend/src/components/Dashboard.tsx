@@ -23,10 +23,10 @@ function Dashboard() {
         }).catch(()=>(alert("error getting info")));
     }
 
-    const edit = ()=>{
+    const createEvent = ()=>{
         logout().then(()=>{
-            navigate("/eventEditing")
-        }).catch(()=>(alert("logout error")));
+            navigate("/eventCreation")
+        }).catch(()=>(alert("creation error")));
     }
 
     return (
@@ -34,9 +34,9 @@ function Dashboard() {
         <header className="header">
             <p>Dashboard</p>
         </header> 
-        <button className='logout' onClick={pagelogout}>logout</button>
-        <button className='display' onClick={display}>display</button>
-        <button className='edit' onClick={edit}>edit</button>
+        <button className='logout' onClick={pagelogout}>Logout</button>
+        <button className='display' onClick={display}>Display</button>
+        <button className='createEvent' onClick={createEvent}>Create A Event</button>
 
         <div className='body'>
             <div className='column1'>
