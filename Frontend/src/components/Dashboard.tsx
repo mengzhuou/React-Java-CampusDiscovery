@@ -18,6 +18,12 @@ function Dashboard() {
         }).catch(()=>(alert("error getting info")));
     }
 
+    const edit = ()=>{
+        logout().then(()=>{
+            navigate("/eventEditing")
+        }).catch(()=>(alert("logout error")));
+    }
+
     return (
     <div className="App">
         <header className="header">
@@ -25,7 +31,7 @@ function Dashboard() {
         </header> 
         <button className='logout' onClick={pagelogout}>logout</button>
         <button className='display' onClick={display}>display</button>
-        
+        <button className='edit' onClick={edit}>edit</button>
 
         <div className='body'>
         <div className='column1'>
