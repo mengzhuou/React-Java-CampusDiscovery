@@ -33,3 +33,13 @@
     cursor: pointer;
     font-family: "Neucha", cursive;
 }
+
+.AppDashboard{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    background-color:rgb(0, 0, 0);
+    font-family: "Neucha", cursive;
+  }

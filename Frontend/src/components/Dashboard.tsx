@@ -25,7 +25,7 @@ function Dashboard() {
     }
 
     return (
-    <div className="App">
+    <div className="AppDashboard">
         <header className="header">
         <p>Dashboard</p>
         </header> 
@@ -37,12 +37,20 @@ function Dashboard() {
         <div className='column1'>
          <DashboardBox></DashboardBox>
          <DashboardBox></DashboardBox>
+         <DashboardBox></DashboardBox>
+         <DashboardBox></DashboardBox>
+         <DashboardBox></DashboardBox>
         </div>
 
         <div className='column2'>
           <DashboardBox></DashboardBox>
           <DashboardBox></DashboardBox>
+          <DashboardBox></DashboardBox>
+          <DashboardBox></DashboardBox>
+          <DashboardBox></DashboardBox>
         </div>
+
+
         </div>
     </div>
 
