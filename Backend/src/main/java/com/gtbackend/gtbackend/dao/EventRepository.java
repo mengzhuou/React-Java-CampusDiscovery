@@ -26,31 +26,52 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM Event e WHERE e.id = ?1")
-    void deleteEvent(Integer id);
+    @Query(value = "DELETE FROM Event e WHERE e.id = ?1 AND e.email = ?2")
+    void deleteEvent(Integer id, String email);
 
     @Modifying
     @Transactional
+    @Query(value = "DELETE FROM Event e WHERE e.id = ?1")
+    void deleteEventAdmin(Integer id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Event e SET e.title = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    void updateTitle(Integer id, String email, String title);
+    @Modifying
+    @Transactional
     @Query(value = "UPDATE Event e SET e.title = ?2 WHERE e.id = ?1")
-    void updateTitle(Integer id, String title);
+    void updateTitleAdmin(Integer id, String title);
 
     @Modifying
     @Transactional
     @Query(value = "UPDATE Event e SET e.email = ?2 WHERE e.id = ?1")
-    void updateEmail(Integer id, String email);
+    void updateEmailAdmin(Integer id, String email);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Event e SET e.description = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    void updateDescription(Integer id, String email, String description);
     @Modifying
     @Transactional
     @Query(value = "UPDATE Event e SET e.description = ?2 WHERE e.id = ?1")
-    void updateDescription(Integer id, String description);
+    void updateDescriptionAdmin(Integer id, String description);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Event e SET e.location = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    void updateLocation(Integer id, String email, String location);
     @Modifying
     @Transactional
     @Query(value = "UPDATE Event e SET e.location = ?2 WHERE e.id = ?1")
-    void updateLocation(Integer id, String location);
+    void updateLocationAdmin(Integer id, String location);
 
     @Modifying
     @Transactional
+    @Query(value = "UPDATE Event e SET e.time = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    void updateTime(Integer id, String email, String time);
+    @Modifying
+    @Transactional
     @Query(value = "UPDATE Event e SET e.time = ?2 WHERE e.id = ?1")
-    void updateTime(Integer id, String time);
+    void updateTimeAdmin(Integer id, String time);
 }

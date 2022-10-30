@@ -1,10 +1,12 @@
 package com.gtbackend.gtbackend.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -64,7 +66,15 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> "read");
+        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
+
+        if(role.equals(Role.ADMIN)){
+            list.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }else{
+            list.add(new SimpleGrantedAuthority("ROLE_USER"));
+        }
+
+        return list;
     }
 
     @Override
