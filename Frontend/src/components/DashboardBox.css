@@ -19,3 +19,8 @@
     border: 10px;
     float: right;
 }
+
+.title {
+    display: flex;
+    justify-content: center;
+}
