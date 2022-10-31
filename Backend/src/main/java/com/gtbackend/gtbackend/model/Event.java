@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
     @NotBlank
     private String title;
 
@@ -31,7 +31,7 @@ public class Event {
         this.time = time;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 

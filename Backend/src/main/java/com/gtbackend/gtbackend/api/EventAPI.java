@@ -37,34 +37,38 @@ public class EventAPI {
         return eventRepository.findEventByRange(PageRequest.of(page_num-1,10));
     }
 
+    @GetMapping("/getEventSize")
+    public long getsize(){
+        return eventRepository.count();
+    }
+
     @DeleteMapping("/removeEvent")
     public void removeEvent(Principal principal, @RequestParam String id) throws NumberFormatException{
-        Integer Event_id = Integer.valueOf(id);
-
+        Long Event_id = Long.valueOf(id);
         eventRepository.deleteEvent(Event_id, principal.getName());
     }
 
     @PatchMapping("/updateTitle")
     public void updateTitle(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
-        Integer id = Integer.valueOf(body.get("id"));
+        Long id = Long.valueOf(body.get("id"));
         String title = body.get("title");
         eventRepository.updateTitle(id,principal.getName(),title);
     }
     @PatchMapping("/updateDescription")
     public void updateDescription(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
-        Integer id = Integer.valueOf(body.get("id"));
+        Long id = Long.valueOf(body.get("id"));
         String description = body.get("description");
         eventRepository.updateDescription(id,principal.getName(),description);
     }
     @PatchMapping("/updateLocation")
     public void updateLocation(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
-        Integer id = Integer.valueOf(body.get("id"));
+        Long id = Long.valueOf(body.get("id"));
         String location = body.get("location");
         eventRepository.updateLocation(id,principal.getName(),location);
     }
     @PatchMapping("/updateTime")
     public void updateTime(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
-        Integer id = Integer.valueOf(body.get("id"));
+        Long id = Long.valueOf(body.get("id"));
         String time = body.get("time");
         eventRepository.updateTime(id,principal.getName(),time);
     }

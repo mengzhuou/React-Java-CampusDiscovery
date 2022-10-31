@@ -1,7 +1,7 @@
 // import React from 'react';
 import {useState} from 'react';
 import "./Dashboard.css";
-import { logout, getinfo } from '../helpers/connector';
+import { logout, getinfo, addevent, runall } from '../helpers/connector';
 import { useNavigate } from 'react-router-dom';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
@@ -21,12 +21,13 @@ function Dashboard() {
         getinfo().then((content)=>{
             alert(content.data);
         }).catch(()=>(alert("error getting info")));
+        runall();
     }
 
-    const edit = ()=>{
+    const createEvent = ()=>{
         logout().then(()=>{
-            navigate("/eventEditing")
-        }).catch(()=>(alert("logout error")));
+            navigate("/eventCreation")
+        }).catch(()=>(alert("creation error")));
     }
 
     return (
@@ -34,9 +35,9 @@ function Dashboard() {
         <header className="header">
             <p>Dashboard</p>
         </header> 
-        <button className='logout' onClick={pagelogout}>logout</button>
-        <button className='display' onClick={display}>display</button>
-        <button className='edit' onClick={edit}>edit</button>
+        <button className='logout' onClick={pagelogout}>Logout</button>
+        <button className='display' onClick={display}>Display</button>
+        <button className='createEvent' onClick={createEvent}>Create A Event</button>
 
         <div className='body'>
             <div className='column1'>

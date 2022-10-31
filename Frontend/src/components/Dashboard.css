@@ -24,9 +24,9 @@
     cursor: pointer;
     font-family: "Neucha", cursive;
 }
-.edit{
+.createEvent{
     position: absolute;
-    right: 15%;
+    right: 30%;
     color: rgb(101, 58, 97);
     background-color:#ffffff;
     border-radius: 35%;
