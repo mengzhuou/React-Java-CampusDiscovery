@@ -30,8 +30,12 @@ function Dashboard() {
     }
 
     
+   
+    let arr: event[] = [];
+    arr.push({title: "adfadsf", host: "adfaf", date: "adfdf", location: "adsfd", descripton: "adfdfadf"})
     const Event1: event = {title: "Midnight Breakfast",host: "Student Orgs",date: "Dec 9", location: "Tech Green", descripton: "Come get Free breakfast!!!"};
-    const Event2: event = {title: "Freshman Cake Race",host: "COC",date: "Dec 3", location: "CRC", descripton: "Race for Cake!!!"};
+    //const Event2: event = {title: "Freshman Cake Race",host: "COC",date: "Dec 3", location: "CRC", descripton: "Race for Cake!!!"};
+    const Event2: event = arr[0];
     return (
     <div className="AppDashboard">
         <header className="header">
