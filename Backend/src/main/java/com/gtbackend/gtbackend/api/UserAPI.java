@@ -69,9 +69,9 @@ public class UserAPI {
         userService.addUser(user);
     }
 
-    @DeleteMapping("/{email}")
-    public void deleteUser(@PathVariable("email") String email){
-        userService.removeUser(email);
+    @DeleteMapping("/deleteUser")
+    public void deleteUser(Principal principal){
+        userService.removeUser(principal.getName());
     }
 
 }
