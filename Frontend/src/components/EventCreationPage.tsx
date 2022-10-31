@@ -10,13 +10,12 @@ function EventEditingPage() {
   const formik = useFormik({
     initialValues:{
       title:'',
-      email:'', //host
       time:'',  //date
       location:'',
       description:'',
     },
     onSubmit: values=>{
-        var textContent:string = "Event title: " + values.title + "\nEvent host (email): " + values.email + "\nEvent date: ";
+        var textContent:string = "Event title: " + values.title + "\nEvent date: ";
         textContent += values.time + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
         if(window.confirm(textContent)){
           addevent(values.title, values.time, values.location, values.description).then(()=>{
@@ -36,11 +35,6 @@ function EventEditingPage() {
             <div className="title">
             <label htmlFor='title'>Event title : </label>
             <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
-            </div>
-
-            <div className="host">
-            <label htmlFor ='host'>Event host (email) : </label>
-            <input size={55} onChange={formik.handleChange} value = {formik.values.email} id='email' name='email'></input>
             </div>
 
             <div className="date">
