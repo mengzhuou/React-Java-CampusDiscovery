@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import "./EventEditingPage.css";
+import "./EventCreationPage.css";
   
 function EventEditingPage() {
   const navigate = useNavigate();
@@ -24,10 +24,14 @@ function EventEditingPage() {
       }
     })
 
+    const goBacktoDashBoard=() =>{
+      navigate("/dashboard")
+    }
+
     return (
         <div className = "App">
             <header className="App-header">
-            <p>Event Description</p>
+            <p>Event Creation</p>
             
         <form className="loginForm" onSubmit={formik.handleSubmit}>
             <div className="title">
@@ -56,6 +60,8 @@ function EventEditingPage() {
             </div>
 
             <button className="button" type="submit">Create Event</button>
+            <p className='text'> Want to go back to the dashboard?</p>
+            <button className="button" onClick={goBacktoDashBoard}>Go Back</button>
         </form>
         </header>
         </div>

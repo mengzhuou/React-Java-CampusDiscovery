@@ -31,7 +31,7 @@ function EventEditingPage() {
     return (
         <div className = "App">
             <header className="App-header">
-            <p>Event Description</p>
+            <p>Event Editing</p>
             
         <form className="loginForm" onSubmit={formik.handleSubmit}>
             <div className="title">

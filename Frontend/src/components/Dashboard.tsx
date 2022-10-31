@@ -37,15 +37,36 @@ function Dashboard() {
         </header> 
         <button className='logout' onClick={pagelogout}>Logout</button>
         <button className='display' onClick={display}>Display</button>
-        <button className='createEvent' onClick={createEvent}>Create A Event</button>
+        <button className='createEvent' onClick={createEvent}>Create an Event</button>
 
         <div className='body'>
             <div className='column1'>
             <DashboardBox></DashboardBox>
             <DashboardBox></DashboardBox>
             </div>
+
+            <div className='column2'>
+            <DashboardBox></DashboardBox>
+            <DashboardBox></DashboardBox>
+            </div>
+
+            <div className='column2'>
+            <DashboardBox></DashboardBox>
+            <DashboardBox></DashboardBox>
+            </div>
+
+            <div className='column2'>
+            <DashboardBox></DashboardBox>
+            <DashboardBox></DashboardBox>
+            </div>
+
+            <div className='column2'>
+            <DashboardBox></DashboardBox>
+            <DashboardBox></DashboardBox>
+            </div>
         </div>
-        <div className="container">
+
+        <div className="pagination">
             <Pagination
                 currentPage={currentPage}
                 lastPage={lastPage}

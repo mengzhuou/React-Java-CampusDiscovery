@@ -1,6 +1,8 @@
 .pagination {
     display: flex;
-    flex-wrap: wrap;
     font-family: monospace;
     font-style: oblique;
+    position:absolute;
+    bottom:0;
+    justify-content:center;
   }
