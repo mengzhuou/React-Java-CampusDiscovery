@@ -23,13 +23,10 @@ function Dashboard() {
         getinfo().then((content)=>{
             alert(content.data);
         }).catch(()=>(alert("error getting info")));
-        runall();
     }
 
     const createEvent = ()=>{
-        logout().then(()=>{
-            navigate("/eventCreation")
-        }).catch(()=>(alert("creation error")));
+        navigate("/eventCreation")
     }
 
     

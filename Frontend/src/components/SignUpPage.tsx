@@ -97,9 +97,6 @@ function SignUpPage() {
                 <option value={option.value}>{option.label}</option>
               )}
             </select>
-        </div>
-        {/* <p>Cate is {value}</p> */}
-        <div >
           <button className="RegisterButton" type="submit">Register</button>
         </div>
       </form>

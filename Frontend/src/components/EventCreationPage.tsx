@@ -3,23 +3,26 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import "./EventEditingPage.css";
+import { addevent } from '../helpers/connector'
   
 function EventEditingPage() {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
       title:'',
-      host:'',
-      date:'',
+      email:'', //host
+      time:'',  //date
       location:'',
       description:'',
     },
     onSubmit: values=>{
-        var textContent:string = "Event title: " + values.title + "\nEvent host: " + values.host + "\nEvent date: ";
-        textContent += values.date + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
+        var textContent:string = "Event title: " + values.title + "\nEvent host (email): " + values.email + "\nEvent date: ";
+        textContent += values.time + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
         if(window.confirm(textContent)){
+          addevent(values.title, values.time, values.location, values.description).then(()=>{
             alert("Confirmation: your changes have been saved")
             navigate("/dashboard")
+          }).catch(()=>console.log("failed"))
         }
       }
     })
@@ -36,13 +39,13 @@ function EventEditingPage() {
             </div>
 
             <div className="host">
-            <label htmlFor ='host'>Event host : </label>
-            <input size={55} onChange={formik.handleChange} value = {formik.values.host} id='host' name='host'></input>
+            <label htmlFor ='host'>Event host (email) : </label>
+            <input size={55} onChange={formik.handleChange} value = {formik.values.email} id='email' name='email'></input>
             </div>
 
             <div className="date">
             <label htmlFor ='date'>Event date : </label>
-            <input size={55} onChange={formik.handleChange} value = {formik.values.date} id='date' name='date'></input>
+            <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
             </div>
 
             <div className="location">

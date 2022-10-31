@@ -9,17 +9,17 @@ function EventEditingPage() {
   const formik = useFormik({
     initialValues:{
       title:'',
-      host:'',
-      date:'',
+      email:'', //host
+      time:'',  //date
       location:'',
       description:'',
     },
     onSubmit: values=>{
-        var textContent:string = "Event title: " + values.title + "\nEvent host: " + values.host + "\nEvent date: ";
-        textContent += values.date + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
+        var textContent:string = "Event title: " + values.title + "\nEvent host (email): " + values.email + "\nEvent date: ";
+        textContent += values.time + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
         if(window.confirm(textContent)){
-            alert("Confirmation: your changes have been saved")
-            navigate("/dashboard")
+          alert("Confirmation: your changes have been saved")
+          navigate("/dashboard")
         }
       }
     })
@@ -41,12 +41,12 @@ function EventEditingPage() {
 
             <div className="host">
             <label htmlFor ='host'>Event host : </label>
-            <input size={55} onChange={formik.handleChange} value = {formik.values.host} id='host' name='host'></input>
+            <input size={55} onChange={formik.handleChange} value = {formik.values.email} id='email' name='email'></input>
             </div>
 
             <div className="date">
             <label htmlFor ='date'>Event date : </label>
-            <input size={55} onChange={formik.handleChange} value = {formik.values.date} id='date' name='date'></input>
+            <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='date'></input>
             </div>
 
             <div className="location">
