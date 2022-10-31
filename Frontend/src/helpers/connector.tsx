@@ -100,6 +100,16 @@ export async function getevent(page:number){
   return content;
 }
 
+export async function geteventsize(){
+
+  let content = await client({
+      method: 'get',
+      url: url+"getEventSize",
+      withCredentials: true
+    });
+  return content;
+}
+
 export async function eventdel(id:number){
 
   let content = await client({
@@ -268,6 +278,7 @@ export async function runall(){ //for testing only
     await updatedescription(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatelocation(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatetime(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
+    await geteventsize().then((content)=>console.log(content.data)).catch(()=>console.log("size fail"));
     await userdel().then(()=>console.log("del suc")).catch(()=>console.log("del err"));
 
     await register("dobigstuff@gmail.com", "big stuff","big","guy","admin").then(()=>console.log("success admin reg")).catch(()=>console.log("unsuc reg"));
@@ -279,5 +290,6 @@ export async function runall(){ //for testing only
     await updatedescriptionadmin(4, "pho guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatelocationadmin(4, "pho guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatetimeadmin(4, "pho guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
+    await geteventsize().then((content)=>console.log(content.data)).catch(()=>console.log("size fail"));
     await userdel().then(()=>console.log("del suc")).catch(()=>console.log("del err"));
 }
