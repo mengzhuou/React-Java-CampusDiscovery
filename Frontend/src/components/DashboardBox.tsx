@@ -19,11 +19,16 @@ class DashboardBox extends Component<any,any> {
     componentDidMount(): void {
         getinfo().then((content)=>this.setState({role:content.data})).catch(()=> console.log("failure to load role"));
     }
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
+        if(this.state.id != this.props.id){
+            this.setState({id: this.props.id});
+        }
+    }
     updateTitle(){
         let tmp = prompt('Update Title:');
         let conf = window.confirm('Confirm or deny');
         if(conf && tmp != null){
-            if(this.state.role == "ADMIN"){
+            if(this.state.role === "ADMIN"){
                 updatetitleadmin(this.state.id, tmp).then(()=>{
                     alert("successful update");
                     this.props.update();
@@ -41,7 +46,7 @@ class DashboardBox extends Component<any,any> {
         let tmp = prompt('Update Description:');
         let conf = window.confirm('Confirm or deny');
         if(conf && tmp != null){
-            if(this.state.role == "ADMIN"){
+            if(this.state.role === "ADMIN"){
                 updatedescriptionadmin(this.state.id, tmp).then(()=>{
                     alert("successful update");
                     this.props.update();
@@ -59,7 +64,7 @@ class DashboardBox extends Component<any,any> {
         let tmp = prompt('Update Host:');
         let conf = window.confirm('Confirm or deny');
         if(conf && tmp != null){
-            if(this.state.role == "ADMIN"){
+            if(this.state.role === "ADMIN"){
                 updateEmailadmin(this.state.id, tmp).then(()=>{
                     alert("successful update");
                     this.props.update();
@@ -74,7 +79,7 @@ class DashboardBox extends Component<any,any> {
         let tmp = prompt('Update Location:');
         let conf = window.confirm('Confirm or deny');
         if(conf && tmp != null){
-            if(this.state.role == "ADMIN"){
+            if(this.state.role === "ADMIN"){
                 updatelocationadmin(this.state.id, tmp).then(()=>{
                     alert("successful update");
                     this.props.update();
@@ -92,7 +97,7 @@ class DashboardBox extends Component<any,any> {
         let tmp = prompt('Update Date:');
         let conf = window.confirm('Confirm or deny');
         if(conf && tmp != null){
-            if(this.state.role == "ADMIN"){
+            if(this.state.role === "ADMIN"){
                 updatetimeadmin(this.state.id, tmp).then(()=>{
                     alert("successful update");
                     this.props.update();
@@ -110,9 +115,10 @@ class DashboardBox extends Component<any,any> {
     eventdel(){
         let conf = window.confirm('Confirm or deny');
         if(conf){
-            if(this.state.role == "ADMIN"){
+            if(this.state.role === "ADMIN"){
                 eventdeladmin(this.state.id).then(()=>{
                     alert("successful update");
+                    console.log(this.state.id)
                     this.props.update();
                 }).catch(()=>alert("unsuc update"));
             }else{
@@ -121,9 +127,9 @@ class DashboardBox extends Component<any,any> {
                     this.props.update();
                 }).catch(()=>alert("unsuc update"));
             }
-            console.log(this.state.id)
         }
     }
+
 
     render() {
         return (

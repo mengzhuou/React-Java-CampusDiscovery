@@ -1,16 +1,15 @@
 // import React from 'react';
 import React from 'react';
 import "./Dashboard.css";
-import { logout, getinfo, getevent } from '../helpers/connector';
+import { getinfo, getevent } from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
-import { arrayBuffer } from 'node:stream/consumers';
 
 
 class Dashboardtmp extends React.Component<any,any>{
     constructor(props:any){
         super(props);
-        this.state = {currentPage: 1, lastpage: 6, arr: []};
+        this.state = {currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
     }
@@ -21,31 +20,28 @@ class Dashboardtmp extends React.Component<any,any>{
         }).catch(()=>(alert("error getting info")));
     }
 
-    forceup(){
-        getevent(this.state.currentPage).then((content)=>{
-            let key;
-            let array = [];
-            for(key in content.data){
-                array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
-                    content.data[key].location, content.data[key].description, content.data[key].id]);
-            }
-            this.setState({arr:array});
-            this.forceUpdate();
-        })
+    async forceup(){
+        this.setState({ForceUpdateNow:true});
+        
+    }
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
+        if(this.state.ForceUpdateNow){
+            getevent(this.state.currentPage).then((content)=>{
+                let key;
+                let array = [];
+                for(key in content.data){
+                    array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
+                        content.data[key].location, content.data[key].description, content.data[key].id]);
+                }
+                this.setState({arr:array});
+                this.forceUpdate();
+            })
+            this.setState({ForceUpdateNow:false});
+        }
     }
 
     setCurrentPage(page:number){
-        this.setState({currentPage:page});
-        getevent(this.state.currentPage).then((content)=>{
-            let key;
-            let array = [];
-            for(key in content.data){
-                array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
-                    content.data[key].location, content.data[key].description, content.data[key].id]);
-            }
-            this.setState({arr:array});
-            this.forceUpdate();
-        })
+        this.setState({currentPage:page, ForceUpdateNow:true});
     }
 
     componentDidMount(): void {
@@ -58,10 +54,9 @@ class Dashboardtmp extends React.Component<any,any>{
             }
             this.setState({arr:array});
         })
-    } 
+    }
 
     render(){
-        const lengthofEvents: number = this.state.arr.length;
         let dasharr: any[] = [];
 
         for(let i = 0; i < this.state.arr.length; i++){
