@@ -109,7 +109,9 @@ class DashboardBox extends Component<any,any> {
     render() {
         return (
         <div className='box'>
+            
             <h1 className='title'>
+                <button className="deleteButton" type="submit">Delete</button>
                 <button className="editButtonTitle" type="submit" onClick={this.updateTitle}>Edit</button> 
                 Title: {this.props.title}
             </h1>
