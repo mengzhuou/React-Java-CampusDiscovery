@@ -30,7 +30,6 @@ class DashboardBox extends Component<any,any> {
     render() {
         return (
         <div className='box'>
-<<<<<<< HEAD
             <h1 className='title'>
                 <button className="editButtonTitle" type="submit">Edit</button> 
                 Title: {this.props.title}
@@ -55,13 +54,6 @@ class DashboardBox extends Component<any,any> {
                 <button className="editButton" type="submit">Edit</button>
                 Descripton: {this.props.descripton}
             </h4>
-=======
-            <h1 className='title'> {this.props.title}</h1>
-            <h4>Host: {this.props.host} </h4>
-            <h4>Date: {this.props.date}</h4>
-            <h4>Location: {this.props.location}</h4>
-            <h4>Descripton: {this.props.description}</h4>
->>>>>>> 452db4caeaccbc3777944533c1411e93b7942d94
         </div>
         )
       }
