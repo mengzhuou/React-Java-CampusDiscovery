@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+
+### username and password to access database ###
+/src/test/java/com/gtbackend/gtbackend/GtbackendApplicationTests/
