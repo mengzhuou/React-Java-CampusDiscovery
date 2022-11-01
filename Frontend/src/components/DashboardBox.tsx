@@ -25,6 +25,7 @@ import './DashboardBox.css'
 class DashboardBox extends Component<any,any> {
     constructor(props:any){
         super(props);
+        this.state = {id: this.props.id}
     }
     render() {
         return (
@@ -33,7 +34,7 @@ class DashboardBox extends Component<any,any> {
             <h4>Host: {this.props.host} </h4>
             <h4>Date: {this.props.date}</h4>
             <h4>Location: {this.props.location}</h4>
-            <h4>Descripton: {this.props.descripton}</h4>
+            <h4>Descripton: {this.props.description}</h4>
         </div>
         )
       }

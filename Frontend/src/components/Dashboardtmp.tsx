@@ -10,7 +10,8 @@ import { arrayBuffer } from 'node:stream/consumers';
 class Dashboardtmp extends React.Component<any,any>{
     constructor(props:any){
         super(props);
-        this.state = {currentPage: 1, setCurrentPage: 1, lastpage: 3, arr: []};
+        this.state = {currentPage: 1, lastpage: 6, arr: []};
+        this.setCurrentPage = this.setCurrentPage.bind(this);
     }
 
     display() {
@@ -19,18 +20,31 @@ class Dashboardtmp extends React.Component<any,any>{
         }).catch(()=>(alert("error getting info")));
     }
 
+    setCurrentPage(page:number){
+        this.setState({currentPage:page});
+        getevent(this.state.currentPage).then((content)=>{
+            let key;
+            let array = [];
+            for(key in content.data){
+                array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
+                    content.data[key].location, content.data[key].description, content.data[key].id]);
+            }
+            this.setState({arr:array});
+            this.forceUpdate();
+        })
+    }
+
     componentDidMount(): void {
         getevent(this.state.currentPage).then((content)=>{
             let key;
             let array = [];
-            console.log(content.data);
             for(key in content.data){
                 array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
                     content.data[key].location, content.data[key].description, content.data[key].id]);
             }
             this.setState({arr:array});
         })
-    }
+    } 
 
     render(){
         const lengthofEvents: number = this.state.arr.length;
@@ -43,6 +57,7 @@ class Dashboardtmp extends React.Component<any,any>{
                 date={this.state.arr[i][2]}
                 location={this.state.arr[i][3]}
                 description={this.state.arr[i][4]}
+                id ={this.state.arr[i][5]}
                 />);
         }
         return (
@@ -64,7 +79,7 @@ class Dashboardtmp extends React.Component<any,any>{
                     currentPage={this.state.currentPage}
                     lastPage={this.state.lastPage}
                     maxLength={10}
-                    setCurrentPage={this.state.setCurrentPage}
+                    setCurrentPage={this.setCurrentPage}
                 />
             </div>
         </div>
