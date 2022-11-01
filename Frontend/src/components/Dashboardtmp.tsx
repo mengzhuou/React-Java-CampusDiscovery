@@ -89,7 +89,7 @@ class Dashboardtmp extends React.Component<any,any>{
                 {dasharr}
                 {/* </div> */}
             </div>
-            <div className="container">
+            <div className="pagination">
                 <Pagination
                     currentPage={this.state.currentPage}
                     lastPage={this.state.lastPage}
