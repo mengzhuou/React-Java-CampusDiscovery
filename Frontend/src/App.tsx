@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route }
+import { BrowserRouter as Router, Routes, Route, useNavigate }
     from "react-router-dom";
 import First from "./components/SignUpPage";
 import Second from "./components/LoginPage";
@@ -12,7 +12,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/first" element={<First />}/>
-        <Route path="/dashboard" element={<Dashboard />}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/second" element={<Second />}/>
         <Route path="/" element={<Main/>}/>
         <Route path="/eventEditing" element={<EventEditingPage/>}/>
