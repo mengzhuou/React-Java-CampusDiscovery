@@ -55,9 +55,9 @@ class Dashboardtmp extends React.Component<any,any>{
             <button className='createEvent' onClick={this.props.createEvent}>Create A Event</button>
 
             <div className='body'>
-                <div className='column1'>
+                {/* <div className='column1'> */}
                 {dasharr}
-                </div>
+                {/* </div> */}
             </div>
             <div className="container">
                 <Pagination
