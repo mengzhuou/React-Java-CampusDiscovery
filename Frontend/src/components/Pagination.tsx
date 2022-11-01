@@ -14,7 +14,7 @@ export default function Pagination({
   maxLength, //maxLength need to keep in track of # of event instance
   setCurrentPage,
 }: Props) {
-  const pageNums = [1,2,3]; //need to extend the pageNum when event num is > 10
+  const pageNums = [1,2,3,4,5,6]; //need to extend the pageNum when event num is > 10
 
   return (
     // aira-label is an Assistant Technology to help people realize where they are in the webpage, optional here 
