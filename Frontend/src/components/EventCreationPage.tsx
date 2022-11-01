@@ -4,6 +4,8 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import "./EventEditingPage.css";
 import { addevent } from '../helpers/connector'
+
+
   
 function EventEditingPage() {
   const navigate = useNavigate();
