@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getinfo, updatedescription, updatedescriptionadmin, 
     updatelocation, updatelocationadmin, updatetime, 
-    updatetimeadmin, updatetitle, updatetitleadmin, updateEmailadmin } from '../helpers/connector'
+    updatetimeadmin, updatetitle, updatetitleadmin, updateEmailadmin, eventdel, eventdeladmin} from '../helpers/connector'
 import './DashboardBox.css'
 
 
@@ -14,6 +14,7 @@ class DashboardBox extends Component<any,any> {
         this.updateEmail = this.updateEmail.bind(this);
         this.updateLocation = this.updateLocation.bind(this);
         this.updateTime = this.updateTime.bind(this);
+        this.eventdel = this.eventdel.bind(this);
     }
     componentDidMount(): void {
         getinfo().then((content)=>this.setState({role:content.data})).catch(()=> console.log("failure to load role"));
@@ -106,12 +107,30 @@ class DashboardBox extends Component<any,any> {
         }
     }
 
+    eventdel(){
+        let conf = window.confirm('Confirm or deny');
+        if(conf){
+            if(this.state.role == "ADMIN"){
+                eventdeladmin(this.state.id).then(()=>{
+                    alert("successful update");
+                    this.props.update();
+                }).catch(()=>alert("unsuc update"));
+            }else{
+                eventdel(this.state.id).then(()=>{
+                    alert("successful update");
+                    this.props.update();
+                }).catch(()=>alert("unsuc update"));
+            }
+            console.log(this.state.id)
+        }
+    }
+
     render() {
         return (
         <div className='box'>
             
             <h1 className='title'>
-                <button className="deleteButton" type="submit">Delete</button>
+                <button className="deleteButton" type="submit" onClick={this.eventdel}>Delete</button>
                 <button className="editButtonTitle" type="submit" onClick={this.updateTitle}>Edit</button> 
                 Title: {this.props.title}
             </h1>
