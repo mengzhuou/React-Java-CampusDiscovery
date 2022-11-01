@@ -265,6 +265,20 @@ export async function updatetimeadmin(id:number, time:string){
   return content;
 }
 
+export async function updateEmailadmin(id:number, email:string){
+
+  let content = await client({
+      method: 'patch',
+      url: urladmin+"updateEmail",
+      withCredentials: true,
+      data: {
+        id: id.toString(),
+        email: email,
+      }
+    });
+  return content;
+}
+
 
 export async function runall(){ //for testing only
 

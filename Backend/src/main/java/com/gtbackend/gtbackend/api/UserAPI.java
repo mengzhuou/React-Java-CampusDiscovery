@@ -33,7 +33,7 @@ public class UserAPI {
     @GetMapping("/info")
     public String getUser(Principal principal){
         User tmp = userService.getUser(principal.getName()).get();
-        return tmp.toString();
+        return tmp.getRole().toString();
     }
 
     @PostMapping("/logout")

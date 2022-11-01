@@ -12,12 +12,26 @@ class Dashboardtmp extends React.Component<any,any>{
         super(props);
         this.state = {currentPage: 1, lastpage: 6, arr: []};
         this.setCurrentPage = this.setCurrentPage.bind(this);
+        this.forceup = this.forceup.bind(this);
     }
 
     display() {
         getinfo().then((content)=>{
             alert(content.data);
         }).catch(()=>(alert("error getting info")));
+    }
+
+    forceup(){
+        getevent(this.state.currentPage).then((content)=>{
+            let key;
+            let array = [];
+            for(key in content.data){
+                array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
+                    content.data[key].location, content.data[key].description, content.data[key].id]);
+            }
+            this.setState({arr:array});
+            this.forceUpdate();
+        })
     }
 
     setCurrentPage(page:number){
@@ -58,6 +72,7 @@ class Dashboardtmp extends React.Component<any,any>{
                 location={this.state.arr[i][3]}
                 description={this.state.arr[i][4]}
                 id ={this.state.arr[i][5]}
+                update={this.forceup}
                 />);
         }
         return (

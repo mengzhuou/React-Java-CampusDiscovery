@@ -41,6 +41,15 @@ public class AdminAPI {
         String title = body.get("title");
         eventRepository.updateTitleAdmin(id, title);
     }
+
+    @PatchMapping("/updateEmail")
+    @Secured("ROLE_ADMIN")
+    public void updateEmail(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
+        Long id = Long.valueOf(body.get("id"));
+        String title = body.get("email");
+        eventRepository.updateEmailAdmin(id, title);
+    }
+
     @PatchMapping("/updateDescription")
     @Secured("ROLE_ADMIN")
     public void updateDescription(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
