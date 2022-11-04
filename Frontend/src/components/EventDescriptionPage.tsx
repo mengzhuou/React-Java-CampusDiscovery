@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import "./EventEditingPage.css";
+import "./EventDescriptionPage.css";
 
   
-function EventEditingPage() {
+function EventDescriptionPage() {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
@@ -27,10 +27,11 @@ function EventEditingPage() {
     return (
       <div className = "App">
         <header className="App-header">
-          <p>Edit Your Event</p>
+        {/* this page should only contain event information, so no input box */}
+          <p>Event Description</p>
           <form className="loginForm" onSubmit={formik.handleSubmit}>
               <div className="title">
-                <label htmlFor='title'>Event title : </label>
+                <label htmlFor='title'>Event title :</label>
                 <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
               </div>
 
@@ -54,8 +55,11 @@ function EventEditingPage() {
                 <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
               </div>
 
-              <button>Submit Changes</button>
-
+              <button className="button" >RSVP</button>
+              <button className="button" >Status</button>
+              <Link to = "/AttendeeListPage">
+                <button className="button">Attendee List</button>
+              </Link>
               <Link to = "/HostManagementPage">
                 <button className="button">Host Management</button>
               </Link>
@@ -68,4 +72,4 @@ function EventEditingPage() {
     );
 }
   
-export default EventEditingPage;
+export default EventDescriptionPage;

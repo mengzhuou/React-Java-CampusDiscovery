@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import { getinfo, getevent } from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
+import { Link } from 'react-router-dom';
 
 
 class Dashboardtmp extends React.Component<any,any>{
@@ -78,11 +79,12 @@ class Dashboardtmp extends React.Component<any,any>{
             <button className='logout' onClick={this.props.logout}>Logout</button>
             <button className='display' onClick={this.display}>Display</button>
             <button className='createEvent' onClick={this.props.createEvent}>Create A Event</button>
+            <button className='All Event Or Invited'>All Event Or Invited: Need to change this to Drop down list</button>
 
             <div className='body'>
-                {/* <div className='column1'> */}
-                {dasharr}
-                {/* </div> */}
+                <Link to = "/EventDescriptionPage">
+                    {dasharr}
+                </Link>
             </div>
             <div className="pagination">
                 <Pagination

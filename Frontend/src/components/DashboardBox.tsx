@@ -133,36 +133,35 @@ class DashboardBox extends Component<any,any> {
 
     render() {
         return (
-        <div className='box'>
-            
-            <h1 className='title'>
-                <button className="deleteButton" type="submit" onClick={this.eventdel}>Delete</button>
-                <button className="editButtonTitle" type="submit" onClick={this.updateTitle}>Edit</button> 
-                Title: {this.props.title}
-            </h1>
+            <div className='box'>
+                <h1 className='title'>
+                    <button className="deleteButton" type="submit" onClick={this.eventdel}>Delete</button>
+                    <button className="editButtonTitle" type="submit" onClick={this.updateTitle}>Edit</button> 
+                    Title: {this.props.title}
+                </h1>
 
-            <h4>
-                <button className="editButton" type="submit" onClick={this.updateEmail}>Edit</button>
-                Host: {this.props.host} 
-            </h4>
+                <h4>
+                    <button className="editButton" type="submit" onClick={this.updateEmail}>Edit</button>
+                    Host: {this.props.host} 
+                </h4>
 
-            <h4>
-                <button className="editButton" type="submit" onClick={this.updateTime}>Edit</button>
-                Date: {this.props.date}
-            </h4>
+                <h4>
+                    <button className="editButton" type="submit" onClick={this.updateTime}>Edit</button>
+                    Date: {this.props.date}
+                </h4>
 
-            <h4>
-                <button className="editButton" type="submit" onClick={this.updateLocation}>Edit</button>
-                Location: {this.props.location}
-            </h4>
+                <h4>
+                    <button className="editButton" type="submit" onClick={this.updateLocation}>Edit</button>
+                    Location: {this.props.location}
+                </h4>
 
-            <h4>
-                <button className="editButton" type="submit" onClick={this.updateDescription}>Edit</button>
-                Descripton: {this.props.description}
-            </h4>
-        </div>
+                <h4>
+                    <button className="editButton" type="submit" onClick={this.updateDescription}>Edit</button>
+                    Descripton: {this.props.description}
+                </h4>
+            </div>
         )
-      }
+    }
 }
 
 export default DashboardBox;

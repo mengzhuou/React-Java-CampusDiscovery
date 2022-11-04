@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import "./EventEditingPage.css";
+import "./EventCreationPage.css";
 import { addevent } from '../helpers/connector'
 
 
   
-function EventEditingPage() {
+function EventCreationPage() {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
@@ -31,7 +31,7 @@ function EventEditingPage() {
     return (
         <div className = "App">
             <header className="App-header">
-            <p>Event Description</p>
+            <p>Event Creation</p>
             
         <form className="loginForm" onSubmit={formik.handleSubmit}>
             <div className="title">
@@ -55,6 +55,9 @@ function EventEditingPage() {
             </div>
 
             <button className="button" type="submit">Create Event</button>
+            <Link to = "/Dashboard">
+                <button className="button">Dashboard</button>
+            </Link>
         </form>
         </header>
         </div>
@@ -62,4 +65,4 @@ function EventEditingPage() {
     );
 }
   
-export default EventEditingPage;
+export default EventCreationPage;

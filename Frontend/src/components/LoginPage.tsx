@@ -51,7 +51,7 @@ function LoginPage() {
         <p>Or don't have an account?</p>
         <Link to = "/first" className = "button">
           <button className="button" type="submit">Sign up</button>
-          </Link>
+        </Link>
       </form>
       </header>
     </div>

@@ -1,4 +1,5 @@
-// import React from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {useState} from 'react';
 import "./Dashboard.css";
 import { logout, getinfo, addevent, runall } from '../helpers/connector';
@@ -9,6 +10,8 @@ import { eventNames } from 'process';
 import { TypeOfExpression } from 'typescript';
 import Dashboardtmp from './Dashboardtmp';
 import { create } from 'domain';
+import EventEditingPage from './EventDescriptionPage';
+
 
 
 function Dashboard() {
@@ -20,7 +23,7 @@ function Dashboard() {
     }
 
     const createEvent = ()=>{
-        navigate("/eventCreation")
+        navigate("/eventCreationPage")
     }
     return (
         <Dashboardtmp logout={pagelogout} createEvent={createEvent}/> 
