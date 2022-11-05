@@ -279,6 +279,62 @@ export async function updateEmailadmin(id:number, email:string){
   return content;
 }
 
+// Rsvp API
+
+export async function addRsvp(email:string, status:string){
+
+  let content = await client({
+    method: 'patch',
+    url: url+"addRsvp",
+    withCredentials: true,
+    data: {
+      email: email,
+      statis: status,
+    }
+  })
+  return content;
+}
+
+export async function getRsvp(email:string){
+
+  let content = await client({
+    method: 'patch',
+    url: url+"getRsvp",
+    withCredentials: true,
+    data: {
+      email: email,
+    }
+  })
+  return content;
+}
+
+export async function updateRsvpStatus(email:string, status:string){
+
+  let content = await client({
+    method: 'patch',
+    url: url+"updateStatus",
+    withCredentials: true,
+    data: {
+      email: email,
+      status: status,
+    }
+  })
+  return content;
+}
+
+export async function rsvpDel(email:string){
+
+  let content = await client({
+    method: 'patch',
+    url: url+"removeRsvp",
+    withCredentials: true,
+    data: {
+      email: email,
+    }
+  })
+  return content;
+}
+
 
 export async function runall(){ //for testing only
 
