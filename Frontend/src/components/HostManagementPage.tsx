@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
+import "./HostManagementPage.css";
 
 class HostManagementPage extends Component<any,any> {
     render(){
