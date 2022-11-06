@@ -23,7 +23,7 @@ function Dashboard() {
     }
 
     const createEvent = ()=>{
-        navigate("/eventCreationPage")
+        navigate("/EventCreationPage")
     }
     return (
         <Dashboardtmp logout={pagelogout} createEvent={createEvent}/> 

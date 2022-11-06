@@ -3,8 +3,42 @@ import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import { getinfo, getevent } from '../helpers/connector';
 import DashboardBox from './DashboardBox';
+import { Formik, Field, FieldProps } from 'formik';
+import { Dropdown } from "semantic-ui-react"
+
+const formik = () => (
+    <Formik
+        initialValues={{
+            status: ""
+        }}
+        onSubmit={(values) => console.log(values)}
+    >
+        {({ values, setFieldValue }) => (
+            <div>
+                <pre>{JSON.stringify(values, undefined, 2)}</pre>
+
+                <Dropdown
+                    selection
+                    placeholder="Select a Status"
+                    options = {[
+                        {label: 'Will Attend', value: 'WILLATTEND'},
+                        {label: 'Maybe', value: 'MAYBE'},
+                        {label: 'Wont Attend', value: 'WONTATTEND'},
+                        {label: 'Nemesis', value: 'NEMESIS'},
+                        {label: 'Invited', value: 'INVITED'}
+                    ]}
+                    value={values.status}
+                    onChange={(_, { value }) => setFieldValue("status", value)}
+                />
+                <div>{values.status}</div>
+            </div>
+        )}
+    </Formik>
+)
 
 class HostManagementPage extends Component<any,any> {
+
+    
     constructor(props:any){
         super(props);
         this.forceup = this.forceup.bind(this);
@@ -30,13 +64,13 @@ class HostManagementPage extends Component<any,any> {
     }
 
     render(){
-        let dasharr: any[] = [];
-        for(let i = 0; i < this.state.arr.length; i++){
-            dasharr.push(<DashboardBox
-                attendee={this.state.arr[i][0]}
-                update={this.forceup}
-            />);
-        }
+        // let dasharr: any[] = [];
+        // for(let i = 0; i < this.state.arr.length; i++){
+        //     dasharr.push(<DashboardBox
+        //         attendee={this.state.arr[i][0]}
+        //         update={this.forceup}
+        //     />);
+        // }
 
         return (
             <div className='App'>
