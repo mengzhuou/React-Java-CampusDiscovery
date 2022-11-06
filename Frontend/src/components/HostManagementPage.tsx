@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import { getinfo, getevent } from '../helpers/connector';
-import DashboardBox from './DashboardBox';
 import { Formik, Field, FieldProps } from 'formik';
 import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
@@ -65,7 +64,9 @@ class HostManagementPage extends Component<any,any> {
         return (
             <div className='App'>
                 <header>
-                    <Dropdown
+                    <h1>Host Management</h1>
+                    <h4 className='statusLine'>Choose Status : </h4>
+                    <Dropdown className="dropdownStatus"
                         options={this.options}
                         // onChange={this._onSelect}
                         value={this.defaultOption}
@@ -73,8 +74,8 @@ class HostManagementPage extends Component<any,any> {
                     />
                 </header>
                 <body>
-                    <p>Host Management</p>
-
+                    <button className="button">X</button>
+                    <button className="button">Add/Invite</button>
                     <Link to = "/EventDescriptionPage">
                         <button className="button">Description</button>
                     </Link>
@@ -82,8 +83,6 @@ class HostManagementPage extends Component<any,any> {
                         <button className="button">Edit Your Event</button>
                     </Link>
                     {/* to delete attendee. */}
-                    <button className="button">X</button>
-                    <button className="button">Add/Invite</button>
 
                 </body>
             </div>
