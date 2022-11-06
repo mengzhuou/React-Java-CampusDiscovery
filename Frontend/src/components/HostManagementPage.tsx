@@ -4,7 +4,9 @@ import "./HostManagementPage.css";
 import { getinfo, getevent } from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import { Formik, Field, FieldProps } from 'formik';
-import { Dropdown } from "semantic-ui-react"
+import Dropdown from 'react-dropdown'
+import 'react-css-dropdown/dist/index.css'
+
 
 const formik = () => (
     <Formik
@@ -15,22 +17,6 @@ const formik = () => (
     >
         {({ values, setFieldValue }) => (
             <div>
-                <pre>{JSON.stringify(values, undefined, 2)}</pre>
-
-                <Dropdown
-                    selection
-                    placeholder="Select a Status"
-                    options = {[
-                        {label: 'Will Attend', value: 'WILLATTEND'},
-                        {label: 'Maybe', value: 'MAYBE'},
-                        {label: 'Wont Attend', value: 'WONTATTEND'},
-                        {label: 'Nemesis', value: 'NEMESIS'},
-                        {label: 'Invited', value: 'INVITED'}
-                    ]}
-                    value={values.status}
-                    onChange={(_, { value }) => setFieldValue("status", value)}
-                />
-                <div>{values.status}</div>
             </div>
         )}
     </Formik>
@@ -63,27 +49,43 @@ class HostManagementPage extends Component<any,any> {
         }
     }
 
-    render(){
-        // let dasharr: any[] = [];
-        // for(let i = 0; i < this.state.arr.length; i++){
-        //     dasharr.push(<DashboardBox
-        //         attendee={this.state.arr[i][0]}
-        //         update={this.forceup}
-        //     />);
-        // }
+    placeholder="Select a Status"
+    options = [
+        {label: 'Will Attend', value: 'WILLATTEND'},
+        {label: 'Maybe', value: 'MAYBE'},
+        {label: 'Will Not Attend', value: 'WONTATTEND'},
+        {label: 'Nemesis', value: 'NEMESIS'},
+        {label: 'Invited', value: 'INVITED'}
+    ];
 
+    defaultOption = this.options[2];
+
+
+    render(){
         return (
             <div className='App'>
-                <p>Host Management</p>
-                <Link to = "/EventDescriptionPage">
-                    <button className="button">Description</button>
-                </Link>
-                <Link to = "/EventEditingPage">
-                    <button className="button">Edit Your Event</button>
-                </Link>
-                {/* to delete attendee. */}
-                <button className="button">X</button>
-                <button className="button">Add/Invite</button>
+                <header>
+                    <Dropdown
+                        options={this.options}
+                        // onChange={this._onSelect}
+                        value={this.defaultOption}
+                        placeholder="Select"
+                    />
+                </header>
+                <body>
+                    <p>Host Management</p>
+
+                    <Link to = "/EventDescriptionPage">
+                        <button className="button">Description</button>
+                    </Link>
+                    <Link to = "/EventEditingPage">
+                        <button className="button">Edit Your Event</button>
+                    </Link>
+                    {/* to delete attendee. */}
+                    <button className="button">X</button>
+                    <button className="button">Add/Invite</button>
+
+                </body>
             </div>
             
 
