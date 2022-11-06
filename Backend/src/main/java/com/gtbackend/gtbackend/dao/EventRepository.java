@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public interface EventRepository extends JpaRepository<Event, Integer> {
+public interface EventRepository extends JpaRepository<Event, Long> {
     @Query(value = "SELECT e FROM Event e ORDER BY e.id")
     List<Event> findEventByRange(Pageable pageable);
 

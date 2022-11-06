@@ -11,10 +11,9 @@ public class Rsvp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
     private long event_id;
-    @NotBlank
-    private String status;
+
+    private RsvpStatus status;
     
     @NotBlank 
     private String email;
@@ -23,34 +22,42 @@ public class Rsvp {
 
     }
 
-    public Rsvp(String status, String email){
+    public Rsvp(long event_id, RsvpStatus status, String email) {
+        this.id = id;
+        this.event_id = event_id;
         this.status = status;
         this.email = email;
     }
 
-    public Long getEventId(){
-        return event_id;
-    }
-
-    public void getEvent_id(Long event_id){
-        this.event_id = event_id;
-    }
-
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public String getStatus(){
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getEvent_id() {
+        return event_id;
+    }
+
+    public void setEvent_id(long event_id) {
+        this.event_id = event_id;
+    }
+
+    public RsvpStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status){
+    public void setStatus(RsvpStatus status) {
         this.status = status;
     }
 
-    public String getEmail(){
-        return status;
+    public String getEmail() {
+        return email;
     }
-    
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }

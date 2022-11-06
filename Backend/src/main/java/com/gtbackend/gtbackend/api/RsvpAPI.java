@@ -2,12 +2,15 @@ package com.gtbackend.gtbackend.api;
 
 import com.gtbackend.gtbackend.dao.RsvpRepository;
 import com.gtbackend.gtbackend.model.Rsvp;
+import com.gtbackend.gtbackend.model.RsvpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -22,18 +25,31 @@ public class RsvpAPI {
 
     @PostMapping("/addRsvp")
     public void addRsvp(Principal principal, @RequestBody Map<String, String> body) throws IllegalArgumentException{
-        Rsvp rsvp = new Rsvp(principal.getName(), body.get("status"));
+        long event_id = Long.valueOf(body.get("event_id"));
+        RsvpStatus status = RsvpStatus.valueOf(body.get("status").toUpperCase());
+        Rsvp rsvp = new Rsvp(event_id, status, principal.getName());
         rsvpRepository.save(rsvp);
+    }
+
+    @GetMapping("/getInvited")
+    @ResponseBody
+    public List<Rsvp> getInvited(@RequestParam String email) throws IllegalArgumentException{
+        return rsvpRepository.getInvited(email, RsvpStatus.INVITED);
     }
 
     @GetMapping("/getRsvp")
     @ResponseBody
-    public List<Rsvp> findRsvpByEmail(@RequestParam String email) throws IllegalArgumentException{
-        return rsvpRepository.findRsvpByEmail(email);
+    public Rsvp getRsvp(@RequestParam String id) throws NoSuchElementException, IllegalArgumentException{
+        long rsvp_id = Long.valueOf(id);
+        Optional<Rsvp> ret = rsvpRepository.findById(rsvp_id);
+        if(ret.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return ret.get();
     }
 
-    @DeleteMapping("/removeRsvp")
-    public void removeRsvpByEmail(Principal principal, @RequestParam String email) throws NumberFormatException{
+    @DeleteMapping("/removeRsvpEmail")
+    public void removeRsvpByEmail(Principal principal){
         rsvpRepository.deleteRsvpByEmail(principal.getName());
     }
 
@@ -44,8 +60,8 @@ public class RsvpAPI {
     }
  
     @PatchMapping("/updateStatus")
-    public void updateStatus(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
-        String status = body.get("status");
+    public void updateStatus(Principal principal, @RequestBody Map<String, String> body) throws IllegalArgumentException{
+        RsvpStatus status = RsvpStatus.valueOf(body.get("status").toUpperCase());
         rsvpRepository.updateStatus(principal.getName(), status);
     }
 }
