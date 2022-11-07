@@ -65,7 +65,7 @@ class HostManagementPage extends Component<any,any> {
             <div className='App'>
                 <header>
                     <h1>Host Management</h1>
-                    <h4 className='statusLine'>Choose Status : </h4>
+                    <h4 className='Line'>Choose Status : </h4>
                     <Dropdown className="dropdownStatus"
                         options={this.options}
                         // onChange={this._onSelect}
@@ -74,8 +74,12 @@ class HostManagementPage extends Component<any,any> {
                     />
                 </header>
                 <body>
+                    <div>
+                        <h4 className='Line'>Invite An Attendee :</h4>
+                        <input placeholder='Email Address'></input>
+                        <button className='inviteButton'>Submit</button>
+                    </div>
                     <button className="button">X</button>
-                    <button className="button">Add/Invite</button>
                     <Link to = "/EventDescriptionPage">
                         <button className="button">Description</button>
                     </Link>

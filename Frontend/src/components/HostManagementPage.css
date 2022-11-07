@@ -11,6 +11,20 @@
     cursor: pointer;
 }
 
-.statusLine{
+.Line{
     display: inline-block;
+    margin-right: 5px;
+    font-family: "Neucha", cursive;
 }
+
+.inviteButton{
+    display: inline-block;
+    margin-left: 5px;
+    color: rgb(101, 58, 97);
+    background-color:#e9b1bb;
+    width: fit-content;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
+  }
