@@ -9,6 +9,7 @@ import EventCreationPage from "./components/EventCreationPage";
 import EventDescriptionPage from "./components/EventDescriptionPage";
 import AttendeeListPage from "./components/AttendeeListPage";
 import HostManagementPage from "./components/HostManagementPage";
+import HostManagementPagetmp from "./components/HostManagementPagetmp";
 import RsvpPage from "./components/RsvpPage";
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/EventCreationPage" element={<EventCreationPage/>}/>
         <Route path="/AttendeeListPage" element={<AttendeeListPage/>}/>
         <Route path="/HostManagementPage" element={<HostManagementPage/>}/>
+        <Route path="/HostManagementPagetmp" element={<HostManagementPagetmp/>}/>
         <Route path="/RsvpPage" element={<RsvpPage/>}/>
         <Route path="/EventDescriptionPage" element={<EventDescriptionPage/>}/>
       </Routes>
