@@ -10,55 +10,35 @@ import Pagination from './Pagination';
   
 function EventDescriptionPage() {
   const navigate = useNavigate();
-  const formik = useFormik({
-    initialValues:{
-      title:'',
-      email:'', //host
-      time:'',  //date
-      location:'',
-      description:'',
-    },
-    onSubmit: values=>{
-        var textContent:string = "Event title: " + values.title + "\nEvent host (email): " + values.email + "\nEvent date: ";
-        textContent += values.time + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
-        if(window.confirm(textContent)){
-          alert("Confirmation: your changes have been saved")
-          navigate("/dashboard")
-        }
-      }
-    })
-
-
-
     return (
       <div className = "App">
         <header className="App-header">
         {/* this page should only contain event information, so no input box */}
           <p>Event Description</p>
-          <form className="loginForm" onSubmit={formik.handleSubmit}>
-              <div className="title">
+          <form className="loginForm">
+              <div className="desName">
                 <label htmlFor='title'>Event title :</label>
-                <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
+                {/* <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input> */}
               </div>
 
-              <div className="host">
+              <div className="desName">
                 <label htmlFor ='host'>Event host : </label>
-                <input size={55} onChange={formik.handleChange} value = {formik.values.email} id='email' name='email'></input>
+                {/* <input size={55} onChange={formik.handleChange} value = {formik.values.email} id='email' name='email'></input> */}
               </div>
 
-              <div className="date">
+              <div className="desName">
                 <label htmlFor ='date'>Event date : </label>
-                <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='date'></input>
+                {/* <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='date'></input> */}
               </div>
 
-              <div className="location">
+              <div className="desName">
                 <label htmlFor ='location'>Event location : </label>
-                <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
+                {/* <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input> */}
               </div>
 
-              <div className="description">
+              <div className="desName">
                 <label htmlFor ='description'>Event description : </label>
-                <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
+                {/* <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input> */}
               </div>
 
               <button className="button" disabled={false}>RSVP</button>              
