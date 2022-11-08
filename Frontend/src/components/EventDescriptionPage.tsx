@@ -7,6 +7,7 @@ import "./Dashboard.css";
 import { getinfo, getevent } from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
+import { Modal } from 'semantic-ui-react';
   
 function EventDescriptionPage() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function EventDescriptionPage() {
         <header className="App-header">
         {/* this page should only contain event information, so no input box */}
           <p>Event Description</p>
-          <form className="loginForm">
+          <form className="eventDescriptionForm">
               <div className="desName">
                 <label htmlFor='title'>Event title :</label>
                 {/* <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input> */}
@@ -41,8 +42,11 @@ function EventDescriptionPage() {
                 {/* <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input> */}
               </div>
 
+              <div className="desName">
+                <p>Your RSVP Status: </p>
+              </div>
+
               <button className="button" disabled={false}>RSVP</button>              
-              <button className="button" >Status</button>
               <Link to = "/AttendeeListPage">
                 <button className="button">Attendee List</button>
               </Link>

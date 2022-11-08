@@ -30,8 +30,8 @@
     font-size: 19px;
     text-align: center;
 }
-.loginForm{
-    margin-top:10%;
+.eventEditingForm{
+    margin-bottom: 20px;
     border: 3px solid transparent;
     border-radius: 5%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -74,4 +74,14 @@
     font-size: 15px;
     text-align: left;
     font-weight: bolder;
+}
+
+.editSubmitButton{
+    color: rgb(101, 58, 97);
+    background-color:#e9b1bb;
+    width: fit-content;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
 }

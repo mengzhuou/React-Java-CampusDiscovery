@@ -19,7 +19,7 @@ function EventEditingPage() {
         textContent += values.time + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
         if(window.confirm(textContent)){
           alert("Confirmation: your changes have been saved")
-          navigate("/dashboard")
+          navigate("/EventDescriptionPage")
         }
       }
     })
@@ -28,7 +28,7 @@ function EventEditingPage() {
       <div className = "App">
         <header className="App-header">
           <p>Edit Your Event</p>
-          <form className="loginForm" onSubmit={formik.handleSubmit}>
+          <form className="eventEditingForm" onSubmit={formik.handleSubmit}>
               <div className="title">
                 <label htmlFor='title'>Event title : </label>
                 <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
@@ -53,8 +53,9 @@ function EventEditingPage() {
                 <label htmlFor ='description'>Event description : </label>
                 <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
               </div>
-
-              <button>Submit Changes</button>
+              <div>
+                <button className='editSubmitButton'>Confirm Changes</button>
+              </div>
 
               <Link to = "/HostManagementPage">
                 <button className="button">Host Management</button>

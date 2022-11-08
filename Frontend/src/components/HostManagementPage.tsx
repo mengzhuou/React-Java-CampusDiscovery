@@ -27,18 +27,12 @@ function HostManagementPage(){
                         },
                     });
                 }
-                
-                
-                // else{
-                //     values.email = ' ';
-                // }
                 // else{
                 //     checkEmail(values.email).then(()=>{
                 //       console.log("You have invited the person")
                 //     }).catch(()=>{
                 //       alert("Error email")
                 //     })
-
             }
         },
       });
