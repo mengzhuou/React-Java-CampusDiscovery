@@ -2,24 +2,32 @@ import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import { getinfo, getevent } from '../helpers/connector';
-import { Formik, Field, FieldProps } from 'formik';
+import { useFormik, Field, FieldProps } from 'formik';
 import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
+import { emailValidator } from '../helpers/emailValidator'
 
 
-const formik = () => (
-    <Formik
-        initialValues={{
-            status: ""
-        }}
-        onSubmit={(values) => console.log(values)}
-    >
-        {({ values, setFieldValue }) => (
-            <div>
-            </div>
-        )}
-    </Formik>
-)
+
+// const formik = useFormik({
+//     initialValues:{
+//       email:''
+//     },
+//     onSubmit: values=>{
+//       const emailError = emailValidator(values.email)
+//       if (emailError) {
+//         alert("invalid email")
+//         return
+//       }else{
+//           checkEmail(values.email).then(()=>{
+//             console.log("You have invited the person")
+//           }).catch(()=>{
+//             alert("Error email")
+//           })
+//       }
+//     }
+//   })
+
 
 class HostManagementPage extends Component<any,any> {
 
@@ -86,7 +94,6 @@ class HostManagementPage extends Component<any,any> {
                     <Link to = "/EventEditingPage">
                         <button className="button">Edit Your Event</button>
                     </Link>
-                    {/* to delete attendee. */}
 
                 </body>
             </div>

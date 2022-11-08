@@ -1,6 +1,5 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, useNavigate }
-    from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import First from "./components/SignUpPage";
 import Second from "./components/LoginPage";
 import Dashboard from "./components/Dashboard";
