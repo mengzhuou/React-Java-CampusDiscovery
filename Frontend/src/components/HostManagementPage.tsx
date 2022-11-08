@@ -12,13 +12,20 @@ function HostManagementPage(){
         initialValues:{
           email:''
         },
-        onSubmit: values =>{
+        onSubmit: (values,actions) =>{
             var text:string = "email = "+ values.email;
             if (window.confirm(text)){
                 const emailError = emailValidator(values.email)
                 if (emailError) {
                     alert("invalid email")
                     return
+                }
+                else{
+                    actions.resetForm({
+                        values:{
+                            email:'',
+                        },
+                    });
                 }
                 
                 
