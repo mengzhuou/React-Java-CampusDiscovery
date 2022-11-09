@@ -2,24 +2,17 @@ import { Link, useNavigate } from 'react-router-dom';
 import React, { Component } from 'react';
 import { useFormik } from 'formik';
 import { addRsvp } from '../helpers/connector';
-
+import Modal from "./Modal";
+import useModal from "./UseModal";
 
 function RsvpPage(){
-    // const navigate = useNavigate();
-    // const formik = useFormik({
-    //     initialValues:{
-    //         status:'will-attend',
-    //     },
-
-    //     onSubmit: values=>{
-    //         var text:string = "status = " + values.status;
-    //         // addRsvp(values.email, values.status).catch(()=>{
-    //         //     alert("error1")
-    //         // })
-    //     }
-    // })
-    return(
-        <div></div>
+    const { isOpen, toggle } = useModal();
+    return (
+      <div className="App">
+        <h1>Rsvp works</h1>
+        <button onClick={toggle}>Open Modal </button>
+        <Modal isOpen={isOpen} toggle={toggle}></Modal>
+      </div>
     );
 }
 export default RsvpPage;

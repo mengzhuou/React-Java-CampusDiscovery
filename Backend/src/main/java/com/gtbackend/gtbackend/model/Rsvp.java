@@ -23,7 +23,6 @@ public class Rsvp {
     }
 
     public Rsvp(long event_id, RsvpStatus status, String email) {
-        this.id = id;
         this.event_id = event_id;
         this.status = status;
         this.email = email;

@@ -1,61 +1,50 @@
-import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import "./HostManagementPage.css";
-import { getinfo, getevent } from '../helpers/connector';
-import DashboardBox from './DashboardBox';
+import { useFormik, Field, FieldProps } from 'formik';
+import 'react-css-dropdown/dist/index.css'
+import { emailValidator } from '../helpers/emailValidator'
+import HostManagementPagetmp from './HostManagementPagetmp';
 
-class HostManagementPage extends Component<any,any> {
-    constructor(props:any){
-        super(props);
-        this.forceup = this.forceup.bind(this);
-    }
 
-    async forceup() {
-        this.setState({ForceUpdateNow:true});
-    }
+function HostManagementPage(){
 
-    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
-        if(this.state.ForceUpdateNow){
-            getevent(this.state.currentPage).then((content)=>{
-                let key;
-                let array = [];
-                for(key in content.data){
-                    array.push([content.data[key].email])
+    const formik = useFormik({
+        initialValues:{
+          email:''
+        },
+        onSubmit: (values,actions) =>{
+            var text:string = "email = "+ values.email;
+            if (window.confirm(text)){
+                const emailError = emailValidator(values.email)
+                if (emailError) {
+                    alert("invalid email")
+                    return
                 }
-                this.setState({arr:array});
-                this.forceUpdate();
-            })
-            this.setState({ForceUpdateNow:false});
-        }
-    }
+                else{
+                    actions.resetForm({
+                        values:{
+                            email:'',
+                        },
+                    });
+                }
+                // else{
+                //     checkEmail(values.email).then(()=>{
+                //       console.log("You have invited the person")
+                //     }).catch(()=>{
+                //       alert("Error email")
+                //     })
+            }
+        },
+      });
 
-    render(){
-        let dasharr: any[] = [];
-        for(let i = 0; i < this.state.arr.length; i++){
-            dasharr.push(<DashboardBox
-                attendee={this.state.arr[i][0]}
-                update={this.forceup}
-            />);
-        }
+      const [value, setValue] = React.useState('12');
 
-        return (
-            <div className='App'>
-                <p>Host Management</p>
-                <Link to = "/EventDescriptionPage">
-                    <button className="button">Description</button>
-                </Link>
-                <Link to = "/EventEditingPage">
-                    <button className="button">Edit Your Event</button>
-                </Link>
-                {/* to delete attendee. */}
-                <button className="button">X</button>
-                <button className="button">Add/Invite</button>
-            </div>
-            
-
-
-        );
-    }
+      const handleChange = (event:any) => {
+        setValue(event.target.value);
+      }
+      return(
+        <HostManagementPagetmp formik={formik} handleChange={handleChange}/>
+      )
 }
 
 export default HostManagementPage;
