@@ -18,6 +18,9 @@ public class Event {
     private String description;
     private String location;
     private String time;
+    private int capacity;
+
+    private boolean inviteOnly;
 
     public Event(){
 
@@ -29,6 +32,18 @@ public class Event {
         this.description = description;
         this.location = location;
         this.time = time;
+        this.inviteOnly = false;
+        this.capacity = 10; //default capacity
+    }
+
+    public Event(String title, String email, String description, String location, String time, boolean inviteOnly, int capacity) {
+        this.title = title;
+        this.email = email;
+        this.description = description;
+        this.location = location;
+        this.time = time;
+        this.inviteOnly = inviteOnly;
+        this.capacity = capacity;
     }
 
     public long getId() {
@@ -73,5 +88,21 @@ public class Event {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public boolean isInviteOnly() {
+        return inviteOnly;
+    }
+
+    public void setInviteOnly(boolean inviteOnly) {
+        this.inviteOnly = inviteOnly;
     }
 }

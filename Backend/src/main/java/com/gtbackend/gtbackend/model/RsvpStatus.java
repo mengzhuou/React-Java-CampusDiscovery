@@ -5,5 +5,6 @@ public enum RsvpStatus {
     MAYBE,
     WONTATTEND,
     NEMESIS,
-    INVITED
+    INVITED,
+    DELETE
 }
