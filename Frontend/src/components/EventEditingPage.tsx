@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import "./EventEditingPage.css";
 
   
-function EventEditingPage() {
+function EventEditingPage(props: any) {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
@@ -27,7 +27,7 @@ function EventEditingPage() {
     return (
       <div className = "App">
         <header className="App-header">
-          <p>Edit Your Event</p>
+          <p>Edit Your Event<button onClick={()=>alert(props.eventNum())}>Event Number</button></p>
           <form className="eventEditingForm" onSubmit={formik.handleSubmit}>
               <div className="title">
                 <label htmlFor='title'>Event title : </label>
@@ -54,7 +54,7 @@ function EventEditingPage() {
                 <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
               </div>
               <div>
-                <button className='editSubmitButton'>Confirm Changes</button>
+                <button className='editSubmitButton' >Confirm Changes</button>
               </div>
 
               <Link to = "/HostManagementPage">
