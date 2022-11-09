@@ -111,16 +111,15 @@ class Dashboard extends React.Component<any,any>{
                 <button className="topnavButton" onClick={this.eventDescrip}>Event Description</button>
             </div>
             <div className="AppDashboard"> 
-                <header className="header">
-                    <p>Dashboard<button onClick={this.setpageNum}>set page</button></p>
+                <header>
+                    <p className="header">Dashboard<button onClick={this.setpageNum}>set page</button></p>
+                    <Dropdown className="dropDownEvent"
+                        options={this.options}
+                        // onChange={this._onSelect}
+                        value={this.defaultOption}
+                        placeholder="All Event"
+                    />
                 </header> 
-                {/* need to be dropdown list */}
-                <Dropdown className="dropDownEvent"
-                    options={this.options}
-                    // onChange={this._onSelect}
-                    value={this.defaultOption}
-                    placeholder="All Event"
-                />
                 <div className='body'>
                     {dasharr}
                 </div>
