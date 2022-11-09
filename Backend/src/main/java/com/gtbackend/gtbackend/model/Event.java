@@ -32,7 +32,7 @@ public class Event {
         this.description = description;
         this.location = location;
         this.time = time;
-        this.inviteOnly = false;
+        this.inviteOnly = false; //default invite only status
         this.capacity = 10; //default capacity
     }
 

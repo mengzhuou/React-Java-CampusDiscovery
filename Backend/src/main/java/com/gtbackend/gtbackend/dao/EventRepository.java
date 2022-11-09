@@ -74,4 +74,14 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Transactional
     @Query(value = "UPDATE Event e SET e.time = ?2 WHERE e.id = ?1")
     void updateTimeAdmin(long id, String time);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Event e SET e.capacity = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    void updateCapacity(long id, String email, int capacity);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE Event e SET e.inviteOnly = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    void updateInvite(long id, String email, boolean inviteOnly);
 }

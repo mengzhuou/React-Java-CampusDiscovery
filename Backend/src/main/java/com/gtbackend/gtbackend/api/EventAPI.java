@@ -72,4 +72,20 @@ public class EventAPI {
         String time = body.get("time");
         eventRepository.updateTime(id,principal.getName(),time);
     }
+    @PatchMapping("/updateCapacity")
+    public void updateCapacity(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
+        Long id = Long.valueOf(body.get("id"));
+        Integer capacity = Integer.valueOf(body.get("capacity"));
+        eventRepository.updateCapacity(id,principal.getName(),capacity);
+    }
+    @PatchMapping("/updateInvite")
+    public void updateInvite(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
+        Long id = Long.valueOf(body.get("id"));
+        String InviteStatus = body.get("invite");
+        if(InviteStatus.toUpperCase().equals("TRUE")){
+            eventRepository.updateInvite(id,principal.getName(),true);
+            return;
+        }
+        eventRepository.updateInvite(id,principal.getName(),false);
+    }
 }
