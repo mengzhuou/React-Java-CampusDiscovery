@@ -15,6 +15,7 @@ class DashboardBox extends Component<any,any> {
         this.updateLocation = this.updateLocation.bind(this);
         this.updateTime = this.updateTime.bind(this);
         this.eventdel = this.eventdel.bind(this);
+        this.passEventId = this.passEventId.bind(this);
     }
     componentDidMount(): void {
         getinfo().then((content)=>this.setState({role:content.data})).catch(()=> console.log("failure to load role"));
@@ -130,10 +131,15 @@ class DashboardBox extends Component<any,any> {
         }
     }
 
+    passEventId = () => {
+        let eventId = this.state.id;
+        this.props.setEventID(eventId);
+    }
 
     render() {
         return (
             <div className='box'>
+                <button className='descriptionButton' type="submit" onClick={this.passEventId}>Event Description</button>
                 <h1 className='title'>
                     <button className="deleteButton" type="submit" onClick={this.eventdel}>Delete</button>
                     <button className="editButtonTitle" type="submit" onClick={this.updateTitle}>Edit</button> 

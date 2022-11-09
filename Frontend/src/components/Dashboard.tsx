@@ -25,7 +25,7 @@ class Dashboard extends React.Component<any,any>{
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
         this.createEvent = this.createEvent.bind(this);
-        this.setpageNum = this.setpageNum.bind(this);
+        this.passEventId = this.passEventId.bind(this);
     }
 
     display() {
@@ -83,9 +83,9 @@ class Dashboard extends React.Component<any,any>{
             this.setState({arr:array});
         })
     }
-    setpageNum(): void{
-        let page = Number(prompt("page:"));
-        this.props.setEventID(page);
+    passEventId(eventId: number): void{
+        this.props.setEventID(eventId);
+        this.props.navigate("/EventDescriptionPage");
     }
 
     render(){
@@ -100,6 +100,7 @@ class Dashboard extends React.Component<any,any>{
                 description={this.state.arr[i][4]}
                 id ={this.state.arr[i][5]}
                 update={this.forceup}
+                setEventID={this.passEventId}
                 />);
         }
         return (
@@ -112,7 +113,8 @@ class Dashboard extends React.Component<any,any>{
             </div>
             <div className="AppDashboard"> 
                 <header>
-                    <p className="header">Dashboard<button onClick={this.setpageNum}>set page</button></p>
+                    <p className="header">Dashboard</p>
+                    {/* <button onClick={this.passEventId}>set page</button> */}
                     <Dropdown className="dropDownEvent"
                         options={this.options}
                         // onChange={this._onSelect}
