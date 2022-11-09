@@ -8,6 +8,7 @@ import com.gtbackend.gtbackend.model.RsvpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,12 +24,12 @@ public final class RsvpService {
     }
 
     //if multithreading willAttend may run into a race condition
-    public void updateWillAttend(long event_id, String email, Event event) throws IllegalAccessException{
+    public void updateWillAttend(long event_id, String email, Event event) throws AccessDeniedException{
         int capacity = event.getCapacity();
         int current = rsvpRepository.getCount(event_id, RsvpStatus.WILLATTEND);
         List<Rsvp> tmp_rsvp = rsvpRepository.getRsvpEmail(event_id,email);
         if(tmp_rsvp.isEmpty() && event.isInviteOnly()){
-            throw new IllegalAccessException();
+            throw new AccessDeniedException("Cannot Attend Invite-Only Event without Invite");
         }
         if(current >= capacity){
             throw new IndexOutOfBoundsException();

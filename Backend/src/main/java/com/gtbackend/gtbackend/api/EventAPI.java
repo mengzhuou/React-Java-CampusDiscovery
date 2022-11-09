@@ -38,7 +38,7 @@ public class EventAPI {
     }
 
     @GetMapping("/getEventSize")
-    public long getsize(){
+    public long getSize(){
         return eventRepository.count();
     }
 

@@ -6,10 +6,9 @@ import com.gtbackend.gtbackend.model.Event;
 import com.gtbackend.gtbackend.model.Rsvp;
 import com.gtbackend.gtbackend.model.RsvpStatus;
 import com.gtbackend.gtbackend.service.RsvpService;
-import org.aspectj.weaver.ast.Literal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
@@ -32,13 +31,13 @@ public class RsvpAPI {
     }
 
     @PatchMapping("/updateRsvp")
-    public void updateRsvp(Principal principal, @RequestBody Map<String, String> body) throws NoSuchElementException, IllegalArgumentException, IllegalAccessException{
+    public void updateRsvp(Principal principal, @RequestBody Map<String, String> body) throws NoSuchElementException, IllegalArgumentException, AccessDeniedException {
         RsvpStatus status = RsvpStatus.valueOf(body.get("status").toUpperCase());
         long event_id = Long.valueOf(body.get("event_id"));
         Optional<Event> tmp_event = eventRepository.findById(event_id);
         List<Rsvp> tmp_rsvp = rsvpRepository.getRsvpEmail(event_id, principal.getName());
         if(status.equals(RsvpStatus.INVITED)){
-            throw new IllegalAccessException();
+            throw new AccessDeniedException("Cannot Self Invite");
         }
         if(tmp_event.isEmpty()){
             throw new NoSuchElementException();
@@ -96,5 +95,42 @@ public class RsvpAPI {
         }
         return tmp_rsvp.get(0).getStatus().toString();
     }
+
+    @DeleteMapping("/hostRemove")
+    public void hostRemove(@RequestBody Map<String, String> body, Principal principal) throws AccessDeniedException {
+        long event_id = Long.valueOf(body.get("event_id"));
+        String email = body.get("email");
+        Optional<Event> tmp_Event = eventRepository.findById(event_id);
+        if(tmp_Event.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        Event event = tmp_Event.get();
+        if(!event.getEmail().equals(principal.getName())){
+            throw new AccessDeniedException("Have to be Event Host");
+        }
+        rsvpRepository.deleteRsvp(event_id, email);
+    }
+
+    @PostMapping("/hostInvite")
+    public void hostInvite(Principal principal, @RequestBody Map<String, String> body)throws AccessDeniedException{
+        long event_id = Long.valueOf(body.get("event_id"));
+        String email = body.get("email");
+        Optional<Event> tmp_Event = eventRepository.findById(event_id);
+        if(tmp_Event.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        Event event = tmp_Event.get();
+        if(!event.getEmail().equals(principal.getName())){
+            throw new AccessDeniedException("Have to be Event Host");
+        }
+        List<Rsvp> tmp_rsvp = rsvpRepository.getRsvpEmail(event_id, email);
+        if(tmp_rsvp.isEmpty()){
+            Rsvp newRsvp = new Rsvp(event_id, RsvpStatus.INVITED, email);
+            rsvpRepository.save((newRsvp));
+            return;
+        }
+    }
+
+
 
 }
