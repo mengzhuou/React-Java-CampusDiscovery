@@ -4,7 +4,6 @@ import React from 'react';
 import { getinfo, getevent, logout} from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
-import { Link } from 'react-router-dom';
 import Dropdown from 'react-dropdown'
 
 

@@ -1,7 +1,3 @@
-import { Link, useNavigate } from 'react-router-dom';
-import React, { Component } from 'react';
-import { useFormik } from 'formik';
-import { addRsvp } from '../helpers/connector';
 import Modal from "./Modal";
 import useModal from "./UseModal";
 
