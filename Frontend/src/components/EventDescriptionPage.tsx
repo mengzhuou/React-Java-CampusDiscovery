@@ -4,14 +4,15 @@ import "./Dashboard.css";
 import Modal from "./Modal";
 import useModal from "./UseModal";
 import { useNavigate } from 'react-router-dom';
+import RsvpPage from "./RsvpPage"
 
   
 function EventDescriptionPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const rsvpNavigate = () => {
-    navigate('/RsvpPage');
-  }
+  // const rsvpNavigate = () => {
+  //   navigate('/RsvpPage');
+  // }
 
   const { isOpen, toggle } = useModal();
   
@@ -51,7 +52,8 @@ function EventDescriptionPage() {
             </div>
 
          
-            <button className='button' onClick={rsvpNavigate}> RSVPworks </button>
+            {/* <button className='button' onClick={rsvpNavigate}> RSVPworks </button> */}
+            {/* <RsvpPage></RsvpPage> */}
             <Link to = "/AttendeeListPage">
               <button className="button">Attendee List</button>
             </Link>

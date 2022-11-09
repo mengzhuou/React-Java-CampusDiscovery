@@ -8,8 +8,7 @@ import useModal from "./UseModal";
 function RsvpPage(){
     const { isOpen, toggle } = useModal();
     return (
-      <div className="App">
-        <h1>Rsvp works</h1>
+      <div>
         <button onClick={toggle}>Open Modal </button>
         <Modal isOpen={isOpen} toggle={toggle}></Modal>
       </div>

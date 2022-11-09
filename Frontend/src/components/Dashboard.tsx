@@ -5,10 +5,19 @@ import { getinfo, getevent, logout} from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
+import Dropdown from 'react-dropdown'
 
 
 
 class Dashboard extends React.Component<any,any>{
+    placeholder="Select a Status"
+    options = [
+        {label: 'All Event', value: 'ALLEVENT'},
+        {label: 'Invited', value: 'INVITED'}
+    ];
+
+    defaultOption = this.options[2];
+
     constructor(props:any){
         super(props);
         this.state = {currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
@@ -33,6 +42,10 @@ class Dashboard extends React.Component<any,any>{
 
     createEvent = ()=>{
         this.props.navigate("/EventCreationPage")
+    }
+
+    eventDescrip = () => {
+        this.props.navigate("/EventDescriptionPage")
     }
 
     async forceup(){
@@ -90,28 +103,35 @@ class Dashboard extends React.Component<any,any>{
                 />);
         }
         return (
-        <div className="AppDashboard">
-            <header className="header">
-                <p>Dashboard<button onClick={this.setpageNum}>set page</button></p>
-            </header> 
-            <button className='logout' onClick={this.pagelogout}>Logout</button>
-            <button className='display' onClick={this.display}>Display</button>
-            <button className='createEvent' onClick={this.createEvent}>Create A Event</button>
-            {/* need to be dropdown list */}
-            <button className="button">All Event Or Invited</button>
-            <Link to = "/EventDescriptionPage">
-                <button className="button">Event Description</button>
-            </Link>
-            <div className='body'>
-                {dasharr}
+        <div>
+            <div className="topnav">
+                <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
+                <button className="topnavButton" onClick={this.display}>Display</button>
+                <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
+                <button className="topnavButton" onClick={this.eventDescrip}>Event Description</button>
             </div>
-            <div className="pagination">
-                <Pagination
-                    currentPage={this.state.currentPage}
-                    lastPage={this.state.lastPage}
-                    maxLength={10}
-                    setCurrentPage={this.setCurrentPage}
+            <div className="AppDashboard"> 
+                <header className="header">
+                    <p>Dashboard<button onClick={this.setpageNum}>set page</button></p>
+                </header> 
+                {/* need to be dropdown list */}
+                <Dropdown className="dropDownEvent"
+                    options={this.options}
+                    // onChange={this._onSelect}
+                    value={this.defaultOption}
+                    placeholder="All Event"
                 />
+                <div className='body'>
+                    {dasharr}
+                </div>
+                <div className="pagination">
+                    <Pagination
+                        currentPage={this.state.currentPage}
+                        lastPage={this.state.lastPage}
+                        maxLength={10}
+                        setCurrentPage={this.setCurrentPage}
+                    />
+                </div>
             </div>
         </div>
         );
