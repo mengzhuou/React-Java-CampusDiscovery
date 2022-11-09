@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import RsvpPage from "./RsvpPage"
 
   
-function EventDescriptionPage() {
+function EventDescriptionPage(props: any) {
   // const navigate = useNavigate();
 
   // const rsvpNavigate = () => {
@@ -23,6 +23,7 @@ function EventDescriptionPage() {
         <p>Event Description</p>
         <form className="eventDescriptionForm">
             <div className="desName">
+              <button onClick={()=>alert(props.eventNum())}>Event Number</button>
               <label htmlFor='title'>Event title :</label>
               {/* <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input> */}
             </div>

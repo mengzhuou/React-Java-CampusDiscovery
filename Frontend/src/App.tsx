@@ -42,7 +42,7 @@ class App extends React.Component<any,any>{
           <Route path="/HostManagementPage" element={<HostManagementPage/>}/>
           <Route path="/HostManagementPagetmp" element={<HostManagementPagetmp/>}/>
           <Route path="/RsvpPage" element={<RsvpPage/>}/>
-          <Route path="/EventDescriptionPage" element={<EventDescriptionPage/>}/>
+          <Route path="/EventDescriptionPage" element={<EventDescriptionPage eventNum={this.getEventID}/>}/>
         </Routes>
       </Router>
     );
