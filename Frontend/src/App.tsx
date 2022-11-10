@@ -19,9 +19,19 @@ class App extends React.Component<any,any>{
   constructor(props:any){
     super(props);
     this.state = {EventID: -1};
+    this.state = {EventPage: -1};
     this.getEventID = this.getEventID.bind(this);
     this.setEventID = this.setEventID.bind(this);
+    this.getEventPage = this.getEventPage.bind(this);
+    this.setEventPage = this.setEventPage.bind(this);
   }
+  setEventPage(page:number){
+    this.setState({EventPage: page});
+  }
+  getEventPage(){
+    return this.state.EventPage;
+  }
+
   setEventID(id:number){
     this.setState({EventID: id});
   }
@@ -33,16 +43,16 @@ class App extends React.Component<any,any>{
       <Router>
         <Routes>
           <Route path="/first" element={<First />}/>
-          <Route path="/dashboard" element={<Dashboard setEventID={this.setEventID}/>}/>
+          <Route path="/dashboard" element={<Dashboard setEventID={this.setEventID} setEventPage={this.setEventPage}/>}/>
           <Route path="/second" element={<Second />}/>
           <Route path="/" element={<Main/>}/>
-          <Route path="/EventEditingPage" element={<EventEditingPage eventNum={this.getEventID}/>}/>
+          <Route path="/EventEditingPage" element={<EventEditingPage eventNum={this.getEventID} eventPage={this.getEventPage}/>}/>
           <Route path="/EventCreationPage" element={<EventCreationPage/>}/>
           <Route path="/AttendeeListPage" element={<AttendeeListPage/>}/>
           <Route path="/HostManagementPage" element={<HostManagementPage/>}/>
           <Route path="/HostManagementPagetmp" element={<HostManagementPagetmp/>}/>
           <Route path="/RsvpPage" element={<RsvpPage/>}/>
-          <Route path="/EventDescriptionPage" element={<EventDescriptionPage eventNum={this.getEventID}/>}/>
+          <Route path="/EventDescriptionPage" element={<EventDescriptionPage eventNum={this.getEventID} eventPage={this.getEventPage}/>}/>
         </Routes>
       </Router>
     );

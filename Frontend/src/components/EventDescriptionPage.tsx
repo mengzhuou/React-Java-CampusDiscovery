@@ -5,6 +5,7 @@ import Modal from "./Modal";
 import useModal from "./UseModal";
 import { Component } from 'react';
 import { getevent} from '../helpers/connector';
+import DashboardBox from './DashboardBox';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
@@ -32,8 +33,9 @@ componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?
   }
 }
 
-showEventId = () => {
+showEventIdAndPage = () => {
   alert(this.props.eventNum())//show event id
+  alert(this.props.eventPage())
 }
 
 
@@ -43,7 +45,7 @@ showEventId = () => {
       <div className = "App">
         <header className="App-header">
           <p>Event Description</p>
-          <button onClick={this.showEventId}>Event Number</button>
+          <button onClick={this.showEventIdAndPage}>Event Number</button>
           <form className="eventDescriptionForm">
               <div className="desName">
                 <label htmlFor='title'>Event title :</label>
