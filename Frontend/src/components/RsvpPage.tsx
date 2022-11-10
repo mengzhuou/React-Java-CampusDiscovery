@@ -5,11 +5,9 @@ import useModal from "./UseModal";
 function RsvpPage(){
     const { isOpen, toggle } = useModal();
     return (
-      <EventDescriptionPage/>
-      // <div>
-      //   <button onClick={toggle}>Open Modal </button>
-      //   <Modal isOpen={isOpen} toggle={toggle}></Modal>
-      // </div>
+      <div>
+        <EventDescriptionPage/>
+      </div>
       );
     }
 export default RsvpPage;

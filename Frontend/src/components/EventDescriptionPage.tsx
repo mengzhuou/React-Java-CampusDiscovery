@@ -39,7 +39,6 @@ showEventIdAndPage = () => {
 }
 
 
-
   render(){
     return (
       <div className = "App">
@@ -80,8 +79,11 @@ showEventIdAndPage = () => {
                 <button className="button">Dashboard</button>
               </Link>
           </form>
-          <button className='button' onClick={this.props.toggle}> RSVP </button>
-          <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}></Modal>
+          
+          <div onClick={this.props.useModal}>
+            <button className='button' onClick={this.props.toggle}> RSVP </button>
+            <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}></Modal>
+          </div>
         </header>
       </div>
     );
