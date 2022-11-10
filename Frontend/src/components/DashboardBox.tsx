@@ -144,7 +144,7 @@ class DashboardBox extends Component<any,any> {
     render() {
         return (
             <div className='box'>
-                <button className='descriptionButton' type="submit" onClick={this.passEventPage}>Event Description</button>
+                <button className='descriptionButton' type="submit" onClick={this.passEventId}>Event Description</button>
                 <h1 className='title'>
                     <button className="deleteButton" type="submit" onClick={this.eventdel}>Delete</button>
                     <button className="editButtonTitle" type="submit" onClick={this.updateTitle}>Edit</button> 

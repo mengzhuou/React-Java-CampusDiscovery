@@ -83,14 +83,14 @@ class Dashboard extends React.Component<any,any>{
                 this.setState({arr:array});
             })
         }
-        passEventId(eventId: number): void{
-            this.props.setEventID(eventId);
-            this.props.navigate("/EventDescriptionPage");
-        }
-        passEventPage(eventPage: number): void{
-            this.props.setEventPage(eventPage);
-            this.props.navigate("/EventDescriptionPage");
-        }
+    passEventId(eventId: number): void{
+        this.props.setEventID(eventId);
+        this.props.navigate("/EventDescriptionPage");
+    }
+    passEventPage(eventPage: number): void{
+        this.props.setEventPage(eventPage);
+        this.props.navigate("/EventDescriptionPage");
+    }
 
     render(){
         let dasharr: any[] = [];
