@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import Modal from "./Modal";
 import useModal from "./UseModal";
 import { Component } from 'react';
+import { getevent} from '../helpers/connector';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
@@ -15,14 +16,36 @@ class EventDescriptionPage extends Component<any,any> {
     this.setState({ForceUpdateNow: true});
   }
 
+componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
+  if(this.state.ForceUpdateNow){
+      getevent(this.state.currentPage).then((content)=>{
+          let key;
+          let array = [];
+          for(key in content.data){
+              array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
+                  content.data[key].location, content.data[key].description, content.data[key].id]);
+          }
+          this.setState({arr:array});
+          this.forceUpdate();
+      })
+      this.setState({ForceUpdateNow:false});
+  }
+}
+
+showEventId = () => {
+  alert(this.props.eventNum())//show event id
+}
+
+
+
   render(){
     return (
       <div className = "App">
         <header className="App-header">
           <p>Event Description</p>
+          <button onClick={this.showEventId}>Event Number</button>
           <form className="eventDescriptionForm">
               <div className="desName">
-                {/* <button onClick={()=>alert(props.eventNum())}>Event Number</button> */}
                 <label htmlFor='title'>Event title :</label>
               </div>
   
