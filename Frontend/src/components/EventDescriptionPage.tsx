@@ -3,70 +3,91 @@ import "./EventDescriptionPage.css";
 import "./Dashboard.css";
 import Modal from "./Modal";
 import useModal from "./UseModal";
-import { useNavigate } from 'react-router-dom';
-
+import { Component } from 'react';
+import { getevent} from '../helpers/connector';
+import DashboardBox from './DashboardBox';
   
-function EventDescriptionPage() {
-  const navigate = useNavigate();
-
-  const rsvpNavigate = () => {
-    navigate('/RsvpPage');
+class EventDescriptionPage extends Component<any,any> {
+  constructor(props:any){
+    super(props);
+    this.forceup = this.forceup.bind(this);
   }
 
-  const { isOpen, toggle } = useModal();
+  async forceup() {
+    this.setState({ForceUpdateNow: true});
+  }
+
+componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
+  if(this.state.ForceUpdateNow){
+      getevent(this.state.currentPage).then((content)=>{
+          let key;
+          let array = [];
+          for(key in content.data){
+              array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
+                  content.data[key].location, content.data[key].description, content.data[key].id]);
+          }
+          this.setState({arr:array});
+          this.forceUpdate();
+      })
+      this.setState({ForceUpdateNow:false});
+  }
+}
+
+showEventIdAndPage = () => {
+  alert(this.props.eventNum())//show event id
+  alert(this.props.eventPage())
+}
+
+
+  render(){
+    return (
+      <div className = "App">
+        <header className="App-header">
+          <p>Event Description</p>
+          <button onClick={this.showEventIdAndPage}>Event Number</button>
+          <form className="eventDescriptionForm">
+              <div className="desName">
+                <label htmlFor='title'>Event title :</label>
+              </div>
   
-  return (
-    <div className = "App">
-      <header className="App-header">
-      {/* this page should only contain event information, so no input box */}
-        <p>Event Description</p>
-        <form className="eventDescriptionForm">
-            <div className="desName">
-              <label htmlFor='title'>Event title :</label>
-              {/* <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input> */}
-            </div>
-
-            <div className="desName">
-              <label htmlFor ='host'>Event host : </label>
-              {/* <input size={55} onChange={formik.handleChange} value = {formik.values.email} id='email' name='email'></input> */}
-            </div>
-
-            <div className="desName">
-              <label htmlFor ='date'>Event date : </label>
-              {/* <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='date'></input> */}
-            </div>
-
-            <div className="desName">
-              <label htmlFor ='location'>Event location : </label>
-              {/* <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input> */}
-            </div>
-
-            <div className="desName">
-              <label htmlFor ='description'>Event description : </label>
-              {/* <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input> */}
-            </div>
-
-            <div className="desName">
-              <p>Your RSVP Status: </p>
-            </div>
-
-         
-            <button className='button' onClick={rsvpNavigate}> RSVPworks </button>
-            <Link to = "/AttendeeListPage">
-              <button className="button">Attendee List</button>
-            </Link>
-            <Link to = "/HostManagementPage">
-              <button className="button">Host Management</button>
-            </Link>
-            <Link to = "/Dashboard">
+              <div className="desName">
+                <label htmlFor ='host'>Event host : </label>
+              </div>
+  
+              <div className="desName">
+                <label htmlFor ='date'>Event date : </label>
+              </div>
+  
+              <div className="desName">
+                <label htmlFor ='location'>Event location : </label>
+              </div>
+  
+              <div className="desName">
+                <label htmlFor ='description'>Event description : </label>
+              </div>
+  
+              <div className="desName">
+                <p>Your RSVP Status: </p>
+              </div>
+              <Link to = "/AttendeeListPage">
+                <button className="button">Attendee List</button>
+              </Link>
+              <Link to = "/HostManagementPage">
+                <button className="button">Host Management</button>
+              </Link>
+              <Link to = "/Dashboard">
                 <button className="button">Dashboard</button>
-            </Link>
-        </form>
-        <button className='button' onClick={toggle}> RSVP </button>
-        <Modal isOpen={isOpen} toggle={toggle}></Modal>
-      </header>
-    </div>
-  );
+              </Link>
+          </form>
+          
+          <div onClick={this.props.useModal}>
+            <button className='button' onClick={this.props.toggle}> RSVP </button>
+            <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}></Modal>
+          </div>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default EventDescriptionPage;

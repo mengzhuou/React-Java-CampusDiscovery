@@ -21,6 +21,7 @@ function HostManagementPage(){
                     return
                 }
                 else{
+                    alert("You have added " + values.email + " to your event!")
                     actions.resetForm({
                         values:{
                             email:'',
