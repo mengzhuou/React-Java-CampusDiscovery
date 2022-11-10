@@ -103,37 +103,36 @@ class Dashboard extends React.Component<any,any>{
                 />);
         }
         return (
-        <div>
-            <div className="topnav">
-                <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
-                <button className="topnavButton" onClick={this.display}>Display</button>
-                <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
-                <button className="topnavButton" onClick={this.eventDescrip}>Event Description</button>
-            </div>
-            <div className="AppDashboard"> 
-                <header>
-                    <p className="header">Dashboard</p>
-                    {/* <button onClick={this.passEventId}>set page</button> */}
-                    <Dropdown className="dropDownEvent"
-                        options={this.options}
-                        // onChange={this._onSelect}
-                        value={this.defaultOption}
-                        placeholder="All Event"
-                    />
-                </header> 
-                <div className='body'>
-                    {dasharr}
+            <div>
+                <div className="topnav">
+                    <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
+                    <button className="topnavButton" onClick={this.display}>Display</button>
+                    <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
+                    <button className="topnavButton" onClick={this.eventDescrip}>Event Description</button>
                 </div>
-                <div className="pagination">
-                    <Pagination
-                        currentPage={this.state.currentPage}
-                        lastPage={this.state.lastPage}
-                        maxLength={10}
-                        setCurrentPage={this.setCurrentPage}
-                    />
+                <div className="AppDashboard"> 
+                    <header>
+                        <p className="header">Dashboard</p>
+                        <Dropdown className="dropDownEvent"
+                            options={this.options}
+                            // onChange={this._onSelect}
+                            value={this.defaultOption}
+                            placeholder="All Event"
+                        />
+                    </header> 
+                    <div className='body'>
+                        {dasharr}
+                    </div>
+                    <div className="pagination">
+                        <Pagination
+                            currentPage={this.state.currentPage}
+                            lastPage={this.state.lastPage}
+                            maxLength={10}
+                            setCurrentPage={this.setCurrentPage}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
         );
     }
 }
