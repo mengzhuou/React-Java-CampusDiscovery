@@ -12,12 +12,6 @@
     cursor: pointer;
 }
 
-.spacer{
-    height: 50px;
-    margin: 0 0 -50px 0;
-    background: transparent;
-}
-
 .body{
     margin-bottom: 30px;
 }
