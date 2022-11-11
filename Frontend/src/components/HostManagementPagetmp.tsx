@@ -70,6 +70,9 @@ class HostManagementPagetmp extends Component<any,any> {
                     <Link to = "/EventEditingPage">
                         <button className="buttomnavButton">Edit Your Event</button>
                     </Link>
+                    <Link to = "/Dashboard">
+                        <button className="buttomnavButton">Dashboard</button>
+                    </Link>
                 </div>
             </div>
         );

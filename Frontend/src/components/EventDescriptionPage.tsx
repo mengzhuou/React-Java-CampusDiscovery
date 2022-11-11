@@ -128,6 +128,10 @@ class EventDescriptionPage extends Component<any,any> {
           <div className="desName">
             <p>Your RSVP Status : </p>
           </div>
+          <div onClick={this.props.useModal}>
+              <button className='button' onClick={this.props.toggle}> RSVP </button>
+              <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}></Modal>
+          </div>
           
         </body>
         <div className='bottomnav'>
@@ -140,10 +144,6 @@ class EventDescriptionPage extends Component<any,any> {
             <Link to = "/Dashboard">
               <button className="buttomnavButton">Dashboard</button>
             </Link>
-            <div onClick={this.props.useModal}>
-              <button className='buttomnavButton' onClick={this.props.toggle}> RSVP </button>
-              <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}></Modal>
-            </div>
         </div>
       </div>
     );

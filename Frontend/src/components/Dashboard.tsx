@@ -114,7 +114,6 @@ class Dashboard extends React.Component<any,any>{
                     <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
                     <button className="topnavButton" onClick={this.display}>Display</button>
                     <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
-                    <button className="topnavButton" onClick={this.eventDescrip}>Event Description</button>
                 </div>
                 <div className="AppDashboard"> 
                     <header>
