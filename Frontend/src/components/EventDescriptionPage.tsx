@@ -4,13 +4,13 @@ import "./Dashboard.css";
 import Modal from "./Modal";
 import useModal from "./UseModal";
 import { Component } from 'react';
-import { getevent} from '../helpers/connector';
+import { getevent, getRsvp } from '../helpers/connector';
 import DashboardBox from './DashboardBox';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
     super(props);
-    this.state = {currentPage: 1, arr: [], updateForced:false, ForceUpdateNow:false};
+    this.state = {id: this.props.id, currentPage: 1, arr: [], updateForced:false, ForceUpdateNow:false};
     this.forceup = this.forceup.bind(this);
   }
 
@@ -24,7 +24,8 @@ class EventDescriptionPage extends Component<any,any> {
             let key;
             let array = [];
             for(key in content.data){
-              if (this.state.id === content.data[key].id){
+              if (this.props.eventNum() === content.data[key].id){
+                console.log(content.data[key].id + "is content id" + this.props.eventNum()  + " is event id");
                 array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
                     content.data[key].location, content.data[key].description, content.data[key].id]);
               }
@@ -41,7 +42,8 @@ class EventDescriptionPage extends Component<any,any> {
         let key;
         let array = [];
         for(key in content.data){
-          if (this.state.id === content.data[key].id){
+          if (this.props.eventNum() === content.data[key].id){
+            console.log(content.data[key].id + "is content id" + this.props.eventNum()  + " is event id");
             array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
                 content.data[key].location, content.data[key].description, content.data[key].id]);
           }
@@ -55,33 +57,55 @@ class EventDescriptionPage extends Component<any,any> {
     alert(this.props.eventPage())
   }
 
-  // showEventStatus = () => {
+  // showEventStatus() {
+  //   getRsvp().then((content)=>{
 
+  //   })
   // }
 
-
   render(){
-    let dasharr: any[] = [];
 
+    
+    // let dasharr: any[] = [];
+    
+    // for(let i = 0; i < this.state.arr.length; i++){
+    //     dasharr.push(<DashboardBox 
+    //         title={this.state.arr[i][0]}
+    //         host={this.state.arr[i][1]}
+    //         date={this.state.arr[i][2]}
+    //         location={this.state.arr[i][3]}
+    //         description={this.state.arr[i][4]}
+    //         id ={this.state.arr[i][5]}
+    //         update={this.forceup}
+    //         />);
+    // }
+
+
+    let dasharr: any[] = [];
+    
     for(let i = 0; i < this.state.arr.length; i++){
-        dasharr.push(<DashboardBox 
-            title={this.state.arr[i][0]}
-            host={this.state.arr[i][1]}
-            date={this.state.arr[i][2]}
-            location={this.state.arr[i][3]}
-            description={this.state.arr[i][4]}
-            id ={this.state.arr[i][5]}
-            update={this.forceup}
-            />);
+      console.log(this.state.arr[i][0]);
+        dasharr.push([
+            this.state.arr[i][0],
+            this.state.arr[i][1],
+            this.state.arr[i][2],
+            this.state.arr[i][3],
+            this.state.arr[i][4],
+            this.state.arr[i][5],
+        ]);
     }
+
     return (
       <div className = "App">
         <header className="App-header">
           <p>Event Description</p>
           <button onClick={this.showEventIdAndPage}>Event Number</button>
           <form className="eventDescriptionForm">
+              <div>
+                {/* hello {dasharr[0][0]} */}
+              </div>
               <div className="desName">
-                <label htmlFor='title'>Event title : {this.props.title}</label>
+                <label htmlFor='title'>Event title : {this.props.arr}</label>
               </div>
   
               <div className="desName">
