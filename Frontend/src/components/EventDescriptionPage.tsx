@@ -100,49 +100,51 @@ class EventDescriptionPage extends Component<any,any> {
         <header className="App-header">
           <p>Event Description</p>
           <button onClick={this.showEventIdAndPage}>Event Number</button>
-          <form className="eventDescriptionForm">
-              <div>
-                {/* hello {dasharr[0][0]} */}
-              </div>
-              <div className="desName">
-                <label htmlFor='title'>Event title : {this.props.arr}</label>
-              </div>
-  
-              <div className="desName">
-                <label htmlFor ='host'>Event host : {this.props.host}</label>
-              </div>
-  
-              <div className="desName">
-                <label htmlFor ='date'>Event date : {this.props.date}</label>
-              </div>
-  
-              <div className="desName">
-                <label htmlFor ='location'>Event location : {this.props.location}</label>
-              </div>
-  
-              <div className="desName">
-                <label htmlFor ='description'>Event description : {this.props.description}</label>
-              </div>
-  
-              <div className="desName">
-                <p>Your RSVP Status : </p>
-              </div>
-              <Link to = "/AttendeeListPage">
-                <button className="button">Attendee List</button>
-              </Link>
-              <Link to = "/HostManagementPage">
-                <button className="button">Host Management</button>
-              </Link>
-              <Link to = "/Dashboard">
-                <button className="button">Dashboard</button>
-              </Link>
-          </form>
-          
-          <div onClick={this.props.useModal}>
-            <button className='button' onClick={this.props.toggle}> RSVP </button>
-            <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}></Modal>
-          </div>
         </header>
+        <body className='eventBody'>
+          <div>
+            {/* hello {dasharr[0][0]} */}
+          </div>
+          <div className="desName">
+            <label htmlFor='title'>Event title :  : vessssssssssssssssssssnt tidddddddddddddddddddddddddd {this.props.arr}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='host'>Event host : {this.props.host}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='date'>Event date : {this.props.date}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='location'>Event location : {this.props.location}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='description'>Event description : {this.props.description}</label>
+          </div>
+
+          <div className="desName">
+            <p>Your RSVP Status : </p>
+          </div>
+          
+        </body>
+        <div className='bottomnav'>
+            <Link to = "/AttendeeListPage">
+              <button className="buttomnavButton">Attendee List</button>
+            </Link>
+            <Link to = "/HostManagementPage">
+              <button className="buttomnavButton">Host Management</button>
+            </Link>
+            <Link to = "/Dashboard">
+              <button className="buttomnavButton">Dashboard</button>
+            </Link>
+            <div onClick={this.props.useModal}>
+              <button className='buttomnavButton' onClick={this.props.toggle}> RSVP </button>
+              <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}></Modal>
+            </div>
+        </div>
       </div>
     );
   }

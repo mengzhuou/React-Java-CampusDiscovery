@@ -61,18 +61,17 @@ class HostManagementPagetmp extends Component<any,any> {
                         <button className='inviteButton' type='submit'>Submit</button>
                     </form>
                     <button className="button">X</button>
-                    <Link to = "/EventDescriptionPage">
-                        <button className="button">Description</button>
-                    </Link>
-                    <Link to = "/EventEditingPage">
-                        <button className="button">Edit Your Event</button>
-                    </Link>
 
                 </body>
+                <div className='bottomnav'>
+                    <Link to = "/EventDescriptionPage">
+                        <button className="buttomnavButton">Description</button>
+                    </Link>
+                    <Link to = "/EventEditingPage">
+                        <button className="buttomnavButton">Edit Your Event</button>
+                    </Link>
+                </div>
             </div>
-            
-
-
         );
     }
 }
