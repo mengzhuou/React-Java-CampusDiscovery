@@ -25,9 +25,14 @@ class AttendeeListPage extends Component<any,any> {
                         placeholder="Select"
                         />
                 </header>
-                <Link to = "/EventDescriptionPage">
-                    <button className="button">Event Description</button>
-                </Link>
+                <div className='bottomnav'>
+                    <Link to = "/EventDescriptionPage">
+                        <button className="buttomnavButton">Event Description</button>
+                    </Link>
+                    <Link to = "/Dashboard">
+                        <button className="buttomnavButton">Dashboard</button>
+                    </Link>
+                </div>
             </div>
         );
     }

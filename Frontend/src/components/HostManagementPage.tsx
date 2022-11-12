@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import { useFormik, Field, FieldProps } from 'formik';
-import 'react-css-dropdown/dist/index.css'
-import { emailValidator } from '../helpers/emailValidator'
+import 'react-css-dropdown/dist/index.css';
+import { emailValidator } from '../helpers/emailValidator';
 import HostManagementPagetmp from './HostManagementPagetmp';
+import { addRsvp } from '../helpers/connector';
 
 
 function HostManagementPage(){
@@ -21,19 +22,15 @@ function HostManagementPage(){
                     return
                 }
                 else{
+                  addRsvp(values.email, 'invited').then(()=>{
                     alert("You have added " + values.email + " to your event!")
                     actions.resetForm({
                         values:{
                             email:'',
                         },
                     });
+                  }).catch(()=>(alert("invalid email2")))
                 }
-                // else{
-                //     checkEmail(values.email).then(()=>{
-                //       console.log("You have invited the person")
-                //     }).catch(()=>{
-                //       alert("Error email")
-                //     })
             }
         },
       });

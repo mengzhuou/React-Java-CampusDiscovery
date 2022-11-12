@@ -6,7 +6,10 @@ function RsvpPage(){
     const { isOpen, toggle } = useModal();
     return (
       <div>
-        <EventDescriptionPage/>
+        <button className='button' onClick={toggle}> RSVP </button>
+        <Modal isOpen={isOpen} toggle={toggle}></Modal>
+        {/* <EventDescriptionPage/> */}
+        
       </div>
       );
     }

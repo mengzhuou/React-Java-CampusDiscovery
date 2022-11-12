@@ -1,31 +1,12 @@
-.topnav {
-    background-color: rgb(121, 79, 79);
-    overflow: hidden;
-  }
-  
-.topnavButton {
-float: left;
-color: black;
-text-align: center;
-padding: 10px 10px;
-margin-right: 10px;
-text-decoration: none;
-font-size: 15px;
-background-color: #ddd;
-cursor: pointer;
-font-family: "Neucha", cursive;
-border-radius: 5%;
-font-weight: bold;
-}
-  
 .dropDownEvent{
     color: #ddd;
     display: inline-block;
-    position: relative;
+    position: absolute;
+    left: 507px;
+    top: 120px;
     background-color: #311402;
     box-shadow: 0px 8px 16px 0px rgba(44, 32, 32, 0.2);
     padding: 2px 2px;
-    z-index: 1;
     border-radius: 10%;
     width: 55px;
     cursor: pointer;
@@ -38,7 +19,6 @@ font-weight: bold;
 .header{
     position: relative;
     font-size: 300%;
-    top:-5%;
     color: white;
 }
 
@@ -52,4 +32,4 @@ font-weight: bold;
     font-family: "Neucha", cursive;
     min-height: 100vh;
     padding-bottom: 3%;
-  }
+}
