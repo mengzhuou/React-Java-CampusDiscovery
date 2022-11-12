@@ -1,19 +1,21 @@
 .dropDownEvent{
     color: #ddd;
-    display: inline-block;
     position: absolute;
-    left: 507px;
-    top: 120px;
+    top: -4%;
+    left: 1%;
     background-color: #311402;
     box-shadow: 0px 8px 16px 0px rgba(44, 32, 32, 0.2);
     padding: 2px 2px;
     border-radius: 10%;
     width: 55px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .body{
     margin-bottom: 30px;
+    height: 100%;
+    position: relative;
 }
 
 .header{
@@ -32,7 +34,4 @@
     font-family: "Neucha", cursive;
     min-height: 100vh;
     padding-bottom: 3%;
-}
-html, body{
-    height: 100%;
 }

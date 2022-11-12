@@ -118,14 +118,14 @@ class Dashboard extends React.Component<any,any>{
                 <div className="AppDashboard"> 
                     <header>
                         <p className="header">Dashboard</p>
+                    </header> 
+                    <div className='body'>
                         <Dropdown className="dropDownEvent"
                             options={this.options}
                             // onChange={this._onSelect}
                             value={this.defaultOption}
                             placeholder="All Event"
                         />
-                    </header> 
-                    <div className='body'>
                         {dasharr}
                     </div>
                     <div className="pagination">
