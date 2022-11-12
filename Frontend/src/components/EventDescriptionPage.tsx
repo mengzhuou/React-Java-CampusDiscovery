@@ -47,7 +47,6 @@ class EventDescriptionPage extends Component<any,any> {
       <div className = "App">
         <header className="App-header">
           <p>Event Description</p>
-          <button onClick={this.showEventId}>Event Number</button>
         </header>
         <body className='eventBody'>
           <div className="desName">

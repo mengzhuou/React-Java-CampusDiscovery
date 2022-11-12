@@ -109,7 +109,7 @@ class Dashboard extends React.Component<any,any>{
                 />);
         }
         return (
-            <div>
+            <div className="html">
                 <div className="topnav">
                     <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
                     <button className="topnavButton" onClick={this.display}>Display</button>
