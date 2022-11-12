@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import React, { Component } from 'react';
 import "./HostManagementPage.css";
-import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
 import { getinfo, eventdel, eventdeladmin} from '../helpers/connector'
 
@@ -9,8 +8,9 @@ import { getinfo, eventdel, eventdeladmin} from '../helpers/connector'
 class EventEditingPagetmp extends Component<any,any> {
     constructor(props:any){
         super(props);
-        this.state = {id: this.props.id, role: "STUDENT"}
+        this.state = {id: this.props.eventNum(), role: "STUDENT"}
         this.forceup = this.forceup.bind(this);
+        this.eventdel = this.eventdel.bind(this);
     }
 
     
@@ -18,8 +18,8 @@ class EventEditingPagetmp extends Component<any,any> {
     getinfo().then((content)=>this.setState({role:content.data})).catch(()=> console.log("failure to load role"));
   }
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
-    if(this.state.id != this.props.id){
-      this.setState({id: this.props.id});
+    if(this.state.id != this.props.eventNum()){
+      this.setState({id: this.props.eventNum()});
     }
   }
       
@@ -33,13 +33,12 @@ class EventEditingPagetmp extends Component<any,any> {
           eventdeladmin(this.state.id).then(()=>{
               alert("successful update");
               console.log(this.state.id)
-              this.props.update();
+              this.props.navigate("/Dashboard")
           }).catch(()=>alert("unsuc update"));
       }else{
           eventdel(this.state.id).then(()=>{
               alert("successful update");
-              this.props.update();
-              this.props.navigate("/")
+              this.props.navigate("/Dashboard")
           }).catch(()=>alert("unsuc update"));
       }
     }

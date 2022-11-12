@@ -25,7 +25,7 @@ function EventEditingPage(props: any) {
       }
     })
     return(
-      <EventEditingPagetmp formik={formik}/>
+      <EventEditingPagetmp formik={formik} eventNum={props.eventNum} navigate={navigate}/>
     )
 }
   
