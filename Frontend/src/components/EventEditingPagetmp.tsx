@@ -77,10 +77,10 @@ class EventEditingPagetmp extends Component<any,any> {
                   </div>
                   <div>
                     <button className='eventEditPageButton' >Confirm Changes</button>
-                    <button className="eventEditPageButton" onClick={this.eventdel}>Delete</button>
                   </div>
                   
                 </form>
+                <button className="eventEditPageButton" onClick={this.eventdel}>Delete</button>
                 <div className='bottomnav'>
                   <Link to = "/HostManagementPage">
                     <button className="buttomnavButton">Host Management</button>

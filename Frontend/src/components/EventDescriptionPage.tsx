@@ -20,7 +20,6 @@ class EventDescriptionPage extends Component<any,any> {
     if(this.state.ForceUpdateNow){
         geteventbyid(this.state.id).then((content)=>{
             let array = [];
-            console.log(content.data.id + "is content id" + this.state.id  + " is event id");
             array = [content.data.title, content.data.email, content.data.time, 
                 content.data.location, content.data.description, content.data.id];
             this.setState({arr:array});
@@ -34,9 +33,8 @@ class EventDescriptionPage extends Component<any,any> {
     this.setState({ForceUpdateNow:true});
   }
 
-  showEventIdAndPage = () => {
+  showEventId = () => {
     alert(this.props.eventNum())//show event id
-    alert(this.props.eventPage())
   }
 
   // showEventStatus() {
@@ -44,19 +42,12 @@ class EventDescriptionPage extends Component<any,any> {
 
   //   })
   // }
-
-  
-
   render(){
-
-
-    let currentEvent = this.props.eventNum();
-
     return (
       <div className = "App">
         <header className="App-header">
           <p>Event Description</p>
-          <button onClick={this.showEventIdAndPage}>Event Number</button>
+          <button onClick={this.showEventId}>Event Number</button>
         </header>
         <body className='eventBody'>
           <div className="desName">
