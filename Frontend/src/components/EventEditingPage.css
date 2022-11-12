@@ -5,16 +5,6 @@
     font-weight: bolder;
 }
 
-.welcomeLink{
-    margin-top: 3%;
-    position: absolute;
-    color: rgb(101, 58, 97);
-    text-align: center;
-    width: 90px;
-    height: 20px;
-    border: 2px solid rgb(3, 59, 21);
-}
-
 .App-header{
     margin-top: 5%;
     font-size: 40px;
@@ -41,42 +31,9 @@
     padding-left: 1%;
 }
 
-.title{
-    margin-top: 5%;
-    margin-bottom: 5%;
-    font-size: 15px;
-    text-align: left;
-    font-weight: bolder;
-}
-
-.host{
-    margin-bottom:5%;
-    font-size: 15px;
-    text-align: left;
-    font-weight: bolder;
-}
-
-.date{
-    margin-bottom:5%;
-    font-size: 15px;
-    text-align: left;
-    font-weight: bolder;
-}
-.location{
-    margin-bottom:5%;
-    font-size: 15px;
-    text-align: left;
-    font-weight: bolder;
-}
-.description{
-    margin-bottom:5%;
-    font-size: 15px;
-    text-align: left;
-    font-weight: bolder;
-}
-
 .eventEditPageButton{
-    margin-right: 120px;
+    margin-right: 15px;
+    margin-bottom: 10px;
     color: rgb(101, 58, 97);
     background-color:#e9b1bb;
     width: fit-content;
@@ -84,4 +41,8 @@
     font-weight: bold;
     cursor: pointer;
     font-family: "Neucha", cursive;
+}
+
+.textCss{
+    position: absolute;
 }
