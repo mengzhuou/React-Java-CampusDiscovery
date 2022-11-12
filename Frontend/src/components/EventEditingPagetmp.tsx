@@ -3,16 +3,47 @@ import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
+import { getinfo, eventdel, eventdeladmin} from '../helpers/connector'
+
 
 class EventEditingPagetmp extends Component<any,any> {
     constructor(props:any){
         super(props);
+        this.state = {id: this.props.id, role: "STUDENT"}
         this.forceup = this.forceup.bind(this);
     }
 
-    async forceup() {
-        this.setState({ForceUpdateNow:true});
+    
+  componentDidMount(): void {
+    getinfo().then((content)=>this.setState({role:content.data})).catch(()=> console.log("failure to load role"));
+  }
+  componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
+    if(this.state.id != this.props.id){
+      this.setState({id: this.props.id});
     }
+  }
+      
+  async forceup() {
+      this.setState({ForceUpdateNow:true});
+  }
+  eventdel(){
+    let conf = window.confirm('Confirm or deny');
+    if(conf){
+      if(this.state.role === "ADMIN"){
+          eventdeladmin(this.state.id).then(()=>{
+              alert("successful update");
+              console.log(this.state.id)
+              this.props.update();
+          }).catch(()=>alert("unsuc update"));
+      }else{
+          eventdel(this.state.id).then(()=>{
+              alert("successful update");
+              this.props.update();
+              this.props.navigate("/")
+          }).catch(()=>alert("unsuc update"));
+      }
+    }
+  }
 
     render(){
         return (
@@ -46,8 +77,10 @@ class EventEditingPagetmp extends Component<any,any> {
                     <input size={35} onChange={this.props.formik.handleChange} value = {this.props.formik.values.description} id='description' name='description'></input>
                   </div>
                   <div>
-                    <button className='editSubmitButton' >Confirm Changes</button>
+                    <button className='eventEditPageButton' >Confirm Changes</button>
+                    <button className="eventEditPageButton" onClick={this.eventdel}>Delete</button>
                   </div>
+                  
                 </form>
                 <div className='bottomnav'>
                   <Link to = "/HostManagementPage">

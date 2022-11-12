@@ -75,7 +75,8 @@
     font-weight: bolder;
 }
 
-.editSubmitButton{
+.eventEditPageButton{
+    margin-right: 120px;
     color: rgb(101, 58, 97);
     background-color:#e9b1bb;
     width: fit-content;

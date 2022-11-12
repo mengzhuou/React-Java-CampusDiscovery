@@ -8,15 +8,17 @@ interface ModalType {
 }
 
 export default function Modal(props: ModalType) {
+  
   return (
-    <>
+    <div>
       {props.isOpen && (
         <div className="modal-overlay" onClick={props.toggle}>
           <div onClick={(e) => e.stopPropagation()} className="modal-box">
-            {props.children}Abaabaabaaba
+            {props.children}
           </div>
+
         </div>
       )}
-    </>
+    </div>
   );
 }

@@ -5,7 +5,7 @@ import Modal from "./Modal";
 import useModal from "./UseModal";
 import { Component } from 'react';
 import { getevent, getRsvp } from '../helpers/connector';
-import DashboardBox from './DashboardBox';
+import DashboardBox from "./DashboardBox";
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
@@ -63,6 +63,8 @@ class EventDescriptionPage extends Component<any,any> {
   //   })
   // }
 
+  
+
   render(){
 
     
@@ -104,9 +106,10 @@ class EventDescriptionPage extends Component<any,any> {
         <body className='eventBody'>
           <div>
             {/* hello {dasharr[0][0]} */}
+            {dasharr}
           </div>
           <div className="desName">
-            <label htmlFor='title'>Event title :  : vessssssssssssssssssssnt tidddddddddddddddddddddddddd {this.props.arr}</label>
+            <label htmlFor='title'>Event title : {this.props.arr} -------------------------------------------</label>
           </div>
 
           <div className="desName">
@@ -138,11 +141,14 @@ class EventDescriptionPage extends Component<any,any> {
             <Link to = "/AttendeeListPage">
               <button className="buttomnavButton">Attendee List</button>
             </Link>
-            <Link to = "/HostManagementPage">
-              <button className="buttomnavButton">Host Management</button>
-            </Link>
             <Link to = "/Dashboard">
               <button className="buttomnavButton">Dashboard</button>
+            </Link>
+            <Link to = "/RsvpPage">
+              <button className="buttomnavButton">RsvpPage</button>
+            </Link>
+            <Link to = "/HostManagementPage">
+              <button className="ManageButton">Host Management</button>
             </Link>
         </div>
       </div>

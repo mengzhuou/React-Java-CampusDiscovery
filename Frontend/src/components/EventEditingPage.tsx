@@ -19,7 +19,7 @@ function EventEditingPage(props: any) {
         var textContent:string = "Event title: " + values.title + "\nEvent host (email): " + values.email + "\nEvent date: ";
         textContent += values.time + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
         if(window.confirm(textContent)){
-          alert("Confirmation: your changes have been saved")
+          alert("Confirmation: your changes have beendddd saved")
           navigate("/EventDescriptionPage")
         }
       }

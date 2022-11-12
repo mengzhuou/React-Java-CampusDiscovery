@@ -41,3 +41,19 @@
     height: fit-content;
     margin-bottom: 50px;
 }
+
+.ManageButton{
+    /* visibility: hidden; */
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 10px 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    background-color: #ddd;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
+    border-radius: 5%;
+    font-weight: bold;
+}
