@@ -34,16 +34,14 @@ class DashboardBox extends Component<any,any> {
         return (
             <div className='box'>
                 <button className='descriptionButton' type="submit" onClick={this.passEventId}>Event Description</button>
-                <h1 className='title'>
-                    Title: {this.props.title}
-                </h1>
-
-                <h4>
-                    Host: {this.props.host} 
+                <div className='DashboardTitle'>
+                    {this.props.title}
+                </div>
+                <h4 className="DashboardElement">
+                    Host : {this.props.host} 
                 </h4>
-
-                <h4>
-                    Date: {this.props.date}
+                <h4 className="DashboardElement">
+                    Date : {this.props.date}
                 </h4>
             </div>
         )
