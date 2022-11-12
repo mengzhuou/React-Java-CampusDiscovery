@@ -5,7 +5,6 @@ import{ CookieJar } from 'tough-cookie';
 const jar = new CookieJar();
 const client = wrapper(axios.create({ jar }));
 
-// Heroku deploy: https://cs4261todolist.herokuapp.com/
 var host = "http://localhost:8080";
 
 var url = host + "/api/v1/";
@@ -95,6 +94,16 @@ export async function getevent(page:number){
   let content = await client({
       method: 'get',
       url: url+"getEvent?page="+page.toString(),
+      withCredentials: true
+    });
+  return content;
+}
+
+export async function geteventbyid(id:number){
+
+  let content = await client({
+      method: 'get',
+      url: url+"getEventById?id="+id.toString(),
       withCredentials: true
     });
   return content;

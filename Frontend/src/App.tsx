@@ -18,8 +18,7 @@ import internal from "stream";
 class App extends React.Component<any,any>{
   constructor(props:any){
     super(props);
-    this.state = {EventID: -1};
-    this.state = {EventPage: -1};
+    this.state = {EventID: -1, EventPage: -1};
     this.getEventID = this.getEventID.bind(this);
     this.setEventID = this.setEventID.bind(this);
     this.getEventPage = this.getEventPage.bind(this);

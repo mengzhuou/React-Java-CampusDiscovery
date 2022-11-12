@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -35,6 +37,17 @@ public class EventAPI {
             throw new IllegalArgumentException();
         }
         return eventRepository.findEventByRange(PageRequest.of(page_num-1,10));
+    }
+
+    @GetMapping("/getEventById")
+    @ResponseBody
+    public Event findEvent(@RequestParam String id) throws IllegalArgumentException, NoSuchElementException{
+        Long event_id = Long.valueOf(id);
+        Optional<Event> tmpEvent = eventRepository.findById(event_id);
+        if(tmpEvent.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return tmpEvent.get();
     }
 
     @GetMapping("/getEventSize")
