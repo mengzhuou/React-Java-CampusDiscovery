@@ -41,9 +41,10 @@
 
 .DashboardTitle{
     text-align: center;
-    font-weight: bold;
-    cursor: pointer;
-    font-family: "Neucha", cursive;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: ui-monospace;
+    letter-spacing: 2px;
     font-size: 34px;
     overflow: hidden;
     white-space: nowrap;
