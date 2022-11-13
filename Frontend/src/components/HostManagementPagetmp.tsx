@@ -5,13 +5,15 @@ import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
 import { getRsvp } from '../helpers/connector'
 import AttendeeBox from './AttendeeBox';
+import AttendeeBoxForHostManagement from './AttendeeBoxForHostManagement';
 
 
 class HostManagementPagetmp extends Component<any,any> {
     constructor(props:any){
         super(props);
         this.forceup = this.forceup.bind(this);
-        this.state = {id: this.props.eventNum(), arr : [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
+        // id should probably be eventNum, probably only need attendeeId here
+        this.state = {id: this.props.id, arr : [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
 
     }
 
@@ -59,7 +61,7 @@ class HostManagementPagetmp extends Component<any,any> {
     render(){
         let dasharr: any[] = [];
         for (let i = 0; i < this.state.arr.length; i++){
-            dasharr.push(<AttendeeBox
+            dasharr.push(<AttendeeBoxForHostManagement
                 email={this.state.arr[i][0]}
                 status={this.state.arr[i][1]}
             />)
@@ -83,7 +85,6 @@ class HostManagementPagetmp extends Component<any,any> {
                         <button className='inviteButton' type='submit'>Submit</button>
                     </form>
                     {dasharr}
-                    <button className="button">X</button>
 
                 </body>
 

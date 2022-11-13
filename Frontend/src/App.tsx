@@ -12,6 +12,7 @@ import HostManagementPage from "./components/HostManagementPage";
 import HostManagementPagetmp from "./components/HostManagementPagetmp";
 import RsvpPage from "./components/RsvpPage";
 import AttendeeBox from "./components/AttendeeBox";
+import AttendeeBoxForHostManagement from "./components/AttendeeBoxForHostManagement";
 import React from "react";
 import internal from "stream";
 
@@ -19,14 +20,24 @@ import internal from "stream";
 class App extends React.Component<any,any>{
   constructor(props:any){
     super(props);
-    this.state = {EventID: -1, EventPage: -1};
+    this.state = {EventID: -1, AttendeeID: -1};
     this.getEventID = this.getEventID.bind(this);
     this.setEventID = this.setEventID.bind(this);
+    this.getAttendeeID = this.getAttendeeID.bind(this);
+    this.setAttendeeID = this.setAttendeeID.bind(this);
+
   }
   setEventID(id:number){
     this.setState({EventID: id});
   }
   getEventID(){
+    return this.state.EventID;
+  }
+
+  setAttendeeID(id:number){
+    this.setState({EventID: id});
+  }
+  getAttendeeID(){
     return this.state.EventID;
   }
   render() {
@@ -42,8 +53,9 @@ class App extends React.Component<any,any>{
           <Route path="/EventEditingPage" element={<EventEditingPage eventNum={this.getEventID}/>}/>
           <Route path="/AttendeeListPage" element={<AttendeeListPage eventNum={this.getEventID}/>}/>
           <Route path="/AttendeeBox" element={<AttendeeBox eventNum={this.getEventID}/>}/>
+          <Route path="/AttendeeBox" element={<AttendeeBoxForHostManagement eventNum={this.getEventID} setEventID={this.getAttendeeID}/>}/>
           <Route path="/HostManagementPage" element={<HostManagementPage />}/>
-          <Route path="/HostManagementPagetmp" element={<HostManagementPagetmp eventNum={this.getEventID}/>}/>
+          <Route path="/HostManagementPagetmp" element={<HostManagementPagetmp eventNum={this.getEventID} setEventID={this.setAttendeeID}/>}/>
           <Route path="/RsvpPage" element={<RsvpPage/>}/>
         </Routes>
       </Router>
