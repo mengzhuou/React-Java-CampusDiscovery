@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import { getinfo, updatedescription, updatedescriptionadmin, 
-    updatelocation, updatelocationadmin, updatetime, 
-    updatetimeadmin, updatetitle, updatetitleadmin, updateEmailadmin, eventdel, eventdeladmin} from '../helpers/connector'
+import { getinfo } from '../helpers/connector'
 import './DashboardBox.css'
 
 
 class DashboardBox extends Component<any,any> {
     constructor(props:any){
         super(props);
-        this.state = {id: this.props.id, page: this.props.page, role: "STUDENT"}
+        this.state = {id: this.props.id, role: "STUDENT"}
         this.passEventId = this.passEventId.bind(this);
-        this.passEventPage = this.passEventPage.bind(this);
     }
     componentDidMount(): void {
         getinfo().then((content)=>this.setState({role:content.data})).catch(()=> console.log("failure to load role"));
@@ -24,10 +21,6 @@ class DashboardBox extends Component<any,any> {
     passEventId = () => {
         let eventId = this.state.id;
         this.props.setEventID(eventId);
-    }
-    passEventPage = () => {
-        let eventPage = this.state.page;
-        this.props.setEventPage(eventPage);
     }
 
     render() {

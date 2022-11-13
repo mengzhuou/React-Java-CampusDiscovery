@@ -25,7 +25,6 @@ class Dashboard extends React.Component<any,any>{
         this.pagelogout = this.pagelogout.bind(this);
         this.createEvent = this.createEvent.bind(this);
         this.passEventId = this.passEventId.bind(this);
-        this.passEventPage = this.passEventPage.bind(this);
     }
 
     display() {
@@ -87,10 +86,6 @@ class Dashboard extends React.Component<any,any>{
         this.props.setEventID(eventId);
         this.props.navigate("/EventDescriptionPage");
     }
-    passEventPage(eventPage: number): void{
-        this.props.setEventPage(eventPage);
-        this.props.navigate("/EventDescriptionPage");
-    }
 
     render(){
         let dasharr: any[] = [];
@@ -105,7 +100,6 @@ class Dashboard extends React.Component<any,any>{
                 id ={this.state.arr[i][5]}
                 update={this.forceup}
                 setEventID={this.passEventId}
-                setEventPage={this.passEventPage}
                 />);
         }
         return (
