@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
-import { getRsvp, rsvpDel } from '../helpers/connector'
+import { getRsvp } from '../helpers/connector'
 import AttendeeBox from './AttendeeBox';
 
 
@@ -43,7 +43,6 @@ class HostManagementPagetmp extends Component<any,any> {
             this.setState({arr:array});
         })
     }
-
 
     placeholder="Select a Status"
     options = [
