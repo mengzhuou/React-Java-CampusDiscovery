@@ -17,14 +17,13 @@
   }
 
 .desName{
-    margin-left: 3%;
-    margin-top: 3%;
-    margin-bottom: 5%;
+    margin: 3% 3% 3% 3%;
     font-size: 15px;
     text-align: left;
-    font-weight: bolder;
     cursor: pointer;
     font-family: "Neucha", cursive;
+    word-wrap: break-word;
+    letter-spacing: 2px;
 }
 
 .eventBody{
@@ -32,7 +31,7 @@
     box-shadow: rgba(0, 0, 255, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     background:  #ffced6;
     width: 500px;
-    height: 500px;
+    height: fit-content;
     margin-bottom: 50px;
 }
 

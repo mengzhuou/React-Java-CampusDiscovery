@@ -152,33 +152,33 @@ class EventEditingPage extends Component<any,any> {
           <header className="App-header">
             <p>Edit Your Event</p>
           </header>
-          <body>
-            <div>
+          <body className='eventEditingConatiner'>
+            <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateTitle}>Edit</button> 
               <label className='textCss'>Event title : {this.state.arr[0]}</label>
             </div>
 
-            <div>
+            <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateEmail}>Edit</button> 
-              <label>Event host : {this.state.arr[1]}</label>
+              <label className='textCss'>Event host : {this.state.arr[1]}</label>
             </div>
 
-            <div>
+            <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateTime}>Edit</button> 
-              <label>Event date : {this.state.arr[2]}</label>
+              <label className='textCss'>Event date : {this.state.arr[2]}</label>
             </div>
 
-            <div>
+            <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateLocation}>Edit</button> 
-              <label>Event location : {this.state.arr[3]}</label>
+              <label className='textCss'>Event location : {this.state.arr[3]}</label>
             </div>
 
-            <div>
+            <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateDescription}>Edit</button> 
-              <label>Event description : {this.state.arr[4]}</label>
+              <label className='textCss'>Event description : {this.state.arr[4]}</label>
             </div>
 
-            <button className="eventEditPageButton" onClick={this.eventdel}>Delete This Event</button>
+            <button className="editPageDeleteButton" onClick={this.eventdel}>Delete This Event</button>
 
           </body>
             <div className='bottomnav'>
@@ -195,38 +195,3 @@ class EventEditingPage extends Component<any,any> {
 }
 
 export default EventEditingPage;
-
-// import { Link } from 'react-router-dom';
-// import { useFormik } from 'formik';
-// import { useNavigate } from 'react-router-dom';
-// import "./EventEditingPage.css";
-// import EventEditingPagetmp from './EventEditingPagetmp';
-// import {  } from '../helpers/connector';
-
-  
-// function EventEditingPage(props: any) {
-//   const navigate = useNavigate();
-//   const formik = useFormik({
-//     initialValues:{
-//       title:'',
-//       email:'', //host
-//       time:'',  //date
-//       location:'',
-//       description:'',
-//     },
-//     onSubmit: values=>{
-//         var textContent:string = "Event title: " + values.title + "\nEvent host (email): " + values.email + "\nEvent date: ";
-//         textContent += values.time + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
-//         if(window.confirm(textContent)){
-          
-//           alert("Confirmation: your changes have been saved")
-//           navigate("/EventDescriptionPage")
-//         }
-//       }
-//     })
-//     return(
-//       <EventEditingPagetmp formik={formik} eventNum={props.eventNum} navigate={navigate}/>
-//     )
-// }
-  
-// export default EventEditingPage;
