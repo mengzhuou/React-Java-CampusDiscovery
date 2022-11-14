@@ -96,6 +96,16 @@ public class RsvpAPI {
         return tmp_rsvp.get(0).getStatus().toString();
     }
 
+    @GetMapping("/getCount")
+    public Integer getCount(@RequestParam String id) throws NoSuchElementException, IllegalArgumentException{
+        long event_id = Long.valueOf(id);
+        Optional<Event> event_tmp = eventRepository.findById(event_id);
+        if(event_tmp.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return rsvpRepository.getCount(event_id,RsvpStatus.WILLATTEND);
+    }
+
     @DeleteMapping("/hostRemove")
     public void hostRemove(@RequestBody Map<String, String> body, Principal principal) throws AccessDeniedException {
         long event_id = Long.valueOf(body.get("event_id"));
