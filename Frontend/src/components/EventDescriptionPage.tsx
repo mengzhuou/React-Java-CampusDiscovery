@@ -83,7 +83,7 @@ class EventDescriptionPage extends Component<any,any> {
             <p>Your RSVP Status : {this.state.status}</p>
           </div>
           <Link to = "/RsvpPage">
-              <button className='button'> RSVP : </button>
+              <button className='button'> RSVP </button>
           </Link>
           
         </div>
@@ -93,9 +93,6 @@ class EventDescriptionPage extends Component<any,any> {
             </Link>
             <Link to = "/Dashboard">
               <button className="buttomnavButton">Dashboard</button>
-            </Link>
-            <Link to = "/RsvpPage">
-              <button className="buttomnavButton">RsvpPage</button>
             </Link>
             <Link to = "/HostManagementPage">
               <button className="ManageButton">Host Management</button>
