@@ -52,7 +52,19 @@ function EventCreationPage() {
               <label htmlFor ='description'>Event description : </label>
               <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
               </div>
+
+              <div className="text">
+              <label htmlFor ='capacity'>Event Capacity : </label>
+              <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
+              </div>
               <button className="button" type="submit">Create Event</button>
+
+
+              <button className="button" type="submit">Create Event</button>
+
+              
+
+
           </form>
           <div className='bottomnav'>
               <Link to = "/Dashboard">
