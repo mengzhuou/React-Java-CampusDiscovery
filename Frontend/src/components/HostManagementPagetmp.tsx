@@ -10,10 +10,9 @@ import AttendeeBoxForHostManagement from './AttendeeBoxForHostManagement';
 class HostManagementPagetmp extends Component<any,any> {
     constructor(props:any){
         super(props);
+        this.state = {id: this.props.eventNum(), Status: "ALL", arr : [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
         this.forceup = this.forceup.bind(this);
-        // id should probably be eventNum, probably only need attendeeId here
-        this.state = {id: this.props.id, arr : [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
-
+        this.onSelect = this.onSelect.bind(this);
     }
 
     async forceup() {
@@ -22,7 +21,7 @@ class HostManagementPagetmp extends Component<any,any> {
 
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
-            getRsvp(this.state.id, "ALL").then((content)=>{
+            getRsvp(this.state.id, this.state.Status).then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
@@ -35,18 +34,15 @@ class HostManagementPagetmp extends Component<any,any> {
         }
     }
     componentDidMount(): void {
-        getRsvp(this.state.id, "ALL").then((content)=>{
-            let key;
-            let array = [];
-            for(key in content.data){
-                array.push([content.data[key].email, content.data[key].status]);
-            }
-            this.setState({arr:array});
-        })
+        this.forceup();
     }
 
+    onSelect(event:any){
+        this.setState({Status:event.value, ForceUpdateNow:true})
+    }
     placeholder="Select a Status"
     options = [
+        {label: 'All RSVP', value: 'ALL'},
         {label: 'Will Attend', value: 'WILLATTEND'},
         {label: 'Maybe', value: 'MAYBE'},
         {label: 'Will Not Attend', value: 'WONTATTEND'},
@@ -54,15 +50,16 @@ class HostManagementPagetmp extends Component<any,any> {
         {label: 'Invited', value: 'INVITED'}
     ];
 
-    defaultOption = this.options[2];
+    defaultOption = this.options[0];
 
 
     render(){
-        let dasharr: any[] = [];
+        let attendarr: any[] = [];
         for (let i = 0; i < this.state.arr.length; i++){
-            dasharr.push(<AttendeeBoxForHostManagement
+            attendarr.push(<AttendeeBoxForHostManagement
                 email={this.state.arr[i][0]}
                 status={this.state.arr[i][1]}
+                eventNum={this.props.eventNum}
             />)
         }
         return (
@@ -72,7 +69,7 @@ class HostManagementPagetmp extends Component<any,any> {
                     <h4 className='Line'>Choose Status : </h4>
                     <Dropdown className="dropdownStatus"
                         options={this.options}
-                        // onChange={this._onSelect}
+                        onChange={this.onSelect}
                         value={this.defaultOption}
                         placeholder="Select"
                     />
@@ -83,7 +80,7 @@ class HostManagementPagetmp extends Component<any,any> {
                         <input type='text' className='formik' placeholder='Email Address' onChange={this.props.formik.handleChange} value = {this.props.formik.values.email} name="email"></input>
                         <button className='inviteButton' type='submit'>Submit</button>
                     </form>
-                    {dasharr}
+                    {attendarr}
 
                 </body>
 
