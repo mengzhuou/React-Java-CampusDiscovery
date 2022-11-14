@@ -290,55 +290,70 @@ export async function updateEmailadmin(id:number, email:string){
 
 // Rsvp API
 
-export async function addRsvp(email:string, status:string){
+export async function updateRsvp(email:string, status:string){
+
+  let content = await client({
+    method: 'patch',
+    url: url+"updateRsvp",
+    withCredentials: true,
+    data: {
+      email: email,
+      status: status,
+    }
+  })
+  return content;
+}
+
+export async function addRsvp(event_id: number, status:string){
 
   let content = await client({
     method: 'patch',
     url: url+"addRsvp",
     withCredentials: true,
     data: {
-      email: email,
+      event_id: event_id,
       status: status,
     }
   })
   return content;
 }
 
-export async function getRsvp(email:string){
+export async function getRsvpStatus(event_id: number){
 
   let content = await client({
     method: 'patch',
-    url: url+"getRsvp",
+    url: url+"getRsvpStatus",
     withCredentials: true,
     data: {
-      email: email,
+      event_id: event_id,
     }
   })
   return content;
 }
 
-export async function updateRsvpStatus(email:string, status:string){
+export async function hostRemove(event_id: number, email: string){
 
   let content = await client({
     method: 'patch',
-    url: url+"updateStatus",
+    url: url+"hostRemove",
     withCredentials: true,
     data: {
       email: email,
-      status: status,
+      event_id: event_id
     }
   })
   return content;
 }
 
-export async function rsvpDel(email:string){
+export async function hostInvite(event_id: number, email: string){
 
   let content = await client({
     method: 'patch',
-    url: url+"removeRsvp",
+    url: url+"hostInvite",
     withCredentials: true,
     data: {
       email: email,
+      event_id: event_id
     }
   })
   return content;
