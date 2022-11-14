@@ -47,7 +47,7 @@ class Dashboard extends React.Component<any,any>{
         this.props.navigate("/EventDescriptionPage")
     }
 
-    async forceup(){
+    forceup(){
         this.setState({ForceUpdateNow:true});
         
     }
@@ -72,16 +72,8 @@ class Dashboard extends React.Component<any,any>{
     }
     
     componentDidMount(): void {
-        getevent(this.state.currentPage).then((content)=>{
-            let key;
-            let array = [];
-            for(key in content.data){
-                array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
-                    content.data[key].location, content.data[key].description, content.data[key].id, content.data[key].page]);
-                }
-                this.setState({arr:array});
-            })
-        }
+        this.forceup();
+    }
     passEventId(eventId: number): void{
         this.props.setEventID(eventId);
         this.props.navigate("/EventDescriptionPage");

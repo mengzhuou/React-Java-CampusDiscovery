@@ -19,9 +19,10 @@ class EventDescriptionPage extends Component<any,any> {
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
     if(this.state.ForceUpdateNow){
         geteventbyid(this.state.id).then((content)=>{
+          console.log(content.data.inviteOnly);
             let array = [];
             array = [content.data.title, content.data.email, content.data.time, 
-                content.data.location, content.data.description, content.data.id];
+                content.data.location, content.data.description, content.data.capacity, content.data.inviteOnly];
             this.setState({arr:array});
             this.forceUpdate();
         })
@@ -68,6 +69,14 @@ class EventDescriptionPage extends Component<any,any> {
 
           <div className="desName">
             <label htmlFor ='description'>Event description : {this.state.arr[4]}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='Capacity'>Capacity : {this.state.arr[5]}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='Invite-Only'>Invite-Only : {this.state.arr[6]?"True":"False"}</label>
           </div>
 
           <div className="desName">
