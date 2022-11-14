@@ -33,14 +33,6 @@ class EventDescriptionPage extends Component<any,any> {
     this.setState({ForceUpdateNow:true});
   }
 
-  showEventId = () => {
-    alert(this.props.eventNum())//show event id
-  }
-
-  createRSVP = () => {
-    this.props.navigate("/RsvpPage")
-}
-
   // showEventStatus() {
   //   getRsvp().then((content)=>{
 

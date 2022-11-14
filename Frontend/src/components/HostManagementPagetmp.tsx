@@ -3,31 +3,48 @@ import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
+import { getRsvp } from '../helpers/connector'
+import AttendeeBox from './AttendeeBox';
+import AttendeeBoxForHostManagement from './AttendeeBoxForHostManagement';
+
 
 class HostManagementPagetmp extends Component<any,any> {
     constructor(props:any){
         super(props);
         this.forceup = this.forceup.bind(this);
+        // id should probably be eventNum, probably only need attendeeId here
+        this.state = {id: this.props.id, arr : [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
+
     }
 
     async forceup() {
         this.setState({ForceUpdateNow:true});
     }
 
-    // componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
-    //     if(this.state.ForceUpdateNow){
-    //         getevent(this.state.currentPage).then((content)=>{
-    //             let key;
-    //             let array = [];
-    //             for(key in content.data){
-    //                 array.push([content.data[key].email])
-    //             }
-    //             this.setState({arr:array});
-    //             this.forceUpdate();
-    //         })
-    //         this.setState({ForceUpdateNow:false});
-    //     }
-    // }
+    componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
+        if(this.state.ForceUpdateNow){
+            getRsvp(this.state.id).then((content)=>{
+                let key;
+                let array = [];
+                for(key in content.data){
+                    array.push([content.data[key].email, content.data[key].status]);
+                }
+                this.setState({arr:array});
+                this.forceUpdate();
+            })
+            this.setState({ForceUpdateNow:false});
+        }
+    }
+    componentDidMount(): void {
+        getRsvp(this.state.id).then((content)=>{
+            let key;
+            let array = [];
+            for(key in content.data){
+                array.push([content.data[key].email, content.data[key].status]);
+            }
+            this.setState({arr:array});
+        })
+    }
 
     placeholder="Select a Status"
     options = [
@@ -42,6 +59,13 @@ class HostManagementPagetmp extends Component<any,any> {
 
 
     render(){
+        let dasharr: any[] = [];
+        for (let i = 0; i < this.state.arr.length; i++){
+            dasharr.push(<AttendeeBoxForHostManagement
+                email={this.state.arr[i][0]}
+                status={this.state.arr[i][1]}
+            />)
+        }
         return (
             <div className='App'>
                 <header>
@@ -60,9 +84,10 @@ class HostManagementPagetmp extends Component<any,any> {
                         <input type='text' className='formik' placeholder='Email Address' onChange={this.props.formik.handleChange} value = {this.props.formik.values.email} name="email"></input>
                         <button className='inviteButton' type='submit'>Submit</button>
                     </form>
-                    <button className="button">X</button>
+                    {dasharr}
 
                 </body>
+
                 <div className='bottomnav'>
                     <Link to = "/EventDescriptionPage">
                         <button className="buttomnavButton">Description</button>
