@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './AttendeeBox.css'
-import { getRsvp, updateRsvp } from '../helpers/connector'
+import { hostRemove, updateRsvp } from '../helpers/connector'
 
 
 
@@ -18,10 +18,10 @@ class AttendeeBoxForHostManagement extends Component<any,any> {
         }
     }
 
-    eventdel(){
+    attendeeDel(){
         let conf = window.confirm('Confirm or deny');
         if(conf){
-            updateRsvp(this.state.id, "DELETE").then(()=>{ //need to be attendeeId
+            hostRemove(this.state.id, this.props.email).then(()=>{ //need to be attendeeId
                 alert("successful update");
                 // this.props.navigate("/HostManagementPagetmp") bug: probably cannot update with deleted attendee
             }).catch(()=>alert("unsuc update"));
@@ -33,11 +33,9 @@ class AttendeeBoxForHostManagement extends Component<any,any> {
         return (
             <div className='AttendeeBox'>
                 <p>
-                    Email : {this.props.host}  Status : {this.props.date}
+                    Email : {this.props.email}  Status : {this.props.status}
                     {/* delete this attendee */}
-                    <button className="eventEditPageButton" onClick={this.eventdel}>X</button> 
-                    
-
+                    <button className="eventEditPageButton" onClick={this.attendeeDel}>X</button> 
                 </p>
             </div>
         )
