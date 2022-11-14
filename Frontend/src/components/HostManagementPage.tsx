@@ -4,10 +4,10 @@ import { useFormik, Field, FieldProps } from 'formik';
 import 'react-css-dropdown/dist/index.css';
 import { emailValidator } from '../helpers/emailValidator';
 import HostManagementPagetmp from './HostManagementPagetmp';
-import { addRsvp } from '../helpers/connector';
+import { hostInvite } from '../helpers/connector';
 
 
-function HostManagementPage(){
+function HostManagementPage(props:any){
 
     const formik = useFormik({
         initialValues:{
@@ -22,7 +22,7 @@ function HostManagementPage(){
                     return
                 }
                 else{
-                  addRsvp(values.email, 'invited').then(()=>{
+                  hostInvite(props.eventNum(), values.email).then(()=>{
                     alert("You have added " + values.email + " to your event!")
                     actions.resetForm({
                         values:{

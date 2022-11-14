@@ -4,7 +4,6 @@ import "./HostManagementPage.css";
 import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
 import { getRsvp } from '../helpers/connector'
-import AttendeeBox from './AttendeeBox';
 import AttendeeBoxForHostManagement from './AttendeeBoxForHostManagement';
 
 
@@ -23,7 +22,7 @@ class HostManagementPagetmp extends Component<any,any> {
 
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
-            getRsvp(this.state.id).then((content)=>{
+            getRsvp(this.state.id, "ALL").then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
@@ -36,7 +35,7 @@ class HostManagementPagetmp extends Component<any,any> {
         }
     }
     componentDidMount(): void {
-        getRsvp(this.state.id).then((content)=>{
+        getRsvp(this.state.id, "ALL").then((content)=>{
             let key;
             let array = [];
             for(key in content.data){

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './AttendeeBox.css'
-import { getRsvp, rsvpDel } from '../helpers/connector'
+import { getRsvp, updateRsvp } from '../helpers/connector'
 
 
 
@@ -21,7 +21,7 @@ class AttendeeBoxForHostManagement extends Component<any,any> {
     eventdel(){
         let conf = window.confirm('Confirm or deny');
         if(conf){
-            rsvpDel(this.state.id).then(()=>{ //need to be attendeeId
+            updateRsvp(this.state.id, "DELETE").then(()=>{ //need to be attendeeId
                 alert("successful update");
                 // this.props.navigate("/HostManagementPagetmp") bug: probably cannot update with deleted attendee
             }).catch(()=>alert("unsuc update"));

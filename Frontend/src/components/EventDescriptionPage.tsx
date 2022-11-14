@@ -3,12 +3,12 @@ import "./EventDescriptionPage.css";
 import "./Dashboard.css";
 import Modal from "./Modal";
 import { Component } from 'react';
-import { geteventbyid, getRsvp } from '../helpers/connector';
+import { geteventbyid, getRsvpStatus } from '../helpers/connector';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
     super(props);
-    this.state = {id: this.props.eventNum(), arr: [], updateForced:false, ForceUpdateNow:false};
+    this.state = {id: this.props.eventNum(), arr: [], updateForced:false, ForceUpdateNow:false, status:"NORSVP"};
     this.forceup = this.forceup.bind(this);
   }
 
@@ -25,6 +25,11 @@ class EventDescriptionPage extends Component<any,any> {
             this.setState({arr:array});
             this.forceUpdate();
         })
+        getRsvpStatus(this.state.id).then((content)=>{
+          this.setState({status:content.data})
+        }).catch(()=>console.log("Failed to get Status"));
+        
+
         this.setState({ForceUpdateNow:false});
     }
   }
@@ -66,10 +71,10 @@ class EventDescriptionPage extends Component<any,any> {
           </div>
 
           <div className="desName">
-            <p>Your RSVP Status : </p>
+            <p>Your RSVP Status : {this.state.status}</p>
           </div>
           <Link to = "/RsvpPage">
-              <button className='button'> RSVP </button>
+              <button className='button'> RSVP : </button>
           </Link>
           
         </body>

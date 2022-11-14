@@ -290,30 +290,40 @@ export async function updateEmailadmin(id:number, email:string){
 
 // Rsvp API
 
-export async function updateRsvp(email:string, status:string){
+export async function updateRsvp(eventid: number, status:string){
 
   let content = await client({
     method: 'patch',
     url: url+"updateRsvp",
     withCredentials: true,
     data: {
-      email: email,
+      event_id: eventid.toString(),
       status: status,
     }
   })
   return content;
 }
 
-export async function addRsvp(event_id: number, status:string){
+export async function getRsvp(eventid: number, status: string){
 
   let content = await client({
-    method: 'patch',
-    url: url+"addRsvp",
+    method: 'get',
+    url: url+"getRsvp",
     withCredentials: true,
     data: {
-      event_id: event_id,
+      event_id: eventid.toString(),
       status: status,
     }
+  })
+  return content;
+}
+
+export async function getCount(event_id: number){
+
+  let content = await client({
+    method: 'get',
+    url: url+"getCount?id="+event_id.toString(),
+    withCredentials: true,
   })
   return content;
 }
@@ -321,12 +331,9 @@ export async function addRsvp(event_id: number, status:string){
 export async function getRsvpStatus(event_id: number){
 
   let content = await client({
-    method: 'patch',
-    url: url+"getRsvpStatus",
+    method: 'get',
+    url: url+"getRsvpStatus?id="+event_id.toString(),
     withCredentials: true,
-    data: {
-      event_id: event_id,
-    }
   })
   return content;
 }
@@ -334,7 +341,7 @@ export async function getRsvpStatus(event_id: number){
 export async function hostRemove(event_id: number, email: string){
 
   let content = await client({
-    method: 'patch',
+    method: 'delete',
     url: url+"hostRemove",
     withCredentials: true,
     data: {
@@ -348,7 +355,7 @@ export async function hostRemove(event_id: number, email: string){
 export async function hostInvite(event_id: number, email: string){
 
   let content = await client({
-    method: 'patch',
+    method: 'post',
     url: url+"hostInvite",
     withCredentials: true,
     data: {
@@ -373,6 +380,8 @@ export async function runall(){ //for testing only
     await updatelocation(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatetime(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await geteventsize().then((content)=>console.log(content.data)).catch(()=>console.log("size fail"));
+    await updateRsvp(1, "WillAttend").then(()=>console.log("successful update Attend")).catch(()=>console.log("unsuc update Attend"));
+    
     await userdel().then(()=>console.log("del suc")).catch(()=>console.log("del err"));
 
     await register("dobigstuff@gmail.com", "big stuff","big","guy","admin").then(()=>console.log("success admin reg")).catch(()=>console.log("unsuc reg"));

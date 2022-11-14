@@ -98,6 +98,7 @@ class Dashboard extends React.Component<any,any>{
                 location={this.state.arr[i][3]}
                 description={this.state.arr[i][4]}
                 id ={this.state.arr[i][5]}
+                key ={this.state.arr[i][5]}
                 update={this.forceup}
                 setEventID={this.passEventId}
                 />);
