@@ -19,7 +19,6 @@ class EventDescriptionPage extends Component<any,any> {
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
     if(this.state.ForceUpdateNow){
         geteventbyid(this.state.id).then((content)=>{
-          console.log(content.data.inviteOnly);
             let array = [];
             array = [content.data.title, content.data.email, content.data.time, 
                 content.data.location, content.data.description, content.data.capacity, content.data.inviteOnly];

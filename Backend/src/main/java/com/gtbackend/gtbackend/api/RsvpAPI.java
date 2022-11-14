@@ -74,16 +74,16 @@ public class RsvpAPI {
 
     @GetMapping("/getRsvp")
     @ResponseBody
-    public List<Rsvp> getRsvp(@RequestBody Map<String, String> body) throws NoSuchElementException, IllegalArgumentException{
-        long event_id = Long.valueOf(body.get("event_id"));
+    public List<Rsvp> getRsvp(@RequestParam String id, @RequestParam String status) throws NoSuchElementException, IllegalArgumentException{
+        long event_id = Long.valueOf(id);
         if(eventRepository.findById(event_id).isEmpty()){
             throw new NoSuchElementException();
         }
-        if(body.get("status").toUpperCase().equals("ALL")){
+        if(status.toUpperCase().equals("ALL")){
             return rsvpRepository.getRsvp(event_id);
         }
-        RsvpStatus status = RsvpStatus.valueOf(body.get("status").toUpperCase());
-        return rsvpRepository.getRsvpByStatus(event_id, status);
+        RsvpStatus rsvp_status = RsvpStatus.valueOf(status.toUpperCase());
+        return rsvpRepository.getRsvpByStatus(event_id, rsvp_status);
     }
 
     @GetMapping("/getRsvpStatus")

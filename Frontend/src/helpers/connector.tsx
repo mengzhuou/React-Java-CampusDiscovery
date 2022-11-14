@@ -308,12 +308,8 @@ export async function getRsvp(eventid: number, status: string){
 
   let content = await client({
     method: 'get',
-    url: url+"getRsvp",
+    url: url+"getRsvp?id="+eventid.toString()+"&status="+status,
     withCredentials: true,
-    data: {
-      event_id: eventid.toString(),
-      status: status,
-    }
   })
   return content;
 }

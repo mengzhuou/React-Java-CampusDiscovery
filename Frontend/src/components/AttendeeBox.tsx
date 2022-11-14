@@ -20,7 +20,7 @@ class AttendeeBox extends Component<any,any> {
         return (
             <div className='AttendeeBox'>
                 <p>
-                    Email : {this.props.host}  Status : {this.props.date}
+                    Email : {this.props.email}  Status : {this.props.status}
                 </p>
             </div>
         )
