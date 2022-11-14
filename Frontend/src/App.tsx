@@ -55,7 +55,7 @@ class App extends React.Component<any,any>{
           <Route path="/AttendeeBox" element={<AttendeeBoxForHostManagement eventNum={this.getEventID} setEventID={this.getAttendeeID}/>}/>
           <Route path="/HostManagementPage" element={<HostManagementPage eventNum={this.getEventID}/>}/>
           <Route path="/HostManagementPagetmp" element={<HostManagementPagetmp eventNum={this.getEventID} setEventID={this.setAttendeeID}/>}/>
-          <Route path="/RsvpPage" element={<RsvpPage/>}/>
+          <Route path="/RsvpPage" element={<RsvpPage eventNum={this.getEventID}/>}/>
         </Routes>
       </Router>
     );

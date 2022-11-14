@@ -49,7 +49,7 @@ class EventDescriptionPage extends Component<any,any> {
         <header className="App-header">
           <p>Event Description</p>
         </header>
-        <body className='eventBody'>
+        <div className='eventBody'>
           <div className="desName">
             <label htmlFor='title'>Event title : {this.state.arr[0]}</label>
           </div>
@@ -77,7 +77,7 @@ class EventDescriptionPage extends Component<any,any> {
               <button className='button'> RSVP : </button>
           </Link>
           
-        </body>
+        </div>
         <div className='bottomnav'>
             <Link to = "/AttendeeListPage">
               <button className="buttomnavButton">Attendee List</button>

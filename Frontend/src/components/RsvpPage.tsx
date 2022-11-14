@@ -1,30 +1,37 @@
-import EventDescriptionPage from "./EventDescriptionPage";
-import Modal from "./Modal";
-import useModal from "./UseModal";
 import "./Dashboard.css";
 import "./EventDescriptionPage.css";
 import "./RsvpPage.css";
 import React from 'react';
-import { geteventbyid, getRsvp } from '../helpers/connector';
+import { updateRsvp } from '../helpers/connector';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
-function RsvpPage(){
-    const { isOpen, toggle } = useModal();
+function RsvpPage(props:any){
+    const navigate = useNavigate();
     const options = [
       // value is the real value we get passed down
-      {label: 'Will Attend', value: 'Will Attend'},
-      {label: 'Maybe', value: 'Maybe'},
-      {label: 'Will not Attend', value: 'Will not Attend'},
+      {label: 'Will Attend', value: 'WILLATTEND'},
+      {label: 'Maybe', value: 'MAYBE'},
+      {label: 'Will not Attend', value: 'WONTATTEND'},
+      {label: 'Nemesis', value: 'NEMESIS'},
+      {label: 'Invited', value: 'INVITED'},
+      {label: 'Delete', value: 'DELETE'},
     ];
     
-    const [value, setValue] = React.useState('Student');
+    const [value, setValue] = React.useState('WILLATTEND');
   
     const handleChange = (event:any) => {
       setValue(event.target.value);
     };
 
-    const navigate = useNavigate();
+    const handleConfirm = ()=>{
+      if(window.confirm("Are you Sure?")){
+        updateRsvp(props.eventNum(), value).then(()=>{
+          alert("Successful Update!");
+          navigate("/EventDescriptionPage")
+        }).catch(()=>console.log("Failed to Update RSVP"));
+      }
+    };
 
     return (
       <div className = "App">
@@ -46,11 +53,9 @@ function RsvpPage(){
           </div>
 
           <div className = "rsvpButton">
+          <button className='button' onClick={handleConfirm}> Confirm </button>
           <Link to = "/EventDescriptionPage">
-            <button className='button' onClick={toggle} > Confirm </button>
-          </Link>
-          <Link to = "/EventDescriptionPage">
-            <button className='button' onClick={toggle}> Cancel </button>
+            <button className='button' > Cancel </button>
           </Link>
           </div>
         </body>
