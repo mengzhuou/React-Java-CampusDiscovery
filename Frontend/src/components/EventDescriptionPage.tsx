@@ -37,6 +37,10 @@ class EventDescriptionPage extends Component<any,any> {
     alert(this.props.eventNum())//show event id
   }
 
+  createRSVP = () => {
+    this.props.navigate("/RsvpPage")
+}
+
   // showEventStatus() {
   //   getRsvp().then((content)=>{
 
@@ -72,10 +76,9 @@ class EventDescriptionPage extends Component<any,any> {
           <div className="desName">
             <p>Your RSVP Status : </p>
           </div>
-          <div onClick={this.props.useModal}>
-              <button className='button' onClick={this.props.toggle}> RSVP </button>
-              <Modal isOpen={this.props.isOpen} toggle={this.props.toggle}></Modal>
-          </div>
+          <Link to = "/RsvpPage">
+              <button className='button'> RSVP </button>
+          </Link>
           
         </body>
         <div className='bottomnav'>

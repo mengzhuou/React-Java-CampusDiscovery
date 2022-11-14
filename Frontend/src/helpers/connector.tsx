@@ -298,7 +298,7 @@ export async function addRsvp(email:string, status:string){
     withCredentials: true,
     data: {
       email: email,
-      statis: status,
+      status: status,
     }
   })
   return content;
