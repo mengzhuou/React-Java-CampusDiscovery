@@ -63,6 +63,9 @@ class EventDescriptionPage extends Component<any,any> {
           <div className="desName">
             <label htmlFor ='host'>Event host : {this.state.arr[1]}</label>
           </div>
+          <div className='test'>
+            Capacity : <br/>{this.state.currentCapacity}/{this.state.arr[5]}
+          </div>
 
           <div className="desName">
             <label htmlFor ='date'>Event date : {this.state.arr[2]}</label>
@@ -76,13 +79,6 @@ class EventDescriptionPage extends Component<any,any> {
             <label htmlFor ='description'>Event description : {this.state.arr[4]}</label>
           </div>
 
-          <div className="desName">
-            <label htmlFor ='Capacity'>Total Capacity : {this.state.arr[5]}</label>
-          </div>
-
-          <div className="desName">
-            <label htmlFor ='Capacity'>Current Capacity : {this.state.currentCapacity}</label>
-          </div>
 
           <div className="desName">
             <label htmlFor ='Invite-Only'>Invite-Only : {this.state.arr[6]?"True":"False"}</label>
@@ -91,6 +87,15 @@ class EventDescriptionPage extends Component<any,any> {
           <div className="desName">
             <p>Your RSVP Status : {this.state.status}</p>
           </div>
+
+          {/* <div className="desName">
+            <label htmlFor ='Capacity'>Total Capacity : {this.state.arr[5]}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='Capacity'>Current Capacity : {this.state.currentCapacity}</label>
+          </div> */}
+
           
         </div>
         <div className='bottomnav'>
