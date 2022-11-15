@@ -352,12 +352,8 @@ export async function hostRemove(event_id: number, email: string){
 
   let content = await client({
     method: 'delete',
-    url: url+"hostRemove",
+    url: url+"hostRemove?id="+event_id.toString()+"&email="+email,
     withCredentials: true,
-    data: {
-      email: email,
-      event_id: event_id
-    }
   })
   return content;
 }

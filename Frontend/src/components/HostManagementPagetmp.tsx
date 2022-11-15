@@ -3,19 +3,22 @@ import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
-import { getRsvp } from '../helpers/connector'
+import { getRsvp, hostInvite } from '../helpers/connector'
 import AttendeeBoxForHostManagement from './AttendeeBoxForHostManagement';
+import { emailValidator } from '../helpers/emailValidator';
 
 
 class HostManagementPagetmp extends Component<any,any> {
     constructor(props:any){
         super(props);
-        this.state = {id: this.props.eventNum(), Status: "ALL", arr : [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
+        this.state = {id: this.props.eventNum(), Status: "ALL", arr : [], xpos:window.scrollX, ypos:window.scrollY, 
+            updateForced:false, ForceUpdateNow:false, email:'', ref:React.createRef()};
         this.forceup = this.forceup.bind(this);
         this.onSelect = this.onSelect.bind(this);
+        this.onClick = this.onClick.bind(this);
     }
 
-    async forceup() {
+    forceup() {
         this.setState({ForceUpdateNow:true});
     }
 
@@ -40,6 +43,24 @@ class HostManagementPagetmp extends Component<any,any> {
     onSelect(event:any){
         this.setState({Status:event.value, ForceUpdateNow:true})
     }
+    onClick(){
+        var text:string = "email = "+ this.state.email;
+        if (window.confirm(text)){
+            const emailError = emailValidator(this.state.email)
+            if (emailError) {
+                alert("invalid email")
+                return
+            }
+            else{
+                hostInvite(this.props.eventNum(), this.state.email).then(()=>{
+                    alert("You have added " + this.state.email + " to your event!")
+                    this.forceup();
+                    this.state.ref.current.value = '';
+                }).catch(()=>(alert("invalid email2")))
+            }
+        }
+    }
+
     placeholder="Select a Status"
     options = [
         {label: 'All RSVP', value: 'ALL'},
@@ -60,6 +81,7 @@ class HostManagementPagetmp extends Component<any,any> {
                 email={this.state.arr[i][0]}
                 status={this.state.arr[i][1]}
                 eventNum={this.props.eventNum}
+                update={this.forceup}
             />)
         }
         return (
@@ -75,11 +97,9 @@ class HostManagementPagetmp extends Component<any,any> {
                     />
                 </header>
                 <body>
-                    <form onSubmit={this.props.formik.handleSubmit}>
-                        <h4 className='Line'>Invite An Attendee :</h4>
-                        <input type='text' className='formik' placeholder='Email Address' onChange={this.props.formik.handleChange} value = {this.props.formik.values.email} name="email"></input>
-                        <button className='inviteButton' type='submit'>Submit</button>
-                    </form>
+                    <h4 className='Line'>Invite An Attendee :</h4>
+                    <input ref={this.state.ref} type='text' className='formik' placeholder='Email Address' name="email" onChange={(evt)=>this.setState({email:evt.target.value})}></input>
+                    <button className='inviteButton' type='submit' onClick={this.onClick}>Submit</button>
                     {attendarr}
 
                 </body>

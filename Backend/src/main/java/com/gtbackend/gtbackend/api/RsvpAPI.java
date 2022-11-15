@@ -107,9 +107,8 @@ public class RsvpAPI {
     }
 
     @DeleteMapping("/hostRemove")
-    public void hostRemove(@RequestBody Map<String, String> body, Principal principal) throws AccessDeniedException {
-        long event_id = Long.valueOf(body.get("event_id"));
-        String email = body.get("email");
+    public void hostRemove(Principal principal, @RequestParam String id, @RequestParam String email) throws AccessDeniedException {
+        long event_id = Long.valueOf(id);
         Optional<Event> tmp_Event = eventRepository.findById(event_id);
         if(tmp_Event.isEmpty()){
             throw new NoSuchElementException();
