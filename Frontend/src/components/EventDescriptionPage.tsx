@@ -2,20 +2,22 @@ import { Link } from 'react-router-dom';
 import "./EventDescriptionPage.css";
 import "./Dashboard.css";
 import Modal from "./Modal";
+import { withRouter } from "./withRouter";
 import { Component } from 'react';
-import { geteventbyid, getRsvpStatus } from '../helpers/connector';
+import { geteventbyid, getRsvpStatus, getCount } from '../helpers/connector';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
     super(props);
-    this.state = {id: this.props.eventNum(), arr: [], updateForced:false, ForceUpdateNow:false, status:"NORSVP"};
+    this.state = {id: this.props.eventNum(), currentCapacity:22, arr: [], updateForced:false, ForceUpdateNow:false, status:"NORSVP"};
     this.forceup = this.forceup.bind(this);
+    this.getCurrentCapacity = this.getCurrentCapacity.bind(this);
   }
-
+  
   forceup() {
     this.setState({ForceUpdateNow: true});
   }
-
+  
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
     if(this.state.ForceUpdateNow){
         geteventbyid(this.state.id).then((content)=>{
@@ -29,30 +31,36 @@ class EventDescriptionPage extends Component<any,any> {
           this.setState({status:content.data})
         }).catch(()=>console.log("Failed to get Status"));
         
-
+        
         this.setState({ForceUpdateNow:false});
+      }
     }
-  }
-
+    
   componentDidMount(): void {
     this.setState({ForceUpdateNow:true});
   }
+  
+  rsvpNav = ()=>{
+    this.props.navigate("/RsvpPage")
+  }
+  
+  getCurrentCapacity = () => {
+    if(this.state.ForceUpdateNow){
+      getCount(this.state.id).then((content)=>{
+        this.setState({currentCapacity: content.data.getCount})
+      })
+    }
+  }
 
-  // showEventStatus() {
-  //   getRsvp().then((content)=>{
-
-  //   })
-  // }
   render(){
     return (
       <div className = "App">
-        <header className="App-header">
-          <p>Event Description</p>
+        <header>
+          <p className='descriptionPageTitle'>Event Description</p>
         </header>
         <div className='eventBody'>
-          <div className="desName">
-            <label htmlFor='title'>Event title : {this.state.arr[0]}</label>
-          </div>
+          <label className="desName" htmlFor='title'>Event title : {this.state.arr[0]}</label>
+          <button className='DescriptionPageRsvpButton' onClick={this.rsvpNav}> RSVP </button>
 
           <div className="desName">
             <label htmlFor ='host'>Event host : {this.state.arr[1]}</label>
@@ -71,7 +79,11 @@ class EventDescriptionPage extends Component<any,any> {
           </div>
 
           <div className="desName">
-            <label htmlFor ='Capacity'>Capacity : {this.state.arr[5]}</label>
+            <label htmlFor ='Capacity'>Total Capacity : {this.state.arr[5]}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='Capacity'>Current Capacity : {this.state.currentCapacity}</label>
           </div>
 
           <div className="desName">
@@ -81,9 +93,6 @@ class EventDescriptionPage extends Component<any,any> {
           <div className="desName">
             <p>Your RSVP Status : {this.state.status}</p>
           </div>
-          <Link to = "/RsvpPage">
-              <button className='button'> RSVP </button>
-          </Link>
           
         </div>
         <div className='bottomnav'>
@@ -101,5 +110,4 @@ class EventDescriptionPage extends Component<any,any> {
     );
   }
 }
-
-export default EventDescriptionPage;
+export default withRouter(EventDescriptionPage);
