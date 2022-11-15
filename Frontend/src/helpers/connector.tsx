@@ -186,6 +186,20 @@ export async function updatetime(id:number, time:string){
   return content;
 }
 
+export async function updateInviteOnly(id:number, invite:string){
+
+  let content = await client({
+      method: 'patch',
+      url: url+"updateInvite",
+      withCredentials: true,
+      data: {
+        id: id.toString(),
+        invite: invite,
+      }
+    });
+  return content;
+}
+
 //admin API
 
 var urladmin = host + "/api/admin/";
