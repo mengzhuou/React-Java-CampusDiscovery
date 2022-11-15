@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import "./EventDescriptionPage.css";
 import "./Dashboard.css";
 import Modal from "./Modal";
+import { withRouter } from "./withRouter";
 import { Component } from 'react';
 import { geteventbyid, getRsvpStatus } from '../helpers/connector';
   
@@ -29,30 +30,27 @@ class EventDescriptionPage extends Component<any,any> {
           this.setState({status:content.data})
         }).catch(()=>console.log("Failed to get Status"));
         
-
+        
         this.setState({ForceUpdateNow:false});
+      }
     }
-  }
-
-  componentDidMount(): void {
-    this.setState({ForceUpdateNow:true});
-  }
-
-  // showEventStatus() {
-  //   getRsvp().then((content)=>{
-
-  //   })
-  // }
+    
+    componentDidMount(): void {
+      this.setState({ForceUpdateNow:true});
+    }
+    
+    rsvpNav = ()=>{
+      this.props.navigate("/RsvpPage")
+    }
   render(){
     return (
       <div className = "App">
-        <header className="App-header">
-          <p>Event Description</p>
+        <header>
+          <p className='descriptionPageTitle'>Event Description</p>
         </header>
         <div className='eventBody'>
-          <div className="desName">
-            <label htmlFor='title'>Event title : {this.state.arr[0]}</label>
-          </div>
+          <label className="desName" htmlFor='title'>Event title : {this.state.arr[0]}</label>
+          <button className='DescriptionPageRsvpButton' onClick={this.rsvpNav}> RSVP </button>
 
           <div className="desName">
             <label htmlFor ='host'>Event host : {this.state.arr[1]}</label>
@@ -81,9 +79,6 @@ class EventDescriptionPage extends Component<any,any> {
           <div className="desName">
             <p>Your RSVP Status : {this.state.status}</p>
           </div>
-          <Link to = "/RsvpPage">
-              <button className='button'> RSVP </button>
-          </Link>
           
         </div>
         <div className='bottomnav'>
@@ -101,5 +96,4 @@ class EventDescriptionPage extends Component<any,any> {
     );
   }
 }
-
-export default EventDescriptionPage;
+export default withRouter(EventDescriptionPage);

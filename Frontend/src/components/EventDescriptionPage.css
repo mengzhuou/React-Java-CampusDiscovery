@@ -6,15 +6,16 @@
 }
 
 
-.App-header{
-    margin-top: 5%;
+.descriptionPageTitle{
+    margin-top: 15%;
     font-size: 40px;
     text-transform: uppercase;
-    color:#6e3232;
+    color: #6e3232;
     z-index: 1;
     text-align: center;
     font-weight: bolder;
-  }
+    margin-right: 20px;
+}
 
 .desName{
     margin: 3% 3% 3% 3%;
@@ -24,6 +25,7 @@
     font-family: "Neucha", cursive;
     word-wrap: break-word;
     letter-spacing: 2px;
+    display: inline-block;
 }
 
 .eventBody{
@@ -33,6 +35,23 @@
     width: 500px;
     height: fit-content;
     margin-bottom: 50px;
+}
+
+
+.DescriptionPageRsvpButton{
+    display: inline-block;
+    color: rgb(101, 58, 97);
+    background-color: #f9b5c0;
+    border-radius: 10%;
+    text-align: center;
+    width: fit-content;
+    font-size: 20px;
+    margin-left: 170px;
+    margin-top: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
+    position: relative;
 }
 
 .ManageButton{
