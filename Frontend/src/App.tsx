@@ -9,7 +9,6 @@ import EventCreationPage from "./components/EventCreationPage";
 import EventDescriptionPage from "./components/EventDescriptionPage";
 import AttendeeListPage from "./components/AttendeeListPage";
 import HostManagementPage from "./components/HostManagementPage";
-import HostManagementPagetmp from "./components/HostManagementPagetmp";
 import RsvpPage from "./components/RsvpPage";
 import AttendeeBox from "./components/AttendeeBox";
 import AttendeeBoxForHostManagement from "./components/AttendeeBoxForHostManagement";
@@ -54,7 +53,6 @@ class App extends React.Component<any,any>{
           <Route path="/AttendeeBox" element={<AttendeeBox eventNum={this.getEventID}/>}/>
           <Route path="/AttendeeBox" element={<AttendeeBoxForHostManagement eventNum={this.getEventID} setEventID={this.getAttendeeID}/>}/>
           <Route path="/HostManagementPage" element={<HostManagementPage eventNum={this.getEventID}/>}/>
-          <Route path="/HostManagementPagetmp" element={<HostManagementPagetmp eventNum={this.getEventID} />}/>
           <Route path="/RsvpPage" element={<RsvpPage eventNum={this.getEventID}/>}/>
         </Routes>
       </Router>

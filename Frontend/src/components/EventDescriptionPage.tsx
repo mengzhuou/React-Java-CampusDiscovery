@@ -9,32 +9,38 @@ import { geteventbyid, getRsvpStatus, getCount } from '../helpers/connector';
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
     super(props);
-    this.state = {id: this.props.eventNum(), currentCapacity:22, arr: [], updateForced:false, ForceUpdateNow:false, status:"NORSVP"};
+    this.state = {id: this.props.eventNum(), currentCapacity:0, arr: [], updateForced:false, ForceUpdateNow:false, status:"NORSVP"};
     this.forceup = this.forceup.bind(this);
-    this.getCurrentCapacity = this.getCurrentCapacity.bind(this);
   }
   
   forceup() {
     this.setState({ForceUpdateNow: true});
   }
+
+  async updateNow(){
+    let array: any[] = [];
+    let stat: any = this.state.status;
+    let curr: number = this.state.currentCapacity;
+    await geteventbyid(this.state.id).then((content)=>{
+        array = [content.data.title, content.data.email, content.data.time, 
+            content.data.location, content.data.description, content.data.capacity, content.data.inviteOnly];
+    })
+    await getRsvpStatus(this.state.id).then((content)=>{
+      stat = content.data;
+    }).catch(()=>console.log("Failed to get Status"));
+
+    await getCount(this.state.id).then((content)=>{
+      curr = content.data;
+    })
+    
+    this.setState({currentCapacity: curr, arr: array, ForceUpdateNow:false, status:stat});
+  }
   
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
     if(this.state.ForceUpdateNow){
-        geteventbyid(this.state.id).then((content)=>{
-            let array = [];
-            array = [content.data.title, content.data.email, content.data.time, 
-                content.data.location, content.data.description, content.data.capacity, content.data.inviteOnly];
-            this.setState({arr:array});
-            this.forceUpdate();
-        })
-        getRsvpStatus(this.state.id).then((content)=>{
-          this.setState({status:content.data})
-        }).catch(()=>console.log("Failed to get Status"));
-        
-        
-        this.setState({ForceUpdateNow:false});
-      }
+      this.updateNow();
     }
+  }
     
   componentDidMount(): void {
     this.setState({ForceUpdateNow:true});
@@ -42,14 +48,6 @@ class EventDescriptionPage extends Component<any,any> {
   
   rsvpNav = ()=>{
     this.props.navigate("/RsvpPage")
-  }
-  
-  getCurrentCapacity = () => {
-    if(this.state.ForceUpdateNow){
-      getCount(this.state.id).then((content)=>{
-        this.setState({currentCapacity: content.data.getCount})
-      })
-    }
   }
 
   render(){
