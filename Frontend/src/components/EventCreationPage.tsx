@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import "./EventCreationPage.css";
 import { addevent } from '../helpers/connector'
+import Checkbox from "./Checkbox";
 
 
   
@@ -14,6 +15,8 @@ function EventCreationPage() {
       time:'',  //date
       location:'',
       description:'',
+      capacity:'',
+      private:''
     },
     onSubmit: values=>{
         var textContent:string = "Event title: " + values.title + "\nEvent date: ";
@@ -26,6 +29,8 @@ function EventCreationPage() {
         }
       }
     })
+  
+
 
     return (
         <div className = "App">
@@ -52,7 +57,25 @@ function EventCreationPage() {
               <label htmlFor ='description'>Event description : </label>
               <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
               </div>
+
+              <div className="text">
+              <label htmlFor ='capacity'>Event Capacity : </label>
+              <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
+              </div>
+             
+              <div>
+                <label>
+                  <input type="checkbox" />
+                     Invite Only
+                </label>
+              </div>
+
+
               <button className="button" type="submit">Create Event</button>
+
+              
+
+
           </form>
           <div className='bottomnav'>
               <Link to = "/Dashboard">
