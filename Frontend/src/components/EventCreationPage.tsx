@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import "./EventCreationPage.css";
-import { addevent } from '../helpers/connector'
-import Checkbox from "./Checkbox";
+import { addevent } from '../helpers/connector';
 
 
   
@@ -16,7 +15,7 @@ function EventCreationPage() {
       location:'',
       description:'',
       capacity:'',
-      private:''
+      inviteonly: '',
     },
     onSubmit: values=>{
         var textContent:string = "Event title: " + values.title + "\nEvent date: ";
@@ -29,7 +28,7 @@ function EventCreationPage() {
         }
       }
     })
-  
+   
 
 
     return (
@@ -60,12 +59,12 @@ function EventCreationPage() {
 
               <div className="text">
               <label htmlFor ='capacity'>Event Capacity : </label>
-              <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
+              <input size={48} onChange={formik.handleChange} value = {formik.values.capacity} id='capacity' name='capacity'></input>
               </div>
              
-              <div>
+              <div className = "text">
                 <label>
-                  <input type="checkbox" />
+                  <input size={48} type="checkbox" onChange={formik.handleChange} value = {formik.values.inviteonly} id='inviteonly' name = 'inviteonly'/>
                      Invite Only
                 </label>
               </div>
