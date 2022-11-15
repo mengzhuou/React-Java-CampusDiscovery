@@ -9,13 +9,13 @@ import Dropdown from 'react-dropdown'
 
 
 class Dashboard extends React.Component<any,any>{
-    placeholder="Select a Status"
-    options = [
-        {label: 'All Event', value: 'ALLEVENT'},
-        {label: 'Invited', value: 'INVITED'}
-    ];
+    // placeholder="Select a Status"
+    // options = [
+    //     {label: 'All Event', value: 'ALLEVENT'},
+    //     {label: 'Invited', value: 'INVITED'}
+    // ];
 
-    defaultOption = this.options[2];
+    // defaultOption = this.options[2];
 
     constructor(props:any){
         super(props);
@@ -107,12 +107,12 @@ class Dashboard extends React.Component<any,any>{
                         <p className="header">Dashboard</p>
                     </header> 
                     <div className='body'>
-                        <Dropdown className="dropDownEvent"
+                        {/* <Dropdown className="dropDownEvent"
                             options={this.options}
                             // onChange={this._onSelect}
                             value={this.defaultOption}
                             placeholder="All Event"
-                        />
+                        /> */}
                         {dasharr}
                     </div>
                     <div className="pagination">
