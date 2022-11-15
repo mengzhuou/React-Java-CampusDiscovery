@@ -18,7 +18,7 @@ import React from "react";
 class App extends React.Component<any,any>{
   constructor(props:any){
     super(props);
-    this.state = {EventID: -1, AttendeeID: -1};
+    this.state = {EventID: -1};
     this.getEventID = this.getEventID.bind(this);
     this.setEventID = this.setEventID.bind(this);
     this.getAttendeeID = this.getAttendeeID.bind(this);
@@ -51,7 +51,7 @@ class App extends React.Component<any,any>{
           <Route path="/EventEditingPage" element={<EventEditingPage eventNum={this.getEventID}/>}/>
           <Route path="/AttendeeListPage" element={<AttendeeListPage eventNum={this.getEventID}/>}/>
           <Route path="/AttendeeBox" element={<AttendeeBox eventNum={this.getEventID}/>}/>
-          <Route path="/AttendeeBox" element={<AttendeeBoxForHostManagement eventNum={this.getEventID} setEventID={this.getAttendeeID}/>}/>
+          <Route path="/AttendeeBox" element={<AttendeeBoxForHostManagement eventNum={this.getEventID}/>}/>
           <Route path="/HostManagementPage" element={<HostManagementPage eventNum={this.getEventID}/>}/>
           <Route path="/RsvpPage" element={<RsvpPage eventNum={this.getEventID}/>}/>
         </Routes>

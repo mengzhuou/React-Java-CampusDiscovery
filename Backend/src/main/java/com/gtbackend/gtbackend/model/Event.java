@@ -26,16 +26,6 @@ public class Event {
 
     }
 
-    public Event(String title, String email, String description, String location, String time) {
-        this.title = title;
-        this.email = email;
-        this.description = description;
-        this.location = location;
-        this.time = time;
-        this.inviteOnly = false; //default invite only status
-        this.capacity = 10; //default capacity
-    }
-
     public Event(String title, String email, String description, String location, String time, boolean inviteOnly, int capacity) {
         this.title = title;
         this.email = email;

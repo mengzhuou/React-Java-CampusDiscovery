@@ -28,8 +28,7 @@ class EventEditingPage extends Component<any,any> {
         let array = [];
         array = [content.data.title, content.data.email, content.data.time, 
           content.data.location, content.data.description, content.data.inviteOnly];
-        this.setState({arr:array});
-        this.forceUpdate();
+        this.setState({arr:array, ForceUpdateNow:false});
       })
       this.setState({ForceUpdateNow:false});
     }

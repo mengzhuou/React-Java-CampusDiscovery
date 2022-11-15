@@ -22,8 +22,10 @@ public class AdminAPI {
     @PostMapping("/addEvent")
     @Secured("ROLE_ADMIN")
     public void addEvent(Principal principal,@RequestBody Map<String, String> body) throws IllegalArgumentException{
-        Event event = new Event(body.get("title"), body.get("email"),
-                body.get("description"), body.get("location"), body.get("time"));
+        boolean invited = Boolean.valueOf(body.get("invite"));
+        int capacity = Integer.valueOf(body.get("capacity"));
+        Event event = new Event(body.get("title"), principal.getName(),
+                body.get("description"), body.get("location"), body.get("time"), invited, capacity);
         eventRepository.save(event);
         System.out.println(principal);
     }

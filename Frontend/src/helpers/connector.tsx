@@ -73,7 +73,7 @@ export async function getinfo(){
 
 //event API
 
-export async function addevent(title:string, description:string, location:string, time:string){
+export async function addevent(title:string, description:string, location:string, time:string, invite:string, capacity: string){
 
   let content = await client({
       method: 'post',
@@ -84,6 +84,8 @@ export async function addevent(title:string, description:string, location:string
         description: description,
         location: location,
         time: time,
+        invite: invite,
+        capacity: capacity,
       }
     });
   return content;
@@ -204,7 +206,7 @@ export async function updateInviteOnly(id:number, invite:string){
 
 var urladmin = host + "/api/admin/";
 
-export async function addeventadmin(title:string, email:string, description:string, location:string, time:string){
+export async function addeventadmin(title:string, email:string, description:string, location:string, time:string, invite:string, capacity:string){
 
   let content = await client({
       method: 'post',
@@ -216,6 +218,8 @@ export async function addeventadmin(title:string, email:string, description:stri
         description: description,
         location: location,
         time: time,
+        invite: invite,
+        capacity: capacity,
       }
     });
   return content;
@@ -378,7 +382,7 @@ export async function runall(){ //for testing only
     await register("dobigstuff@gmail.com", "big stuff","big","guy","student").then(()=>console.log("success reg")).catch(()=>console.log("unsuc reg"));
     await login("dobigstuff@gmail.com", "big stuff").then(()=>console.log("success login")).catch(()=>console.log("unsuc login"));
     await getinfo().then((content)=>console.log(content.data)).catch((err)=>console.log("uncomfy"));
-    await addevent("big stuff","unique","stuff","student").then(()=>console.log("add suc")).catch(()=>console.log("add fail"));
+    await addevent("big stuff","unique","stuff","student", "FALSE", "100").then(()=>console.log("add suc")).catch(()=>console.log("add fail"));
     await getevent(1).then((content)=>console.log(content.data)).catch((err)=>console.log("uncomfy"));
     await eventdel(3).then(()=>console.log("event del suc")).catch(()=>console.log("del event err"));
     await updatetitle(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
@@ -393,7 +397,7 @@ export async function runall(){ //for testing only
     await register("dobigstuff@gmail.com", "big stuff","big","guy","admin").then(()=>console.log("success admin reg")).catch(()=>console.log("unsuc reg"));
     await login("dobigstuff@gmail.com", "big stuff").then(()=>console.log("success login")).catch(()=>console.log("unsuc login"));
     await getinfo().then((content)=>console.log(content.data)).catch((err)=>console.log("uncomfy"));
-    await addeventadmin("big stuff", "bigboi@boi.com","unique","stuff","student").then(()=>console.log("add suc")).catch(()=>console.log("add fail"));
+    await addeventadmin("big stuff", "bigboi@boi.com","unique","stuff","student", "True","6969").then(()=>console.log("add suc")).catch(()=>console.log("add fail"));
     await eventdeladmin(5).then(()=>console.log("event del suc")).catch(()=>console.log("del event err"));
     await updatetitleadmin(4, "pho guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatedescriptionadmin(4, "pho guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));

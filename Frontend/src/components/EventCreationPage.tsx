@@ -15,13 +15,14 @@ function EventCreationPage() {
       location:'',
       description:'',
       capacity:'',
-      inviteonly: '',
+      inviteonly: false,
     },
     onSubmit: values=>{
         var textContent:string = "Event title: " + values.title + "\nEvent date: ";
-        textContent += values.time + "\nEvent location: " + values.location + "\nEvent description: " + values.description;
+        textContent += values.time + "\nEvent location: " + values.location + 
+                      "\nEvent description: " + values.description + "\nEvent Capacity: " + values.capacity + "\nEvent Invite-Only: " + values.inviteonly;
         if(window.confirm(textContent)){
-          addevent(values.title, values.time, values.location, values.description).then(()=>{
+          addevent(values.title, values.time, values.location, values.description, (values.inviteonly?"true":"false"), values.capacity).then(()=>{
             alert("Confirmation: your changes have been saved")
             navigate("/dashboard")
           }).catch(()=>console.log("failed"))
@@ -64,7 +65,7 @@ function EventCreationPage() {
              
               <div className = "text">
                 <label>
-                  <input size={48} type="checkbox" onChange={formik.handleChange} value = {formik.values.inviteonly} id='inviteonly' name = 'inviteonly'/>
+                  <input size={48} type="checkbox" onChange={formik.handleChange} id='inviteonly' name = 'inviteonly'/>
                      Invite Only
                 </label>
               </div>

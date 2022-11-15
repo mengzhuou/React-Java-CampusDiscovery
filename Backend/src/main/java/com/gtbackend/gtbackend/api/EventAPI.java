@@ -24,8 +24,10 @@ public class EventAPI {
 
     @PostMapping("/addEvent")
     public void addEvent(Principal principal, @RequestBody Map<String, String> body) throws IllegalArgumentException{
+        boolean invited = Boolean.valueOf(body.get("invite"));
+        int capacity = Integer.valueOf(body.get("capacity"));
         Event event = new Event(body.get("title"), principal.getName(),
-                body.get("description"), body.get("location"), body.get("time"));
+                body.get("description"), body.get("location"), body.get("time"), invited, capacity);
         eventRepository.save(event);
     }
 
