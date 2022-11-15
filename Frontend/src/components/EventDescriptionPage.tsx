@@ -4,19 +4,20 @@ import "./Dashboard.css";
 import Modal from "./Modal";
 import { withRouter } from "./withRouter";
 import { Component } from 'react';
-import { geteventbyid, getRsvpStatus } from '../helpers/connector';
+import { geteventbyid, getRsvpStatus, getCount } from '../helpers/connector';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
     super(props);
-    this.state = {id: this.props.eventNum(), arr: [], updateForced:false, ForceUpdateNow:false, status:"NORSVP"};
+    this.state = {id: this.props.eventNum(), currentCapacity:22, arr: [], updateForced:false, ForceUpdateNow:false, status:"NORSVP"};
     this.forceup = this.forceup.bind(this);
+    this.getCurrentCapacity = this.getCurrentCapacity.bind(this);
   }
-
+  
   forceup() {
     this.setState({ForceUpdateNow: true});
   }
-
+  
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
     if(this.state.ForceUpdateNow){
         geteventbyid(this.state.id).then((content)=>{
@@ -35,13 +36,22 @@ class EventDescriptionPage extends Component<any,any> {
       }
     }
     
-    componentDidMount(): void {
-      this.setState({ForceUpdateNow:true});
+  componentDidMount(): void {
+    this.setState({ForceUpdateNow:true});
+  }
+  
+  rsvpNav = ()=>{
+    this.props.navigate("/RsvpPage")
+  }
+  
+  getCurrentCapacity = () => {
+    if(this.state.ForceUpdateNow){
+      getCount(this.state.id).then((content)=>{
+        this.setState({currentCapacity: content.data.getCount})
+      })
     }
-    
-    rsvpNav = ()=>{
-      this.props.navigate("/RsvpPage")
-    }
+  }
+
   render(){
     return (
       <div className = "App">
@@ -69,7 +79,11 @@ class EventDescriptionPage extends Component<any,any> {
           </div>
 
           <div className="desName">
-            <label htmlFor ='Capacity'>Capacity : {this.state.arr[5]}</label>
+            <label htmlFor ='Capacity'>Total Capacity : {this.state.arr[5]}</label>
+          </div>
+
+          <div className="desName">
+            <label htmlFor ='Capacity'>Current Capacity : {this.state.currentCapacity}</label>
           </div>
 
           <div className="desName">
