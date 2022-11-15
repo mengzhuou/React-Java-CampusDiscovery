@@ -41,7 +41,7 @@ function HostManagementPage(props:any){
         setValue(event.target.value);
       }
       return(
-        <HostManagementPagetmp formik={formik} handleChange={handleChange}/>
+        <HostManagementPagetmp formik={formik} handleChange={handleChange} eventNum={props.eventNum}/>
       )
 }
 
