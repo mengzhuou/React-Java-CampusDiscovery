@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import "./EventDescriptionPage.css";
 import "./Dashboard.css";
-import Modal from "./Modal";
 import { withRouter } from "./withRouter";
 import { Component } from 'react';
 import { geteventbyid, getRsvpStatus, getCount } from '../helpers/connector';
