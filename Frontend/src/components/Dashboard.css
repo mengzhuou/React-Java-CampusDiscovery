@@ -35,3 +35,17 @@
     min-height: 100vh;
     padding-bottom: 3%;
 }
+
+.sidenav {
+    height: 100%; /* 100% Full-height */
+    width: 180px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: rgb(236, 188, 188); /* Black*/
+    padding-top: 60px; /* Place content 60px from the top */
+    /* text-decoration:overline; */
+    color: #818181;
+    text-align: center;
+}
