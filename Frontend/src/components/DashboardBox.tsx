@@ -35,7 +35,7 @@ class DashboardBox extends Component<any,any> {
                     Host : {this.props.host} 
                 </h4>
                 <h4 className="DashboardElement">
-                    Date : {this.props.date}
+                    Date : {this.props.date[2] + "/" + this.props.date[1] + "/" + this.props.date[0] + " " + this.props.date[3] + ":" + ('0' + this.props.date[4]).slice(-2)   }
                 </h4>
             </div>
         )
