@@ -1,10 +1,11 @@
 import "./Dashboard.css";
 import { withRouter } from "./withRouter";
-import React from 'react';
+import React, { useState } from 'react';
 import { getinfo, getevent, logout} from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
-import Dropdown from 'react-dropdown'
+import Checkbox from "./Checkbox";
+import { DateSelector } from "./DateSelector";
 
 
 
@@ -19,12 +20,13 @@ class Dashboard extends React.Component<any,any>{
 
     constructor(props:any){
         super(props);
-        this.state = {currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false};
+        this.state = {currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
         this.createEvent = this.createEvent.bind(this);
         this.passEventId = this.passEventId.bind(this);
+        this.changeCheckedState = this.changeCheckedState.bind(this);
     }
 
     display() {
@@ -79,6 +81,11 @@ class Dashboard extends React.Component<any,any>{
         this.props.navigate("/EventDescriptionPage");
     }
 
+    changeCheckedState = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({isFilterChecked: e.target.checked});
+        console.log("check if checked : " + this.state.isFilterChecked)        
+    }
+
     render(){
         let dasharr: any[] = [];
 
@@ -95,6 +102,7 @@ class Dashboard extends React.Component<any,any>{
                 setEventID={this.passEventId}
                 />);
         }
+
         return (
             <div className="html">
                 <div className="topnav">
@@ -105,7 +113,42 @@ class Dashboard extends React.Component<any,any>{
                 <div className="AppDashboard"> 
                     <header>
                         <p className="header">Dashboard</p>
-                    </header> 
+
+                    </header>
+                    <div className="sidenav">
+                        <h1 >Filters</h1> 
+                        {/* <div>clear</div> //clear filter*/}
+                        <div>
+                            <label>Choose Date : </label>
+                            <DateSelector/>
+                            <Checkbox
+                                handleChange={this.changeCheckedState}
+                                isChecked={this.state.isFilterChecked}
+                                label="Before Date : "
+                            />
+                            <Checkbox
+                                handleChange={this.changeCheckedState}
+                                isChecked={this.state.isFilterChecked}
+                                label="After Date : "
+                            />
+                        </div>
+                        <div>
+                            <label>Distance : </label>
+                            <input
+                                className="inputStyle"
+                            />
+                            <label>miles from your current location</label>
+                        </div>
+
+                        <div>
+                            <label>Host (email) : </label>
+                            <input
+                                className="inputStyle"
+                            />
+                        </div>
+
+                        <button className="filterButton">Confirm Filter</button>
+                    </div>
                     <div className='body'>
                         {/* <Dropdown className="dropDownEvent"
                             options={this.options}
