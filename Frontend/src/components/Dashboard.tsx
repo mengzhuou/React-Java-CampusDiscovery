@@ -6,6 +6,7 @@ import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
 import Dropdown from 'react-dropdown'
 import Checkbox from "./Checkbox";
+import { DateSelector } from "./DateSelector";
 
 
 
@@ -103,27 +104,6 @@ class Dashboard extends React.Component<any,any>{
                 />);
         }
 
-        // const names = ['James', 'Nina', "heyo", "Ninja"];
-        const people = [
-            {
-                name: 'James',
-                age:31,
-            },
-            {
-                name: 'Nina',
-                age:22,
-            },
-            {
-                name: 'Ninja',
-                age:18,
-            }
-        ];
-
-        
-        const filtered = people.filter(person => {
-            return person.name.includes('Ninj');
-        });
-
         return (
             <div className="html">
                 <div className="topnav">
@@ -134,18 +114,7 @@ class Dashboard extends React.Component<any,any>{
                 <div className="AppDashboard"> 
                     <header>
                         <p className="header">Dashboard</p>
-                        {/* {people.filter(person => person.name.includes('J')).map(filteredName => (
-                            <li>
-                                {filteredName.name}
-                            </li>
-                        ))} */}
-                        {filtered.map(person => {
-                            return (
-                                <div key={person.name}>
-                                    <h2>name: {person.name}</h2>
-                                </div>
-                            )
-                        })}
+
                     </header>
                     <div className="sidenav">
                         <h1 >Filters</h1> 
@@ -153,8 +122,9 @@ class Dashboard extends React.Component<any,any>{
                         <Checkbox
                             handleChange={this.changeCheckedState}
                             isChecked={this.state.isFilterChecked}
-                            label="Name"
+                            label="Date"
                         />
+                        <DateSelector/>
 
                     </div>
                     <div className='body'>
