@@ -7,6 +7,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 @RestController
@@ -21,11 +23,14 @@ public class AdminAPI {
 
     @PostMapping("/addEvent")
     @Secured("ROLE_ADMIN")
-    public void addEvent(Principal principal,@RequestBody Map<String, String> body) throws IllegalArgumentException{
+    public void addEvent(Principal principal,@RequestBody Map<String, String> body) throws IllegalArgumentException, DateTimeParseException {
         boolean invited = Boolean.valueOf(body.get("invite"));
         int capacity = Integer.valueOf(body.get("capacity"));
+        LocalDateTime time = LocalDateTime.parse(body.get("time"));
+        double longitude = Double.valueOf(body.get("longitude"));
+        double latitude = Double .valueOf(body.get("latitude"));
         Event event = new Event(body.get("title"), principal.getName(),
-                body.get("description"), body.get("location"), body.get("time"), invited, capacity);
+                body.get("description"), body.get("location"), longitude, latitude, time, invited, capacity);
         eventRepository.save(event);
         System.out.println(principal);
     }

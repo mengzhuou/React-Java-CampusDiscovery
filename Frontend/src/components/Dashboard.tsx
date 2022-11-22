@@ -53,7 +53,7 @@ class Dashboard extends React.Component<any,any>{
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
-            getevent(this.state.currentPage).then((content)=>{
+            getevent(this.state.currentPage,"none","none","-1","-1","none","none").then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
