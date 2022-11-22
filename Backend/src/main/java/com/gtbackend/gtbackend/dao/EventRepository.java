@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
     @Query(value = "SELECT e FROM Event e ORDER BY e.id")
-    List<Event> findEventByRange(Pageable pageable);
+    List<Event> findEventByRange();
 
     @Query(value = "SELECT e FROM Event e WHERE e.email = ?1 ORDER BY e.id")
     List<Event> findEventByEmail(String email);

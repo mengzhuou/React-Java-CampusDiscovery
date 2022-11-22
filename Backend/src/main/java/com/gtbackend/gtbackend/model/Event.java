@@ -2,6 +2,7 @@ package com.gtbackend.gtbackend.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "event_table")
@@ -17,7 +18,9 @@ public class Event {
     @Lob
     private String description;
     private String location;
-    private String time;
+    private double longitude;
+    private double latitude;
+    private LocalDateTime time;
     private int capacity;
 
     private boolean inviteOnly;
@@ -26,11 +29,14 @@ public class Event {
 
     }
 
-    public Event(String title, String email, String description, String location, String time, boolean inviteOnly, int capacity) {
+    public Event(String title, String email, String description, String location, double longitude, double latitude,
+                 LocalDateTime time, boolean inviteOnly, int capacity) {
         this.title = title;
         this.email = email;
         this.description = description;
         this.location = location;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.time = time;
         this.inviteOnly = inviteOnly;
         this.capacity = capacity;
@@ -72,11 +78,11 @@ public class Event {
         this.location = location;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
@@ -94,5 +100,21 @@ public class Event {
 
     public void setInviteOnly(boolean inviteOnly) {
         this.inviteOnly = inviteOnly;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 }
