@@ -118,19 +118,36 @@ class Dashboard extends React.Component<any,any>{
                     <div className="sidenav">
                         <h1 >Filters</h1> 
                         {/* <div>clear</div> //clear filter*/}
-                        <label>Choose Date : </label>
-                        <DateSelector/>
-                        <Checkbox
-                            handleChange={this.changeCheckedState}
-                            isChecked={this.state.isFilterChecked}
-                            label="Before Date : "
-                        />
-                        <Checkbox
-                            handleChange={this.changeCheckedState}
-                            isChecked={this.state.isFilterChecked}
-                            label="After Date : "
-                        />
+                        <div>
+                            <label>Choose Date : </label>
+                            <DateSelector/>
+                            <Checkbox
+                                handleChange={this.changeCheckedState}
+                                isChecked={this.state.isFilterChecked}
+                                label="Before Date : "
+                            />
+                            <Checkbox
+                                handleChange={this.changeCheckedState}
+                                isChecked={this.state.isFilterChecked}
+                                label="After Date : "
+                            />
+                        </div>
+                        <div>
+                            <label>Distance : </label>
+                            <input
+                                className="inputStyle"
+                            />
+                            <label>miles from your current location</label>
+                        </div>
 
+                        <div>
+                            <label>Host (email) : </label>
+                            <input
+                                className="inputStyle"
+                            />
+                        </div>
+
+                        <button className="filterButton">Confirm Filter</button>
                     </div>
                     <div className='body'>
                         {/* <Dropdown className="dropDownEvent"
