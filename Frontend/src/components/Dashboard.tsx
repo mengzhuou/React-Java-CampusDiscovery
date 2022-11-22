@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { getinfo, getevent, logout} from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
-import Dropdown from 'react-dropdown'
 import Checkbox from "./Checkbox";
 import { DateSelector } from "./DateSelector";
 
@@ -119,12 +118,18 @@ class Dashboard extends React.Component<any,any>{
                     <div className="sidenav">
                         <h1 >Filters</h1> 
                         {/* <div>clear</div> //clear filter*/}
+                        <label>Choose Date : </label>
+                        <DateSelector/>
                         <Checkbox
                             handleChange={this.changeCheckedState}
                             isChecked={this.state.isFilterChecked}
-                            label="Date"
+                            label="Before Date : "
                         />
-                        <DateSelector/>
+                        <Checkbox
+                            handleChange={this.changeCheckedState}
+                            isChecked={this.state.isFilterChecked}
+                            label="After Date : "
+                        />
 
                     </div>
                     <div className='body'>
