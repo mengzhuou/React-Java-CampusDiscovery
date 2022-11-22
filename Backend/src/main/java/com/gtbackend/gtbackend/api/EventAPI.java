@@ -68,7 +68,7 @@ public class EventAPI {
             if(mi != null && distanceTo(lat, lng, e.getLatitude(), e.getLongitude()) > mi){
                 continue;
             }
-            if(!host.equals("none") && !e.getEmail().equals(host)){
+            if(!host.equals("none") && !e.getEmail().contains(host)){
                 continue;
             }
             ret.add(e);
