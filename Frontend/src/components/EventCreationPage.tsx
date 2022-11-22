@@ -22,7 +22,7 @@ function EventCreationPage() {
         textContent += values.time + "\nEvent location: " + values.location + 
                       "\nEvent description: " + values.description + "\nEvent Capacity: " + values.capacity + "\nEvent Invite-Only: " + values.inviteonly;
         if(window.confirm(textContent)){
-          addevent(values.title, values.time, values.location, "-1", "-1", values.description, (values.inviteonly?"true":"false"), values.capacity).then(()=>{
+          addevent(values.title, values.description, values.location, "-1", "-1", values.time, (values.inviteonly?"true":"false"), values.capacity).then(()=>{
             alert("Confirmation: your changes have been saved")
             navigate("/dashboard")
           }).catch(()=>console.log("failed"))
