@@ -3,6 +3,8 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import "./EventCreationPage.css";
 import { addevent } from '../helpers/connector';
+import { DateSelector } from "./DateSelector";
+import { useState } from 'react';
 
 
   
@@ -31,6 +33,8 @@ function EventCreationPage() {
     })
    
 
+    const [date, setDate] = useState("");
+
 
     return (
         <div className = "App">
@@ -39,28 +43,29 @@ function EventCreationPage() {
           </header>
           <form className="eventCreationForm" onSubmit={formik.handleSubmit}>
               <div className="text">
-              <label htmlFor='title'>Event title : </label>
-              <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
+                <label htmlFor='title'>Event title : </label>
+                <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
               </div>
 
               <div className="text">
-              <label htmlFor ='date'>Event date : </label>
-              <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
+                <label htmlFor ='date'>Event date : </label>
+                <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
+                <DateSelector/>
               </div>
 
               <div className="text">
-              <label htmlFor ='location'>Event location : </label>
-              <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
+                <label htmlFor ='location'>Event location : </label>
+                <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
               </div>
 
               <div className="text">
-              <label htmlFor ='description'>Event description : </label>
-              <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
+                <label htmlFor ='description'>Event description : </label>
+                <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
               </div>
 
               <div className="text">
-              <label htmlFor ='capacity'>Event Capacity : </label>
-              <input size={48} onChange={formik.handleChange} value = {formik.values.capacity} id='capacity' name='capacity'></input>
+                <label htmlFor ='capacity'>Event Capacity : </label>
+                <input size={48} onChange={formik.handleChange} value = {formik.values.capacity} id='capacity' name='capacity'></input>
               </div>
              
               <div className = "text">
