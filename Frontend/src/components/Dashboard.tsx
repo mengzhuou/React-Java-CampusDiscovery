@@ -112,7 +112,7 @@ class Dashboard extends React.Component<any,any>{
                 />);
         }
 
-        const { startDate } = this.state;
+        // const { startDate } = this.state;
 
         return (
             <div className="html">
@@ -130,10 +130,10 @@ class Dashboard extends React.Component<any,any>{
                         <h1 >Filters</h1> 
                         {/* <div>clear</div> //clear filter*/}
                         <div>
-                            <label>Choose Date : </label>
+                            <label>Choose Date : {JSON.stringify(this.state.startDate)}</label>
                             <DatePicker
                                 dateFormat="dd/MM/yyyy"
-                                selected={startDate} 
+                                selected={this.state.startDate} 
                                 onChange={this.dateChange}
                             />
                             <Checkbox
