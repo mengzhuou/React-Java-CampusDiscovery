@@ -21,7 +21,7 @@ class Dashboard extends React.Component<any,any>{
 
     constructor(props:any){
         super(props);
-        this.state = {startDate: new Date(),currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
+        this.state = {hostEmailFilter: "none",distance: "none", startDate: new Date(),currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
@@ -29,6 +29,9 @@ class Dashboard extends React.Component<any,any>{
         this.passEventId = this.passEventId.bind(this);
         this.changeCheckedState = this.changeCheckedState.bind(this);
         this.dateChange = this.dateChange.bind(this);
+        this.setDistance = this.setDistance.bind(this);
+        this.getHostFromFilter = this.getHostFromFilter.bind(this);
+
     }
 
     display() {
@@ -57,7 +60,7 @@ class Dashboard extends React.Component<any,any>{
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
-            getevent(this.state.currentPage,"none","none","-1","-1","none","none").then((content)=>{
+            getevent(this.state.currentPage,"none","none","-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
@@ -88,11 +91,23 @@ class Dashboard extends React.Component<any,any>{
         console.log("check if checked : " + this.state.isFilterChecked)        
     }
 
-    private dateChange(date: Date){
+    dateChange(date: Date){
         console.log('created by Nina!', date);
         this.setState({
             startDate: date
         });
+    }
+
+    setDistance(e: React.FormEvent<HTMLInputElement>){
+        this.setState({
+            distance: e.currentTarget.value
+        })
+    }
+
+    getHostFromFilter(e: React.FormEvent<HTMLInputElement>){
+        this.setState({
+            hostEmailFilter: e.currentTarget.value
+        })
     }
 
     render(){
@@ -148,17 +163,22 @@ class Dashboard extends React.Component<any,any>{
                             />
                         </div>
                         <div>
-                            <label>Distance : </label>
+                            <label>Distance : {this.state.distance}</label>
                             <input
-                                className="inputStyle"
+                                onChange={this.setDistance}
+                                value={this.state.distance}
+                                className="mileInputStyle"
                             />
                             <label>miles from your current location</label>
                         </div>
 
                         <div>
-                            <label>Host (email) : </label>
+                            <label>Host : {this.state.hostEmailFilter}</label>
                             <input
-                                className="inputStyle"
+                                onChange={this.getHostFromFilter}
+                                placeholder="Email"
+                                value={this.state.hostEmailFilter}
+                                className="hostInputStyle"
                             />
                         </div>
 
