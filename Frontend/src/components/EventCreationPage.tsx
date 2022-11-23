@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import "./EventCreationPage.css";
 import { addevent } from '../helpers/connector';
 import { useState } from 'react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 
 
   
@@ -33,8 +36,8 @@ function EventCreationPage() {
    
 
     const [date, setDate] = useState("");
-
-
+    const result = JSON.stringify(date).substring(1,11);
+    console.log(result);
     return (
         <div className = "App">
             <header className="App-header">
@@ -47,8 +50,15 @@ function EventCreationPage() {
               </div>
 
               <div className="text">
-                <label htmlFor ='date'>Event date : </label>
+                <label htmlFor ='date'>Event date : {JSON.stringify(result)}</label>
                 <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
+                <DatePicker
+                  dateFormat="yyyy-MM-dd"
+                  selected={date}
+                  onChange={setDate}
+
+                />
+
               </div>
 
               <div className="text">
