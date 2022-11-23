@@ -3,7 +3,6 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import "./EventCreationPage.css";
 import { addevent } from '../helpers/connector';
-import { DateSelector } from "./DateSelector";
 import { useState } from 'react';
 
 
@@ -50,7 +49,6 @@ function EventCreationPage() {
               <div className="text">
                 <label htmlFor ='date'>Event date : </label>
                 <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
-                <DateSelector/>
               </div>
 
               <div className="text">

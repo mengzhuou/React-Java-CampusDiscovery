@@ -5,7 +5,8 @@ import { getinfo, getevent, logout} from '../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
 import Checkbox from "./Checkbox";
-import { DateSelector } from "./DateSelector";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 
@@ -20,13 +21,14 @@ class Dashboard extends React.Component<any,any>{
 
     constructor(props:any){
         super(props);
-        this.state = {currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
+        this.state = {startDate: new Date(),currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
         this.createEvent = this.createEvent.bind(this);
         this.passEventId = this.passEventId.bind(this);
         this.changeCheckedState = this.changeCheckedState.bind(this);
+        this.dateChange = this.dateChange.bind(this);
     }
 
     display() {
@@ -86,6 +88,13 @@ class Dashboard extends React.Component<any,any>{
         console.log("check if checked : " + this.state.isFilterChecked)        
     }
 
+    private dateChange(date: Date){
+        console.log('created by Nina!', date);
+        this.setState({
+            startDate: date
+        });
+    }
+
     render(){
         let dasharr: any[] = [];
 
@@ -102,6 +111,8 @@ class Dashboard extends React.Component<any,any>{
                 setEventID={this.passEventId}
                 />);
         }
+
+        const { startDate } = this.state;
 
         return (
             <div className="html">
@@ -120,7 +131,11 @@ class Dashboard extends React.Component<any,any>{
                         {/* <div>clear</div> //clear filter*/}
                         <div>
                             <label>Choose Date : </label>
-                            <DateSelector/>
+                            <DatePicker
+                                dateFormat="dd/MM/yyyy"
+                                selected={startDate} 
+                                onChange={this.dateChange}
+                            />
                             <Checkbox
                                 handleChange={this.changeCheckedState}
                                 isChecked={this.state.isFilterChecked}
