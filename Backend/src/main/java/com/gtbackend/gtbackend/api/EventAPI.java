@@ -50,7 +50,7 @@ public class EventAPI {
         double lng = Double.parseDouble(longitude);
         double lat = Double.parseDouble(latitude);
         Double mi = null;
-        if(!miles.equals("none")){
+        if(!miles.equals("")){
             mi = Double.valueOf(miles);
         }
         if(page_num < 1){
@@ -68,7 +68,7 @@ public class EventAPI {
             if(mi != null && distanceTo(lat, lng, e.getLatitude(), e.getLongitude()) > mi){
                 continue;
             }
-            if(!host.equals("none") && !e.getEmail().contains(host)){
+            if(!host.equals("") && !e.getEmail().contains(host)){
                 continue;
             }
             ret.add(e);

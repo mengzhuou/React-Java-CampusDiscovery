@@ -22,8 +22,8 @@ class Dashboard extends React.Component<any,any>{
     constructor(props:any){
         super(props);
         this.state = {isFilterBeforeChecked:false, isFilterAfterChecked:false,
-             beforeDate: new Date(), afterDate: new Date(), hostEmailFilter: "none",
-             distance: "none", currentPage: 1, lastpage: 6, arr: [], 
+             beforeDate: new Date(), afterDate: new Date(), hostEmailFilter: "",
+             distance: "", currentPage: 1, lastpage: 6, arr: [], 
              xpos:window.scrollX, ypos:window.scrollY, updateForced:false, 
              ForceUpdateNow:false};
         this.setCurrentPage = this.setCurrentPage.bind(this);
@@ -71,9 +71,11 @@ class Dashboard extends React.Component<any,any>{
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
             let after = JSON.stringify(this.state.afterDate).substring(1,11)+"T00:00:00";
-            after = this.state.checkAfterDateState ? after: "none";
+            after = this.state.isFilterAfterChecked ? after: "none";
             let before = JSON.stringify(this.state.beforeDate).substring(1,11)+"T00:00:00";
-            before = this.state.checkBeforeDateState ? before: "none";
+            before = this.state.isFilterBeforeChecked ? before: "none";
+            console.log(before);
+            console.log(after);
             getevent(this.state.currentPage,after,before,"-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
                 let key;
                 let array = [];
@@ -196,7 +198,7 @@ class Dashboard extends React.Component<any,any>{
                             />
                         </div>
                         <div>
-                            <label>Distance : {this.state.distance}</label>
+                            <label>Distance : </label>
                             <input
                                 onChange={this.setDistance}
                                 value={this.state.distance}
@@ -211,7 +213,6 @@ class Dashboard extends React.Component<any,any>{
                                 onChange={this.getHostFromFilter}
                                 placeholder="Email"
                                 value={this.state.hostEmailFilter}
-                                
                             />
                         </div>
 
