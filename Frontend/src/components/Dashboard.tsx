@@ -179,7 +179,7 @@ class Dashboard extends React.Component<any,any>{
                             />
                         </div>
 
-                        <button className="filterButton">Confirm Filter</button>
+                        <button className="filterButton" onClick={this.forceup}>Confirm Filter</button>
                     </div>
                     <div className='body'>
                         {/* <Dropdown className="dropDownEvent"

@@ -43,7 +43,7 @@ function EventCreationPage() {
     const dateResult = JSON.stringify(date).substring(1,11);
 
     const [ timeValue, setTimeValue ] = useState(moment());
-    const timeResult = JSON.stringify(timeValue).substring(11,20);
+    const timeResult = JSON.stringify(timeValue.local()).substring(11,20);
     return (
         <div className = "App">
             <header className="App-header">
