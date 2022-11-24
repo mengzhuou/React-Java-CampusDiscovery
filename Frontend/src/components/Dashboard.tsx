@@ -40,6 +40,10 @@ class Dashboard extends React.Component<any,any>{
 
     }
 
+    userEventScreen = () => {
+        this.props.navigate("/")
+    }
+
     display() {
         getinfo().then((content)=>{
             alert(content.data);
@@ -152,6 +156,8 @@ class Dashboard extends React.Component<any,any>{
                     <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
                     <button className="topnavButton" onClick={this.display}>Display</button>
                     <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
+                    <button className="topnavButton" onClick={this.userEventScreen}>Your Events</button>
+
                 </div>
                 <div className="AppDashboard"> 
                     <header>
