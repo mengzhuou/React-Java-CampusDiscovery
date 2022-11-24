@@ -21,17 +21,27 @@ class Dashboard extends React.Component<any,any>{
 
     constructor(props:any){
         super(props);
-        this.state = {hostEmailFilter: "none",distance: "none", startDate: new Date(),currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
+        this.state = {isFilterBeforeChecked:false, isFilterAfterChecked:false,
+             beforeDate: new Date(), afterDate: new Date(), hostEmailFilter: "",
+             distance: "", currentPage: 1, lastpage: 6, arr: [], 
+             xpos:window.scrollX, ypos:window.scrollY, updateForced:false, 
+             ForceUpdateNow:false};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
         this.createEvent = this.createEvent.bind(this);
         this.passEventId = this.passEventId.bind(this);
-        this.changeCheckedState = this.changeCheckedState.bind(this);
-        this.dateChange = this.dateChange.bind(this);
+        this.checkBeforeDateState = this.checkBeforeDateState.bind(this);
+        this.checkAfterDateState = this.checkAfterDateState.bind(this);
+        this.dateBeforeChange = this.dateBeforeChange.bind(this);
+        this.dateAfterChange = this.dateAfterChange.bind(this);
         this.setDistance = this.setDistance.bind(this);
         this.getHostFromFilter = this.getHostFromFilter.bind(this);
 
+    }
+
+    userEventScreen = () => {
+        this.props.navigate("/")
     }
 
     display() {
@@ -60,7 +70,13 @@ class Dashboard extends React.Component<any,any>{
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
-            getevent(this.state.currentPage,"none","none","-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
+            let after = JSON.stringify(this.state.afterDate).substring(1,11)+"T00:00:00";
+            after = this.state.isFilterAfterChecked ? after: "none";
+            let before = JSON.stringify(this.state.beforeDate).substring(1,11)+"T00:00:00";
+            before = this.state.isFilterBeforeChecked ? before: "none";
+            console.log(before);
+            console.log(after);
+            getevent(this.state.currentPage,after,before,"-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
@@ -86,15 +102,17 @@ class Dashboard extends React.Component<any,any>{
         this.props.navigate("/EventDescriptionPage");
     }
 
-    changeCheckedState = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({isFilterChecked: e.target.checked});
-        console.log("check if checked : " + this.state.isFilterChecked)        
+    dateBeforeChange(date: Date){
+        console.log('date before!', date);
+        this.setState({
+            beforeDate: date
+        });
     }
 
-    dateChange(date: Date){
-        console.log('created by Nina!', date);
+    dateAfterChange(date: Date){
+        console.log('date after: ', date);
         this.setState({
-            startDate: date
+            afterDate: date
         });
     }
 
@@ -108,6 +126,15 @@ class Dashboard extends React.Component<any,any>{
         this.setState({
             hostEmailFilter: e.currentTarget.value
         })
+    }
+
+    checkBeforeDateState = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        this.setState({isFilterBeforeChecked: e.target.checked});
+    }
+
+    checkAfterDateState = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({isFilterAfterChecked: e.target.checked});
     }
 
     render(){
@@ -135,6 +162,8 @@ class Dashboard extends React.Component<any,any>{
                     <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
                     <button className="topnavButton" onClick={this.display}>Display</button>
                     <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
+                    <button className="topnavButton" onClick={this.userEventScreen}>Your Events</button>
+
                 </div>
                 <div className="AppDashboard"> 
                     <header>
@@ -145,22 +174,31 @@ class Dashboard extends React.Component<any,any>{
                         <h1 >Filters</h1> 
                         {/* <div>clear</div> //clear filter*/}
                         <div>
-                            <label>Before Date : {JSON.stringify(this.state.startDate)}</label>
-                            <DatePicker
-                                dateFormat="dd/MM/yyyy"
-                                selected={this.state.startDate} 
-                                onChange={this.dateChange}
-                            />
-                            <label>After Date : </label>
+                            <Checkbox
+                                isChecked= {this.state.isFilterBeforeChecked}
+                                handleChange={this.checkBeforeDateState}
+                                label={"Before Date : "}
 
+                            />
                             <DatePicker
-                                dateFormat="dd/MM/yyyy"
-                                selected={this.state.startDate} 
-                                onChange={this.dateChange}
+                                dateFormat="yyyy-MM-dd"
+                                selected={this.state.beforeDate} 
+                                onChange={this.dateBeforeChange}
+                            />
+                            <Checkbox
+                                isChecked= {this.state.isFilterAfterChecked}
+                                handleChange={this.checkAfterDateState}
+                                label={"After Date : "}
+
+                            />
+                            <DatePicker
+                                dateFormat="yyyy-MM-dd"
+                                selected={this.state.afterDate} 
+                                onChange={this.dateAfterChange}
                             />
                         </div>
                         <div>
-                            <label>Distance : {this.state.distance}</label>
+                            <label>Distance : </label>
                             <input
                                 onChange={this.setDistance}
                                 value={this.state.distance}
@@ -169,13 +207,12 @@ class Dashboard extends React.Component<any,any>{
                             <label>miles from your current location</label>
                         </div>
 
-                        <div>
-                            <label>Host : {this.state.hostEmailFilter}</label>
+                        <div className="hostInputStyle">
+                            <label>Host : </label>
                             <input
                                 onChange={this.getHostFromFilter}
                                 placeholder="Email"
                                 value={this.state.hostEmailFilter}
-                                className="hostInputStyle"
                             />
                         </div>
 
