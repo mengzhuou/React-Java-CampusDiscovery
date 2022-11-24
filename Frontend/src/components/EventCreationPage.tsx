@@ -6,6 +6,10 @@ import { addevent } from '../helpers/connector';
 import { useState } from 'react';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from 'rc-time-picker';
+import 'rc-time-picker/assets/index.css'
+import moment from 'moment';
+import { getValue } from '@testing-library/user-event/dist/utils';
 
 
 
@@ -36,8 +40,10 @@ function EventCreationPage() {
    
 
     const [date, setDate] = useState("");
-    const result = JSON.stringify(date).substring(1,11);
-    console.log(result);
+    const dateResult = JSON.stringify(date).substring(1,11);
+
+    const [ timeValue, setTimeValue ] = useState(moment());
+    const timeResult = JSON.stringify(timeValue).substring(11,20);
     return (
         <div className = "App">
             <header className="App-header">
@@ -50,14 +56,20 @@ function EventCreationPage() {
               </div>
 
               <div className="text">
-                <label htmlFor ='date'>Event date : {JSON.stringify(result)}</label>
+                <label htmlFor ='date'>Event date : {JSON.stringify(dateResult)}</label>
                 <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
                 <DatePicker
                   dateFormat="yyyy-MM-dd"
                   selected={date}
                   onChange={setDate}
-
                 />
+                <TimePicker
+                  format='HH:mm'
+                  value={timeValue}
+                  onChange={setTimeValue}
+                  placeholder="00:00:00"
+                />
+                <label>time is {JSON.stringify(timeResult)}</label>
 
               </div>
 
