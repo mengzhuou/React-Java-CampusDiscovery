@@ -70,7 +70,11 @@ class Dashboard extends React.Component<any,any>{
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
-            getevent(this.state.currentPage,JSON.stringify(this.state.afterDate).substring(1,11)+"T00:00:00",JSON.stringify(this.state.beforeDate).substring(1,11)+"T00:00:00","-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
+            let after = JSON.stringify(this.state.afterDate).substring(1,11)+"T00:00:00";
+            after = this.state.checkAfterDateState ? after: "none";
+            let before = JSON.stringify(this.state.beforeDate).substring(1,11)+"T00:00:00";
+            before = this.state.checkBeforeDateState ? before: "none";
+            getevent(this.state.currentPage,after,before,"-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
