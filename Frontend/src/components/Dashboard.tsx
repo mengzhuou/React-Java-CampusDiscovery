@@ -21,14 +21,15 @@ class Dashboard extends React.Component<any,any>{
 
     constructor(props:any){
         super(props);
-        this.state = {hostEmailFilter: "none",distance: "none", startDate: new Date(),currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
+        this.state = {beforeDate: new Date(),afterDate: new Date(),hostEmailFilter: "none",distance: "none",currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
         this.createEvent = this.createEvent.bind(this);
         this.passEventId = this.passEventId.bind(this);
         this.changeCheckedState = this.changeCheckedState.bind(this);
-        this.dateChange = this.dateChange.bind(this);
+        this.dateBeforeChange = this.dateBeforeChange.bind(this);
+        this.dateAfterChange = this.dateAfterChange.bind(this);
         this.setDistance = this.setDistance.bind(this);
         this.getHostFromFilter = this.getHostFromFilter.bind(this);
 
@@ -60,7 +61,7 @@ class Dashboard extends React.Component<any,any>{
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
-            getevent(this.state.currentPage,"none","none","-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
+            getevent(this.state.currentPage,this.state.afterDate,this.state.beforeDate,"-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
@@ -91,10 +92,17 @@ class Dashboard extends React.Component<any,any>{
         console.log("check if checked : " + this.state.isFilterChecked)        
     }
 
-    dateChange(date: Date){
-        console.log('created by Nina!', date);
+    dateBeforeChange(date: Date){
+        console.log('date before!', date);
         this.setState({
-            startDate: date
+            beforeDate: date
+        });
+    }
+
+    dateAfterChange(date: Date){
+        console.log('date after: ', date);
+        this.setState({
+            afterDate: date
         });
     }
 
@@ -145,18 +153,18 @@ class Dashboard extends React.Component<any,any>{
                         <h1 >Filters</h1> 
                         {/* <div>clear</div> //clear filter*/}
                         <div>
-                            <label>Before Date : {JSON.stringify(this.state.startDate)}</label>
+                            <label>Before Date : {JSON.stringify(this.state.beforeDate)}</label>
                             <DatePicker
-                                dateFormat="dd/MM/yyyy"
-                                selected={this.state.startDate} 
-                                onChange={this.dateChange}
+                                dateFormat="yyyy-MM-dd"
+                                selected={this.state.beforeDate} 
+                                onChange={this.dateBeforeChange}
                             />
                             <label>After Date : </label>
 
                             <DatePicker
-                                dateFormat="dd/MM/yyyy"
-                                selected={this.state.startDate} 
-                                onChange={this.dateChange}
+                                dateFormat="yyyy-MM-dd"
+                                selected={this.state.afterDate} 
+                                onChange={this.dateAfterChange}
                             />
                         </div>
                         <div>
@@ -169,13 +177,13 @@ class Dashboard extends React.Component<any,any>{
                             <label>miles from your current location</label>
                         </div>
 
-                        <div>
-                            <label>Host : {this.state.hostEmailFilter}</label>
+                        <div className="hostInputStyle">
+                            <label>Host : </label>
                             <input
                                 onChange={this.getHostFromFilter}
                                 placeholder="Email"
                                 value={this.state.hostEmailFilter}
-                                className="hostInputStyle"
+                                
                             />
                         </div>
 
