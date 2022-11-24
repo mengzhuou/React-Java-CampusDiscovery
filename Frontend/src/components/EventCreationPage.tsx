@@ -3,6 +3,14 @@ import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import "./EventCreationPage.css";
 import { addevent } from '../helpers/connector';
+import { useState } from 'react';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from 'rc-time-picker';
+import 'rc-time-picker/assets/index.css'
+import moment from 'moment';
+import { getValue } from '@testing-library/user-event/dist/utils';
+
 
 
   
@@ -31,7 +39,11 @@ function EventCreationPage() {
     })
    
 
+    const [date, setDate] = useState("");
+    const dateResult = JSON.stringify(date).substring(1,11);
 
+    const [ timeValue, setTimeValue ] = useState(moment());
+    const timeResult = JSON.stringify(timeValue.local()).substring(11,20);
     return (
         <div className = "App">
             <header className="App-header">
@@ -39,28 +51,41 @@ function EventCreationPage() {
           </header>
           <form className="eventCreationForm" onSubmit={formik.handleSubmit}>
               <div className="text">
-              <label htmlFor='title'>Event title : </label>
-              <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
+                <label htmlFor='title'>Event title : </label>
+                <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
               </div>
 
               <div className="text">
-              <label htmlFor ='date'>Event date : </label>
-              <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
+                <label htmlFor ='date'>Event date : {JSON.stringify(dateResult)}</label>
+                <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
+                <DatePicker
+                  dateFormat="yyyy-MM-dd"
+                  selected={date}
+                  onChange={setDate}
+                />
+                <TimePicker
+                  format='HH:mm'
+                  value={timeValue}
+                  onChange={setTimeValue}
+                  placeholder="00:00:00"
+                />
+                <label>time is {JSON.stringify(timeResult)}</label>
+
               </div>
 
               <div className="text">
-              <label htmlFor ='location'>Event location : </label>
-              <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
+                <label htmlFor ='location'>Event location : </label>
+                <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
               </div>
 
               <div className="text">
-              <label htmlFor ='description'>Event description : </label>
-              <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
+                <label htmlFor ='description'>Event description : </label>
+                <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
               </div>
 
               <div className="text">
-              <label htmlFor ='capacity'>Event Capacity : </label>
-              <input size={48} onChange={formik.handleChange} value = {formik.values.capacity} id='capacity' name='capacity'></input>
+                <label htmlFor ='capacity'>Event Capacity : </label>
+                <input size={48} onChange={formik.handleChange} value = {formik.values.capacity} id='capacity' name='capacity'></input>
               </div>
              
               <div className = "text">
