@@ -145,21 +145,18 @@ class Dashboard extends React.Component<any,any>{
                         <h1 >Filters</h1> 
                         {/* <div>clear</div> //clear filter*/}
                         <div>
-                            <label>Choose Date : {JSON.stringify(this.state.startDate)}</label>
+                            <label>Before Date : {JSON.stringify(this.state.startDate)}</label>
                             <DatePicker
                                 dateFormat="dd/MM/yyyy"
                                 selected={this.state.startDate} 
                                 onChange={this.dateChange}
                             />
-                            <Checkbox
-                                handleChange={this.changeCheckedState}
-                                isChecked={this.state.isFilterChecked}
-                                label="Before Date : "
-                            />
-                            <Checkbox
-                                handleChange={this.changeCheckedState}
-                                isChecked={this.state.isFilterChecked}
-                                label="After Date : "
+                            <label>After Date : </label>
+
+                            <DatePicker
+                                dateFormat="dd/MM/yyyy"
+                                selected={this.state.startDate} 
+                                onChange={this.dateChange}
                             />
                         </div>
                         <div>
