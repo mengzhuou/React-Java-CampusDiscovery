@@ -27,10 +27,10 @@ function EventCreationPage() {
     },
     onSubmit: values=>{
         var textContent:string = "Event title: " + values.title + "\nEvent date: ";
-        textContent += values.time + "\nEvent location: " + values.location + 
+        textContent += dateResult + timeResult + "\nEvent location: " + values.location + 
                       "\nEvent description: " + values.description + "\nEvent Capacity: " + values.capacity + "\nEvent Invite-Only: " + values.inviteonly;
         if(window.confirm(textContent)){
-          addevent(values.title, values.description, values.location, "-1", "-1", values.time, (values.inviteonly?"true":"false"), values.capacity).then(()=>{
+          addevent(values.title, values.description, values.location, "-1", "-1", dateResult + timeResult, (values.inviteonly?"true":"false"), values.capacity).then(()=>{
             alert("Confirmation: your changes have been saved")
             navigate("/dashboard")
           }).catch(()=>console.log("failed"))
@@ -45,6 +45,7 @@ function EventCreationPage() {
     const TimeZone = (new Date()).getTimezoneOffset;
     const [ timeValue, setTimeValue ] = useState(moment().utcOffset(TimeZone.toString()));
     const timeResult = JSON.stringify(timeValue).substring(11,20);
+
     return (
         <div className = "App">
             <header className="App-header">
@@ -56,9 +57,8 @@ function EventCreationPage() {
                 <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
               </div>
 
-              <div className="text">
-                <label htmlFor ='date'>Event date : {JSON.stringify(dateResult)}</label>
-                <input size={55} onChange={formik.handleChange} value = {formik.values.time} id='time' name='time'></input>
+              <div className="text" >
+                <label htmlFor ='date'>Event date : {dateResult + timeResult}</label>
                 <DatePicker
                   dateFormat="yyyy-MM-dd"
                   selected={date}
@@ -70,7 +70,6 @@ function EventCreationPage() {
                   onChange={setTimeValue}
                   placeholder="00:00:00"
                 />
-                <label>time is {JSON.stringify(timeResult)}</label>
 
               </div>
 

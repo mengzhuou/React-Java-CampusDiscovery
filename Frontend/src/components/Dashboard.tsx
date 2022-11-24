@@ -21,13 +21,18 @@ class Dashboard extends React.Component<any,any>{
 
     constructor(props:any){
         super(props);
-        this.state = {beforeDate: new Date(),afterDate: new Date(),hostEmailFilter: "none",distance: "none",currentPage: 1, lastpage: 6, arr: [], xpos:window.scrollX, ypos:window.scrollY, updateForced:false, ForceUpdateNow:false, isFilterChecked: false};
+        this.state = {isFilterBeforeChecked:false, isFilterAfterChecked:false,
+             beforeDate: new Date(), afterDate: new Date(), hostEmailFilter: "none",
+             distance: "none", currentPage: 1, lastpage: 6, arr: [], 
+             xpos:window.scrollX, ypos:window.scrollY, updateForced:false, 
+             ForceUpdateNow:false};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
         this.createEvent = this.createEvent.bind(this);
         this.passEventId = this.passEventId.bind(this);
-        this.changeCheckedState = this.changeCheckedState.bind(this);
+        this.checkBeforeDateState = this.checkBeforeDateState.bind(this);
+        this.checkAfterDateState = this.checkAfterDateState.bind(this);
         this.dateBeforeChange = this.dateBeforeChange.bind(this);
         this.dateAfterChange = this.dateAfterChange.bind(this);
         this.setDistance = this.setDistance.bind(this);
@@ -61,7 +66,7 @@ class Dashboard extends React.Component<any,any>{
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
-            getevent(this.state.currentPage,this.state.afterDate,this.state.beforeDate,"-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
+            getevent(this.state.currentPage,JSON.stringify(this.state.afterDate).substring(1,11)+"T00:00:00",JSON.stringify(this.state.beforeDate).substring(1,11)+"T00:00:00","-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
@@ -85,11 +90,6 @@ class Dashboard extends React.Component<any,any>{
     passEventId(eventId: number): void{
         this.props.setEventID(eventId);
         this.props.navigate("/EventDescriptionPage");
-    }
-
-    changeCheckedState = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.setState({isFilterChecked: e.target.checked});
-        console.log("check if checked : " + this.state.isFilterChecked)        
     }
 
     dateBeforeChange(date: Date){
@@ -116,6 +116,15 @@ class Dashboard extends React.Component<any,any>{
         this.setState({
             hostEmailFilter: e.currentTarget.value
         })
+    }
+
+    checkBeforeDateState = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+        this.setState({isFilterBeforeChecked: e.target.checked});
+    }
+
+    checkAfterDateState = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.setState({isFilterAfterChecked: e.target.checked});
     }
 
     render(){
@@ -153,14 +162,23 @@ class Dashboard extends React.Component<any,any>{
                         <h1 >Filters</h1> 
                         {/* <div>clear</div> //clear filter*/}
                         <div>
-                            <label>Before Date : {JSON.stringify(this.state.beforeDate)}</label>
+                            <Checkbox
+                                isChecked= {this.state.isFilterBeforeChecked}
+                                handleChange={this.checkBeforeDateState}
+                                label={"Before Date : "}
+
+                            />
                             <DatePicker
                                 dateFormat="yyyy-MM-dd"
                                 selected={this.state.beforeDate} 
                                 onChange={this.dateBeforeChange}
                             />
-                            <label>After Date : </label>
+                            <Checkbox
+                                isChecked= {this.state.isFilterAfterChecked}
+                                handleChange={this.checkAfterDateState}
+                                label={"After Date : "}
 
+                            />
                             <DatePicker
                                 dateFormat="yyyy-MM-dd"
                                 selected={this.state.afterDate} 
