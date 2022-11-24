@@ -42,8 +42,9 @@ function EventCreationPage() {
     const [date, setDate] = useState("");
     const dateResult = JSON.stringify(date).substring(1,11);
 
-    const [ timeValue, setTimeValue ] = useState(moment());
-    const timeResult = JSON.stringify(timeValue.local()).substring(11,20);
+    const TimeZone = (new Date()).getTimezoneOffset;
+    const [ timeValue, setTimeValue ] = useState(moment().utcOffset(TimeZone.toString()));
+    const timeResult = JSON.stringify(timeValue).substring(11,20);
     return (
         <div className = "App">
             <header className="App-header">
