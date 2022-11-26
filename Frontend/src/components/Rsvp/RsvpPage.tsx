@@ -29,7 +29,7 @@ function RsvpPage(props:any){
         updateRsvp(props.eventNum(), value).then(()=>{
           alert("Successful Update!");
           navigate("/EventDescriptionPage")
-        }).catch(()=>console.log("Failed to Update RSVP"));
+        }).catch(()=>alert("Failed to Update RSVP"));
       }
     };
 

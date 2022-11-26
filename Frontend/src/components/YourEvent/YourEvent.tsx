@@ -2,12 +2,11 @@ import "./YourEvent.css";
 import { withRouter } from "../withRouter";
 import React from 'react';
 import { getPersonalRsvp} from '../../helpers/connector';
-import DashboardBox from '../Dashboard/DashboardBox';
-import "react-datepicker/dist/react-datepicker.css";
+import YourEventBox from "./YourEventBox";
 
 
 
-class Dashboard extends React.Component<any,any>{
+class YourEvent extends React.Component<any,any>{
 
     constructor(props:any){
         super(props);
@@ -62,14 +61,14 @@ class Dashboard extends React.Component<any,any>{
         let dasharr: any[] = [];
 
         for(let i = 0; i < this.state.arr.length; i++){
-            dasharr.push(<DashboardBox 
+            dasharr.push(<YourEventBox 
                 title={this.state.arr[i][0]}
                 host={this.state.arr[i][1]}
                 date={this.state.arr[i][2]}
-                location={this.state.arr[i][3]}
-                description={this.state.arr[i][4]}
-                id ={this.state.arr[i][5]}
-                key ={this.state.arr[i][5]}
+                id ={this.state.arr[i][3]}
+                status={this.state.arr[i][4]}
+                conflict={this.state.arr[i][5]}
+                key ={this.state.arr[i][3]}
                 update={this.forceup}
                 setEventID={this.passEventId}
                 />);
@@ -84,10 +83,10 @@ class Dashboard extends React.Component<any,any>{
                 </div>
                 <div className="AppDashboard"> 
                     <header>
-                        <p className="header">Dashboard</p>
+                        <p className="header">Your Events</p>
 
                     </header>
-                    <div className='body'>
+                    <div className='RsvpBody'>
                         {dasharr}
                     </div>
                 </div>
@@ -97,4 +96,4 @@ class Dashboard extends React.Component<any,any>{
 }
 
 
-export default withRouter(Dashboard);
+export default withRouter(YourEvent);

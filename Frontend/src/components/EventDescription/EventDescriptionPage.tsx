@@ -107,6 +107,9 @@ class EventDescriptionPage extends Component<any,any> {
             <Link to = "/HostManagementPage">
               <button className="ManageButton">Host Management</button>
             </Link>
+            <Link to = "/yourEvent">
+              <button className="ManageButton">Your Events</button>
+            </Link>
         </div>
       </div>
     );
