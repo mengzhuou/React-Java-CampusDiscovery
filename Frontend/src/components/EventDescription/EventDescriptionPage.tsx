@@ -72,7 +72,8 @@ class EventDescriptionPage extends Component<any,any> {
     var getDateFromObject : number[] = [this.state.arr[2]];
     var formattedDateInString = String(getDateFromObject[0]);
     var dateArr = formattedDateInString.split(",");
-    var dateResult = dateArr[0] + "/" + dateArr[1] + "/" + dateArr[2] + " " + dateArr[3] + ":0" + dateArr[4];
+    var hourStr = String(dateArr[4]);
+    var dateResult = dateArr[0] + "/" + dateArr[1] + "/" + dateArr[2] + " " + dateArr[3] + (hourStr.length == 1 ? ":0" : ":") + dateArr[4];
 
     return (
       <div className = "App">
@@ -92,8 +93,6 @@ class EventDescriptionPage extends Component<any,any> {
 
           <div className="desName">
             <label htmlFor ='date'>Event date : {dateResult}</label>
-            {/* str: {formattedDateInString}
-            arr: {dateArr} */}
           </div>
 
           <div className="desName">
