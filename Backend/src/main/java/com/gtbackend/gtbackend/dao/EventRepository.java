@@ -16,17 +16,17 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query(value = "SELECT e FROM Event e ORDER BY e.id")
     List<Event> findEventByRange();
 
-    @Query(value = "SELECT e FROM Event e WHERE e.email = ?1 ORDER BY e.id")
+    @Query(value = "SELECT e FROM Event e WHERE e.user.email = ?1 ORDER BY e.id")
     List<Event> findEventByEmail(String email);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM Event e WHERE e.email = ?1")
+    @Query(value = "DELETE FROM Event e WHERE e.user.email = ?1")
     void deleteAllByEmail(String email);
 
     @Modifying
     @Transactional
-    @Query(value = "DELETE FROM Event e WHERE e.id = ?1 AND e.email = ?2")
+    @Query(value = "DELETE FROM Event e WHERE e.id = ?1 AND e.user.email = ?2")
     void deleteEvent(long id, String email);
 
     @Modifying
@@ -36,7 +36,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Event e SET e.title = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    @Query(value = "UPDATE Event e SET e.title = ?3 WHERE e.id = ?1 AND e.user.email = ?2")
     void updateTitle(long id, String email, String title);
     @Modifying
     @Transactional
@@ -45,12 +45,12 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Event e SET e.email = ?2 WHERE e.id = ?1")
+    @Query(value = "UPDATE Event e SET e.user.email = ?2 WHERE e.id = ?1")
     void updateEmailAdmin(long id, String email);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Event e SET e.description = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    @Query(value = "UPDATE Event e SET e.description = ?3 WHERE e.id = ?1 AND e.user.email = ?2")
     void updateDescription(long id, String email, String description);
     @Modifying
     @Transactional
@@ -59,7 +59,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Event e SET e.location = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    @Query(value = "UPDATE Event e SET e.location = ?3 WHERE e.id = ?1 AND e.user.email = ?2")
     void updateLocation(long id, String email, String location);
     @Modifying
     @Transactional
@@ -68,7 +68,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Event e SET e.time = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    @Query(value = "UPDATE Event e SET e.time = ?3 WHERE e.id = ?1 AND e.user.email = ?2")
     void updateTime(long id, String email, String time);
     @Modifying
     @Transactional
@@ -77,11 +77,11 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Event e SET e.capacity = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    @Query(value = "UPDATE Event e SET e.capacity = ?3 WHERE e.id = ?1 AND e.user.email = ?2")
     void updateCapacity(long id, String email, int capacity);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE Event e SET e.inviteOnly = ?3 WHERE e.id = ?1 AND e.email = ?2")
+    @Query(value = "UPDATE Event e SET e.inviteOnly = ?3 WHERE e.id = ?1 AND e.user.email = ?2")
     void updateInvite(long id, String email, boolean inviteOnly);
 }

@@ -9,7 +9,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css'
 import moment from 'moment';
-import { getValue } from '@testing-library/user-event/dist/utils';
 
 
 
@@ -43,7 +42,7 @@ function EventCreationPage() {
     const dateResult = JSON.stringify(date).substring(1,11);
 
     const TimeZone = (new Date()).getTimezoneOffset;
-    const [ timeValue, setTimeValue ] = useState(moment().utcOffset(TimeZone.toString()));
+    const [ timeValue, setTimeValue ] = useState(moment(0).utcOffset(TimeZone.toString()));
     const timeResult = JSON.stringify(timeValue).substring(11,20);
 
     return (
@@ -58,18 +57,26 @@ function EventCreationPage() {
               </div>
 
               <div className="text" >
-                <label htmlFor ='date'>Event date : {dateResult + timeResult}</label>
-                <DatePicker
-                  dateFormat="yyyy-MM-dd"
-                  selected={date}
-                  onChange={setDate}
-                />
-                <TimePicker
-                  format='HH:mm'
-                  value={timeValue}
-                  onChange={setTimeValue}
-                  placeholder="00:00:00"
-                />
+                <div className='datetime'>
+                  <label htmlFor='date'>Event date : </label>
+                </div>
+                <div className='datetime'>
+                  <DatePicker
+                    dateFormat="yyyy-MM-dd"
+                    selected={date}
+                    
+                    onChange={setDate}
+                  />
+                </div>
+                <div className='datetime'>
+                  <TimePicker
+                    format='HH:mm'
+                    value={timeValue}
+                    onChange={setTimeValue}
+                    placeholder="00:00"
+                    showSecond={false}
+                  />
+                </div>
 
               </div>
 

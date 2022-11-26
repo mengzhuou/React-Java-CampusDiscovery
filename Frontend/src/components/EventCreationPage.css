@@ -15,11 +15,18 @@
     font-weight: bolder;
   }
 
+  .datetime{
+    float:left;
+    padding-right: 1%;
+    padding-bottom: 1%;
+  }
+
 .text{
     margin-top: 25px;
     font-size: 15px;
     text-align: left;
     font-weight: bolder;
+    block-size: 5%;
 }
 .eventCreationForm{
     margin-bottom:10%;

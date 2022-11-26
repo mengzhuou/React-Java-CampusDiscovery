@@ -1,7 +1,9 @@
 package com.gtbackend.gtbackend.api;
 
 import com.gtbackend.gtbackend.dao.EventRepository;
+import com.gtbackend.gtbackend.dao.UserRepository;
 import com.gtbackend.gtbackend.model.Event;
+import com.gtbackend.gtbackend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -10,15 +12,19 @@ import java.security.Principal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/admin")
 public class AdminAPI {
-    private EventRepository eventRepository;
+    private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public AdminAPI(EventRepository eventRepository){
+    public AdminAPI(EventRepository eventRepository, UserRepository userRepository){
         this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/addEvent")
@@ -29,7 +35,11 @@ public class AdminAPI {
         LocalDateTime time = LocalDateTime.parse(body.get("time"));
         double longitude = Double.valueOf(body.get("longitude"));
         double latitude = Double .valueOf(body.get("latitude"));
-        Event event = new Event(body.get("title"), principal.getName(),
+        Optional<User> user = userRepository.findById(principal.getName());
+        if(user.isEmpty()){
+            throw new NoSuchElementException("User Not Found");
+        }
+        Event event = new Event(body.get("title"), user.get(),
                 body.get("description"), body.get("location"), longitude, latitude, time, invited, capacity);
         eventRepository.save(event);
         System.out.println(principal);

@@ -1,7 +1,9 @@
 package com.gtbackend.gtbackend.api;
 
 import com.gtbackend.gtbackend.dao.EventRepository;
+import com.gtbackend.gtbackend.dao.UserRepository;
 import com.gtbackend.gtbackend.model.Event;
+import com.gtbackend.gtbackend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,15 +16,18 @@ import java.util.*;
 @RequestMapping("/api/v1")
 public class EventAPI {
     private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public EventAPI(EventRepository eventRepository){
+    public EventAPI(EventRepository eventRepository, UserRepository userRepository){
         this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/addEvent")
     public void addEvent(Principal principal, @RequestBody Map<String, String> body) throws IllegalArgumentException, DateTimeParseException {
-        Event event = new Event(body.get("title"), principal.getName(),
+        Optional<User> user = userRepository.findById(principal.getName());
+        Event event = new Event(body.get("title"), user.get(),
                 body.get("description"), body.get("location"), Double.parseDouble(body.get("longitude")),
                 Double .parseDouble(body.get("latitude")), LocalDateTime.parse(body.get("time")),
                 Boolean.parseBoolean(body.get("invite")), Integer.parseInt(body.get("capacity")));

@@ -13,8 +13,8 @@ public class Event {
     @NotBlank
     private String title;
 
-    @NotBlank
-    private String email;
+    @ManyToOne
+    private User user;
     @Lob
     private String description;
     private String location;
@@ -29,10 +29,10 @@ public class Event {
 
     }
 
-    public Event(String title, String email, String description, String location, double longitude, double latitude,
+    public Event(String title, User user, String description, String location, double longitude, double latitude,
                  LocalDateTime time, boolean inviteOnly, int capacity) {
         this.title = title;
-        this.email = email;
+        this.user = user;
         this.description = description;
         this.location = location;
         this.longitude = longitude;
@@ -55,11 +55,7 @@ public class Event {
     }
 
     public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        return user.getUsername();
     }
 
     public String getDescription() {

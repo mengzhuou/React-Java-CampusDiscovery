@@ -11,19 +11,23 @@ public class Rsvp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long event_id;
+    @ManyToOne(cascade = {CascadeType.REMOVE})
+    private Event event;
 
     private RsvpStatus status;
     
     @NotBlank 
     private String email;
 
+    @Transient
+    private boolean conflict;
+
     public Rsvp(){
 
     }
 
-    public Rsvp(long event_id, RsvpStatus status, String email) {
-        this.event_id = event_id;
+    public Rsvp(Event event, RsvpStatus status, String email) {
+        this.event = event;
         this.status = status;
         this.email = email;
     }
@@ -36,12 +40,8 @@ public class Rsvp {
         this.id = id;
     }
 
-    public long getEvent_id() {
-        return event_id;
-    }
-
-    public void setEvent_id(long event_id) {
-        this.event_id = event_id;
+    public Event getEvent() {
+        return event;
     }
 
     public RsvpStatus getStatus() {
@@ -58,5 +58,13 @@ public class Rsvp {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public boolean isConflict() {
+        return conflict;
+    }
+
+    public void setConflict(boolean conflict) {
+        this.conflict = conflict;
     }
 }

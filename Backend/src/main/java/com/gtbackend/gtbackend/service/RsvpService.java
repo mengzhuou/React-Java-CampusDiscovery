@@ -24,10 +24,10 @@ public final class RsvpService {
     }
 
     //if multithreading willAttend may run into a race condition
-    public void updateWillAttend(long event_id, String email, Event event) throws AccessDeniedException{
+    public void updateWillAttend(Event event, String email) throws AccessDeniedException{
         int capacity = event.getCapacity();
-        int current = rsvpRepository.getCount(event_id, RsvpStatus.WILLATTEND);
-        List<Rsvp> tmp_rsvp = rsvpRepository.getRsvpEmail(event_id,email);
+        int current = rsvpRepository.getCount(event.getId(), RsvpStatus.WILLATTEND);
+        List<Rsvp> tmp_rsvp = rsvpRepository.getRsvpEmail(event.getId(), email);
         if(tmp_rsvp.isEmpty() && event.isInviteOnly()){
             throw new AccessDeniedException("Cannot Attend Invite-Only Event without Invite");
         }
@@ -35,10 +35,10 @@ public final class RsvpService {
             throw new IndexOutOfBoundsException();
         }
         if(tmp_rsvp.isEmpty()){
-            Rsvp rsvp = new Rsvp(event_id, RsvpStatus.WILLATTEND, email);
+            Rsvp rsvp = new Rsvp(event, RsvpStatus.WILLATTEND, email);
             rsvpRepository.save(rsvp);
         }else{
-            rsvpRepository.updateStatus(event_id, email, RsvpStatus.WILLATTEND);
+            rsvpRepository.updateStatus(event.getId(), email, RsvpStatus.WILLATTEND);
         }
     }
 

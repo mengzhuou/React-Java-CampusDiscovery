@@ -9,6 +9,8 @@ import com.gtbackend.gtbackend.service.RsvpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.*;
+
+import javax.swing.text.html.Option;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
@@ -55,7 +57,7 @@ public class RsvpAPI {
             return;
         }
         if(status.equals(RsvpStatus.WILLATTEND)){
-            rsvpService.updateWillAttend(event_id, principal.getName(), event);
+            rsvpService.updateWillAttend(event, principal.getName());
             return;
         }
         if(tmp_rsvp.isEmpty()){
@@ -67,8 +69,12 @@ public class RsvpAPI {
         rsvpRepository.updateStatus(event_id, principal.getName(), status);
     }
 
-    public void addRsvp(long event_id, String email, RsvpStatus status){
-        Rsvp rsvp = new Rsvp(event_id, status, email);
+    public void addRsvp(long event_id, String email, RsvpStatus status) throws NoSuchElementException{
+        Optional<Event> event = eventRepository.findById(event_id);
+        if(event.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        Rsvp rsvp = new Rsvp(event.get(), status, email);
         rsvpRepository.save(rsvp);
     }
 
@@ -84,6 +90,14 @@ public class RsvpAPI {
         }
         RsvpStatus rsvp_status = RsvpStatus.valueOf(status.toUpperCase());
         return rsvpRepository.getRsvpByStatus(event_id, rsvp_status);
+    }
+
+    @GetMapping("/getPersonalRsvp")
+    @ResponseBody
+    public List<Rsvp> getPersonalRsvp(Principal principal) throws NoSuchElementException, IllegalArgumentException{
+        List<Rsvp> ret = rsvpRepository.getAllRsvpEmail(principal.getName());
+
+        return ret;
     }
 
     @GetMapping("/getRsvpStatus")
@@ -134,7 +148,7 @@ public class RsvpAPI {
         }
         List<Rsvp> tmp_rsvp = rsvpRepository.getRsvpEmail(event_id, email);
         if(tmp_rsvp.isEmpty()){
-            Rsvp newRsvp = new Rsvp(event_id, RsvpStatus.INVITED, email);
+            Rsvp newRsvp = new Rsvp(event, RsvpStatus.INVITED, email);
             rsvpRepository.save((newRsvp));
             return;
         }
