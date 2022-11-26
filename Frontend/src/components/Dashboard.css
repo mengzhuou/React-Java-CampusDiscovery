@@ -15,7 +15,8 @@
 .body{
     margin-bottom: 30px;
     height: 100%;
-    position: relative;
+    position: sticky;
+    margin-left: 200px;
 }
 
 .header{
@@ -75,4 +76,9 @@
     font-weight: bold;
     cursor: pointer;
     font-family: "Neucha", cursive;
+}
+
+.box{
+    float: left;
+    margin: 1%;
 }
