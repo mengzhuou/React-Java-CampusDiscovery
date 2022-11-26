@@ -78,7 +78,9 @@ class HostManagementPage extends Component<any,any> {
 
     render(){
         let attendarr: any[] = [];
+        let countArr : number[] = [];
         for (let i = 0; i < this.state.arr.length; i++){
+            countArr.push(i+1);
             attendarr.push(<AttendeeBoxForHostManagement
                 email={this.state.arr[i][0]}
                 status={this.state.arr[i][1]}
@@ -102,8 +104,15 @@ class HostManagementPage extends Component<any,any> {
                     <h4 className='Line'>Invite An Attendee :</h4>
                     <input ref={this.state.ref} type='text' className='formik' placeholder='Email Address' name="email" onChange={(evt)=>this.setState({email:evt.target.value})}></input>
                     <button className='inviteButton' type='submit' onClick={this.onClick}>Submit</button>
-                    {attendarr}
-
+                    
+                    <div className="IndexAndList">
+                        <div className='index'>
+                            {countArr.map(index => <div>{index}</div>)}
+                        </div>
+                        <div>
+                            {attendarr}
+                        </div>
+                    </div>
                 </body>
 
                 <div className='bottomnav'>

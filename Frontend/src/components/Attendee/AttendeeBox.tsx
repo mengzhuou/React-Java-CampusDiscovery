@@ -19,9 +19,12 @@ class AttendeeBox extends Component<any,any> {
     render() {
         return (
             <div className='AttendeeBox'>
-                <p>
-                    Email : {this.props.email}  Status : {this.props.status}
-                </p>
+                <div className='listElement'>
+                    Email : {this.props.email}  &nbsp;
+                </div>
+                <div className='listElement'>
+                    Status : {this.props.status}
+                </div>
             </div>
         )
     }
