@@ -75,7 +75,7 @@ class AttendeeListPage extends Component<any,any> {
                         />
                 </header>
                 <div className="IndexAndList">
-                    <div className='index'>
+                    <div className='indexList'>
                         {countArr.map(index => <div>{index}</div>)}
                     </div>
                     <div>
