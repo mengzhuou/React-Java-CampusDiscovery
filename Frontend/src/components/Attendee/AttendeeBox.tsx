@@ -11,7 +11,7 @@ class AttendeeBox extends Component<any,any> {
         this.setState({ForceUpdateNow:true})
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
-        if(this.state.id != this.props.id){
+        if(this.state.id !== this.props.id){
             this.setState({id: this.props.id});  //should probably be id: this.state.id
         }
     }

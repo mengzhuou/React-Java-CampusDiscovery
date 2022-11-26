@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import Dropdown from 'react-dropdown'
 import { getRsvp } from '../../helpers/connector'
 import AttendeeBox from './AttendeeBox';
-import { textChangeRangeIsUnchanged } from 'typescript';
 
 class AttendeeListPage extends Component<any,any> {
     constructor(props:any){

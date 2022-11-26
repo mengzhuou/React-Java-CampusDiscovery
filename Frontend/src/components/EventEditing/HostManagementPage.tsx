@@ -55,7 +55,9 @@ class HostManagementPage extends Component<any,any> {
                 hostInvite(this.props.eventNum(), this.state.email).then(()=>{
                     alert("You have added " + this.state.email + " to your event!")
                     this.forceup();
-                    this.state.ref.current.value = '';
+                    let temp:any = this.state.ref;
+                    temp.current.value = '';
+                    this.setState({ref:temp});
                 }).catch(()=>(alert("invalid email2")))
             }
         }

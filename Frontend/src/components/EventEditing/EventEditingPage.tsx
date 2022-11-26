@@ -157,7 +157,13 @@ class EventEditingPage extends Component<any,any> {
             this.forceup();
         }).catch(()=>alert("unsuc update"));
       }
-  } 
+  }
+  
+  updateArray(evt:React.ChangeEvent<HTMLInputElement>, arr:string[], ind:number){
+    let retarr = [...arr];
+    retarr[ind] = evt.target.value;
+    this.setState({currarr:retarr});
+  }
 
   render(){
       return (
@@ -168,27 +174,27 @@ class EventEditingPage extends Component<any,any> {
           <body className='eventEditingConatiner'>
             <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateTitle}>Update</button> 
-              <label className='textCss'>Event title : </label> <input type="text" id="event_title" onChange={evt => {this.state.currarr[0] = evt.target.value }} placeholder={this.state.arr[0]}/>
+              <label className='textCss'>Event title : </label> <input type="text" id="event_title" onChange={evt => {this.updateArray(evt, this.state.currarr, 0) }} placeholder={this.state.arr[0]}/>
             </div>
 
             <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateEmail}>Update</button> 
-              <label className='textCss'>Event host : </label> <input type="text" id="event_title" onChange={evt => {this.state.currarr[1] = evt.target.value }} placeholder={this.state.arr[1]}/>
+              <label className='textCss'>Event host : </label> <input type="text" id="event_title" onChange={evt => {this.updateArray(evt, this.state.currarr, 1) }} placeholder={this.state.arr[1]}/>
             </div>
 
             <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateTime}>Update</button> 
-              <label className='textCss'>Event date : </label> <input type="text" id="event_title" onChange={evt => {this.state.currarr[2] = evt.target.value }} placeholder={this.state.arr[2]}/>
+              <label className='textCss'>Event date : </label> <input type="text" id="event_title" onChange={evt => {this.updateArray(evt, this.state.currarr, 2) }} placeholder={this.state.arr[2]}/>
             </div>
 
             <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateLocation}>Update</button> 
-              <label className='textCss'>Event location : </label> <input type="text" id="event_title" onChange={evt => {this.state.currarr[3] = evt.target.value }} placeholder={this.state.arr[3]}/>
+              <label className='textCss'>Event location : </label> <input type="text" id="event_title" onChange={evt => {this.updateArray(evt, this.state.currarr, 3) }} placeholder={this.state.arr[3]}/>
             </div>
 
             <div className='buttonAndText'>
               <button className="eventEditPageButton" type="submit" onClick={this.updateDescription}>Update</button> 
-              <label className='textCss'>Event description : </label> <input type="text" id="event_title" onChange={evt => {this.state.currarr[4] = evt.target.value }} placeholder={this.state.arr[4]}/>
+              <label className='textCss'>Event description : </label> <input type="text" id="event_title" onChange={evt => {this.updateArray(evt, this.state.currarr, 4) }} placeholder={this.state.arr[4]}/>
             </div>
 
             <div className='buttonAndText'>

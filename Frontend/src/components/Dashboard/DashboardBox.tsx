@@ -13,7 +13,7 @@ class DashboardBox extends Component<any,any> {
         getinfo().then((content)=>this.setState({role:content.data})).catch(()=> console.log("failure to load role"));
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
-        if(this.state.id != this.props.id){
+        if(this.state.id !== this.props.id){
             this.setState({id: this.props.id});
         }
     }
