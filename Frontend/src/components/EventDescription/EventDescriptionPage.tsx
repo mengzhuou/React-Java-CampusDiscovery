@@ -4,6 +4,7 @@ import "../Dashboard/Dashboard.css";
 import { withRouter } from "../withRouter";
 import { Component } from 'react';
 import { geteventbyid, getRsvpStatus, getCount, getinfo } from '../../helpers/connector';
+import { type } from 'os';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
@@ -67,6 +68,12 @@ class EventDescriptionPage extends Component<any,any> {
         </Link>
       );
     }
+
+    var getDateFromObject : number[] = [this.state.arr[2]];
+    var formattedDateInString = String(getDateFromObject[0]);
+    var dateArr = formattedDateInString.split(",");
+    var dateResult = dateArr[0] + "/" + dateArr[1] + "/" + dateArr[2] + " " + dateArr[3] + ":0" + dateArr[4];
+
     return (
       <div className = "App">
         <header>
@@ -84,7 +91,9 @@ class EventDescriptionPage extends Component<any,any> {
           </div>
 
           <div className="desName">
-            <label htmlFor ='date'>Event date : {this.state.arr[2]}</label>
+            <label htmlFor ='date'>Event date : {dateResult}</label>
+            {/* str: {formattedDateInString}
+            arr: {dateArr} */}
           </div>
 
           <div className="desName">
@@ -114,9 +123,6 @@ class EventDescriptionPage extends Component<any,any> {
               <button className="buttomnavButton">Dashboard</button>
             </Link>
             {hostmgmt}
-            <Link to = "/yourEvent">
-              <button className="ManageButton">Your Events</button>
-            </Link>
         </div>
       </div>
     );
