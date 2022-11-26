@@ -11,7 +11,7 @@ public class Rsvp {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE})
+    @ManyToOne(fetch = FetchType.LAZY)
     private Event event;
 
     private RsvpStatus status;

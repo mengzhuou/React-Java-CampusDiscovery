@@ -1,5 +1,8 @@
 package com.gtbackend.gtbackend.api;
 
+import com.gtbackend.gtbackend.dao.EventRepository;
+import com.gtbackend.gtbackend.dao.RsvpRepository;
+import com.gtbackend.gtbackend.model.Event;
 import com.gtbackend.gtbackend.model.Role;
 import com.gtbackend.gtbackend.model.User;
 import com.gtbackend.gtbackend.service.UserService;
@@ -20,13 +23,19 @@ import java.util.*;
 @RequestMapping("/api/v1")
 public class UserAPI {
     private final UserService userService;
+    private final EventRepository eventRepository;
+    private final RsvpRepository rsvpRepository;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserAPI(UserService userService,
-                   PasswordEncoder passwordEncoder) {
+                   PasswordEncoder passwordEncoder,
+                   EventRepository eventRepository,
+                   RsvpRepository rsvpRepository) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.eventRepository = eventRepository;
+        this.rsvpRepository = rsvpRepository;
     }
 
     //related to User Service
@@ -75,6 +84,11 @@ public class UserAPI {
 
     @DeleteMapping("/deleteUser")
     public void deleteUser(Principal principal){
+        List<Event> events = eventRepository.findAllbyUser(principal.getName());
+        for(Event e : events){
+            rsvpRepository.deleteAllRsvp(e.getId());
+        }
+        eventRepository.deleteEventbyEmail(principal.getName());
         userService.removeUser(principal.getName());
     }
 

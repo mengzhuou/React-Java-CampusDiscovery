@@ -1,6 +1,7 @@
 package com.gtbackend.gtbackend.api;
 
 import com.gtbackend.gtbackend.dao.EventRepository;
+import com.gtbackend.gtbackend.dao.RsvpRepository;
 import com.gtbackend.gtbackend.dao.UserRepository;
 import com.gtbackend.gtbackend.model.Event;
 import com.gtbackend.gtbackend.model.User;
@@ -17,11 +18,13 @@ import java.util.*;
 public class EventAPI {
     private final EventRepository eventRepository;
     private final UserRepository userRepository;
+    private final RsvpRepository rsvpRepository;
 
     @Autowired
-    public EventAPI(EventRepository eventRepository, UserRepository userRepository){
+    public EventAPI(EventRepository eventRepository, UserRepository userRepository, RsvpRepository rsvpRepository){
         this.eventRepository = eventRepository;
         this.userRepository = userRepository;
+        this.rsvpRepository = rsvpRepository;
     }
 
     @PostMapping("/addEvent")
@@ -121,6 +124,7 @@ public class EventAPI {
     @DeleteMapping("/removeEvent")
     public void removeEvent(Principal principal, @RequestParam String id) throws NumberFormatException{
         long Event_id = Long.parseLong(id);
+        rsvpRepository.deleteAllRsvp(Event_id);
         eventRepository.deleteEvent(Event_id, principal.getName());
     }
 

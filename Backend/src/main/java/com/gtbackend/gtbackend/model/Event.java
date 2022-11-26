@@ -3,6 +3,7 @@ package com.gtbackend.gtbackend.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "event_table")
@@ -113,4 +114,9 @@ public class Event {
     public void setLatitude(double latitude) {
         this.latitude = latitude;
     }
+
+    public User getUser() {
+        return user;
+    }
+
 }

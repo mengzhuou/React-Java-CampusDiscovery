@@ -7,6 +7,7 @@ import { getinfo, eventdel, eventdeladmin, geteventbyid,
   updatelocation, updatelocationadmin, updatetime, updateInviteOnly,
   updatetimeadmin, updatetitle, updatetitleadmin, updateEmailadmin} from '../../helpers/connector'
 import "./EventEditingPage.css"
+import { withRouter } from '../withRouter';
 
 class EventEditingPage extends Component<any,any> {
   constructor(props:any){
@@ -30,6 +31,9 @@ class EventEditingPage extends Component<any,any> {
           content.data.location, content.data.description, content.data.inviteOnly];
         this.setState({arr:array, ForceUpdateNow:false});
       })
+      getinfo().then((content)=>{
+        this.setState({role:content.data.role})
+      });
       this.setState({ForceUpdateNow:false});
     }
   }
@@ -47,12 +51,12 @@ class EventEditingPage extends Component<any,any> {
       if(this.state.role === "ADMIN"){
           eventdeladmin(this.state.id).then(()=>{
               alert("Admin successful update");
-              this.props.navigate("/Dashboard")
+              this.props.navigate("/Dashboard");
           }).catch(()=>alert("Admin unsuc update"));
       }else{
           eventdel(this.state.id).then(()=>{
               alert("successful update");
-              this.props.navigate("/Dashboard")
+              this.props.navigate("/Dashboard");
           }).catch(()=>alert("unsuc update"));
       }
     }
@@ -208,4 +212,4 @@ class EventEditingPage extends Component<any,any> {
   }
 }
 
-export default EventEditingPage;
+export default withRouter(EventEditingPage);

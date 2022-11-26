@@ -37,6 +37,11 @@ public interface RsvpRepository extends JpaRepository<Rsvp, Long>{
 
     @Modifying
     @Transactional
+    @Query(value = "DELETE FROM Rsvp e WHERE e.event.id = ?1")
+    void deleteAllRsvp(long event_id);
+
+    @Modifying
+    @Transactional
     @Query(value = "UPDATE Rsvp e SET e.status = ?3 WHERE e.event.id = ?1 AND e.email = ?2")
     void updateStatus(long event_id, String email, RsvpStatus status);
 

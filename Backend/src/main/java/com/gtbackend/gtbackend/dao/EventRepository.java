@@ -18,18 +18,18 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query(value = "SELECT e FROM Event e ORDER BY e.id")
     List<Event> findEventByRange();
 
-    @Query(value = "SELECT e FROM Event e WHERE e.user.email = ?1 ORDER BY e.id")
-    List<Event> findEventByEmail(String email);
-
-    @Modifying
-    @Transactional
-    @Query(value = "DELETE FROM Event e WHERE e.user.email = ?1")
-    void deleteAllByEmail(String email);
+    @Query(value = "SELECT e FROM Event e Where e.user.email = ?1")
+    List<Event> findAllbyUser(String email);
 
     @Modifying
     @Transactional
     @Query(value = "DELETE FROM Event e WHERE e.id = ?1 AND e.user.email = ?2")
     void deleteEvent(long id, String email);
+
+    @Modifying
+    @Transactional
+    @Query(value = "DELETE FROM Event e WHERE e.user.email = ?1")
+    void deleteEventbyEmail(String email);
 
     @Modifying
     @Transactional
