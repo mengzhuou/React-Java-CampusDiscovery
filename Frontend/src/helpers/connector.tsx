@@ -339,6 +339,16 @@ export async function getRsvp(eventid: number, status: string){
   return content;
 }
 
+export async function getPersonalRsvp(){
+
+  let content = await client({
+    method: 'get',
+    url: url+"getPersonalRsvp",
+    withCredentials: true,
+  })
+  return content;
+}
+
 export async function getCount(event_id: number){
 
   let content = await client({

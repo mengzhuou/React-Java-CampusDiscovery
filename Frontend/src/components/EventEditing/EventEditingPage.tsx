@@ -5,7 +5,7 @@ import 'react-css-dropdown/dist/index.css'
 import { getinfo, eventdel, eventdeladmin, geteventbyid, 
   updatedescription, updatedescriptionadmin, 
   updatelocation, updatelocationadmin, updatetime, updateInviteOnly,
-  updatetimeadmin, updatetitle, updatetitleadmin, updateEmailadmin} from '../helpers/connector'
+  updatetimeadmin, updatetitle, updatetitleadmin, updateEmailadmin} from '../../helpers/connector'
 import "./EventEditingPage.css"
 
 class EventEditingPage extends Component<any,any> {

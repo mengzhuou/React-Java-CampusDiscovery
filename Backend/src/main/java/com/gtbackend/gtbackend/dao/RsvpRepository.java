@@ -27,7 +27,7 @@ public interface RsvpRepository extends JpaRepository<Rsvp, Long>{
     @Query(value = "SELECT e FROM Rsvp e WHERE e.event.id = ?1 AND e.email = ?2")
     List<Rsvp> getRsvpEmail(long event_id, String email);
 
-    @Query(value = "SELECT e FROM Rsvp e WHERE e.email = ?2")
+    @Query(value = "SELECT e FROM Rsvp e WHERE e.email = ?1")
     List<Rsvp> getAllRsvpEmail(String email);
 
     @Modifying

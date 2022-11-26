@@ -4,6 +4,7 @@ import com.gtbackend.gtbackend.dao.EventRepository;
 import com.gtbackend.gtbackend.dao.UserRepository;
 import com.gtbackend.gtbackend.model.Event;
 import com.gtbackend.gtbackend.model.User;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -85,7 +86,7 @@ public class AdminAPI {
     @Secured("ROLE_ADMIN")
     public void updateTime(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
         Long id = Long.valueOf(body.get("id"));
-        String time = body.get("time");
+        LocalDateTime time = LocalDateTime.parse(body.get("time"));
         eventRepository.updateTimeAdmin(id,time);
     }
 }

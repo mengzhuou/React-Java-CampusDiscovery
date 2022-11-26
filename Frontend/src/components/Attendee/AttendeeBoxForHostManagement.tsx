@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './AttendeeBox.css'
-import { hostRemove } from '../helpers/connector'
+import { hostRemove } from '../../helpers/connector'
 
 
 
@@ -30,7 +30,6 @@ class AttendeeBoxForHostManagement extends Component<any,any> {
             <div className='AttendeeBox'>
                 <p>
                     Email : {this.props.email}  Status : {this.props.status}
-                    {/* delete this attendee */}
                     <button className="eventEditPageButton" onClick={this.attendeeDel}>X</button> 
                 </p>
             </div>

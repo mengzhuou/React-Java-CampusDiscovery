@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import "./EventDescriptionPage.css";
-import "./Dashboard.css";
-import { withRouter } from "./withRouter";
+import "../Dashboard/Dashboard.css";
+import { withRouter } from "../withRouter";
 import { Component } from 'react';
-import { geteventbyid, getRsvpStatus, getCount } from '../helpers/connector';
+import { geteventbyid, getRsvpStatus, getCount } from '../../helpers/connector';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){

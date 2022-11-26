@@ -145,7 +145,7 @@ public class EventAPI {
     @PatchMapping("/updateTime")
     public void updateTime(Principal principal, @RequestBody Map<String, String> body) throws NumberFormatException{
         long id = Long.parseLong(body.get("id"));
-        String time = body.get("time");
+        LocalDateTime time = LocalDateTime.parse(body.get("time"));
         eventRepository.updateTime(id,principal.getName(),time);
     }
     @PatchMapping("/updateCapacity")

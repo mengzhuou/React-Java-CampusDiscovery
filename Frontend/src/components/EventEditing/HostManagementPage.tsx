@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import "./HostManagementPage.css";
 import Dropdown from 'react-dropdown'
 import 'react-css-dropdown/dist/index.css'
-import { getRsvp, hostInvite } from '../helpers/connector'
-import AttendeeBoxForHostManagement from './AttendeeBoxForHostManagement';
-import { emailValidator } from '../helpers/emailValidator';
+import { getRsvp, hostInvite } from '../../helpers/connector'
+import AttendeeBoxForHostManagement from '../Attendee/AttendeeBoxForHostManagement';
+import { emailValidator } from '../../helpers/emailValidator';
 
 
 class HostManagementPage extends Component<any,any> {

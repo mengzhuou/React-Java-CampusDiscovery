@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getinfo } from '../helpers/connector'
+import { getinfo } from '../../helpers/connector'
 import './DashboardBox.css'
 
 

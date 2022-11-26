@@ -1,17 +1,18 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import First from "./components/SignUpPage";
-import Second from "./components/LoginPage";
-import Dashboard from "./components/Dashboard";
-import Main from "./components/Main";
-import EventEditingPage from "./components/EventEditingPage";
-import EventCreationPage from "./components/EventCreationPage";
-import EventDescriptionPage from "./components/EventDescriptionPage";
-import AttendeeListPage from "./components/AttendeeListPage";
-import HostManagementPage from "./components/HostManagementPage";
-import RsvpPage from "./components/RsvpPage";
-import AttendeeBox from "./components/AttendeeBox";
-import AttendeeBoxForHostManagement from "./components/AttendeeBoxForHostManagement";
+import First from "./components/SignUp/SignUpPage";
+import Second from "./components/Login/LoginPage";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Main from "./components/Main/Main";
+import EventEditingPage from "./components/EventEditing/EventEditingPage";
+import EventCreationPage from "./components/EventCreation/EventCreationPage";
+import EventDescriptionPage from "./components/EventDescription/EventDescriptionPage";
+import AttendeeListPage from "./components/Attendee/AttendeeListPage";
+import HostManagementPage from "./components/EventEditing/HostManagementPage";
+import RsvpPage from "./components/Rsvp/RsvpPage";
+import AttendeeBox from "./components/Attendee/AttendeeBox";
+import AttendeeBoxForHostManagement from "./components/Attendee/AttendeeBoxForHostManagement";
+import YourEvent from "./components/YourEvent/YourEvent";
 import React from "react";
 
 
@@ -54,6 +55,7 @@ class App extends React.Component<any,any>{
           <Route path="/AttendeeBox" element={<AttendeeBoxForHostManagement eventNum={this.getEventID}/>}/>
           <Route path="/HostManagementPage" element={<HostManagementPage eventNum={this.getEventID}/>}/>
           <Route path="/RsvpPage" element={<RsvpPage eventNum={this.getEventID}/>}/>
+          <Route path="/yourEvent" element={<YourEvent setEventID={this.setEventID}/>}/>
         </Routes>
       </Router>
     );

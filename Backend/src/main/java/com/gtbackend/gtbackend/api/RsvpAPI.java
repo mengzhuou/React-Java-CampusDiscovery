@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.swing.text.html.Option;
 import java.security.Principal;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -96,7 +94,13 @@ public class RsvpAPI {
     @ResponseBody
     public List<Rsvp> getPersonalRsvp(Principal principal) throws NoSuchElementException, IllegalArgumentException{
         List<Rsvp> ret = rsvpRepository.getAllRsvpEmail(principal.getName());
-
+        Collections.sort(ret, (a,b)-> a.getEvent().getTime().compareTo(b.getEvent().getTime()));
+        for(int i = 0; i < ret.size()-1; i++){
+            if(ret.get(i).getEvent().getTime().equals(ret.get(i+1).getEvent().getTime())){
+                ret.get(i).setConflict(true);
+                ret.get(i+1).setConflict(true);
+            }
+        }
         return ret;
     }
 

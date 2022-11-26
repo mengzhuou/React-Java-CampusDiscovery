@@ -1,6 +1,7 @@
 package com.gtbackend.gtbackend.dao;
 
 import com.gtbackend.gtbackend.model.Event;
+import net.bytebuddy.asm.Advice;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -69,11 +71,11 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Modifying
     @Transactional
     @Query(value = "UPDATE Event e SET e.time = ?3 WHERE e.id = ?1 AND e.user.email = ?2")
-    void updateTime(long id, String email, String time);
+    void updateTime(long id, String email, LocalDateTime time);
     @Modifying
     @Transactional
     @Query(value = "UPDATE Event e SET e.time = ?2 WHERE e.id = ?1")
-    void updateTimeAdmin(long id, String time);
+    void updateTimeAdmin(long id, LocalDateTime time);
 
     @Modifying
     @Transactional

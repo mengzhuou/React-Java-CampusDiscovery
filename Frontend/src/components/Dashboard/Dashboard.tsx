@@ -1,7 +1,7 @@
 import "./Dashboard.css";
-import { withRouter } from "./withRouter";
-import React, { useState } from 'react';
-import { getinfo, getevent, logout} from '../helpers/connector';
+import { withRouter } from "../withRouter";
+import React from 'react';
+import { getinfo, getevent, logout} from '../../helpers/connector';
 import DashboardBox from './DashboardBox';
 import Pagination from './Pagination';
 import Checkbox from "./Checkbox";
@@ -11,13 +11,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 class Dashboard extends React.Component<any,any>{
-    // placeholder="Select a Status"
-    // options = [
-    //     {label: 'All Event', value: 'ALLEVENT'},
-    //     {label: 'Invited', value: 'INVITED'}
-    // ];
-
-    // defaultOption = this.options[2];
 
     constructor(props:any){
         super(props);
@@ -41,7 +34,7 @@ class Dashboard extends React.Component<any,any>{
     }
 
     userEventScreen = () => {
-        this.props.navigate("/")
+        this.props.navigate("/yourEvent")
     }
 
     display() {
@@ -58,10 +51,6 @@ class Dashboard extends React.Component<any,any>{
 
     createEvent = ()=>{
         this.props.navigate("/EventCreationPage")
-    }
-
-    eventDescrip = () => {
-        this.props.navigate("/EventDescriptionPage")
     }
 
     forceup(){
@@ -154,8 +143,6 @@ class Dashboard extends React.Component<any,any>{
                 />);
         }
 
-        // const { startDate } = this.state;
-
         return (
             <div className="html">
                 <div className="topnav">
@@ -172,7 +159,6 @@ class Dashboard extends React.Component<any,any>{
                     </header>
                     <div className="sidenav">
                         <h1 >Filters</h1> 
-                        {/* <div>clear</div> //clear filter*/}
                         <div>
                             <Checkbox
                                 isChecked= {this.state.isFilterBeforeChecked}
@@ -219,12 +205,6 @@ class Dashboard extends React.Component<any,any>{
                         <button className="filterButton" onClick={this.forceup}>Confirm Filter</button>
                     </div>
                     <div className='body'>
-                        {/* <Dropdown className="dropDownEvent"
-                            options={this.options}
-                            // onChange={this._onSelect}
-                            value={this.defaultOption}
-                            placeholder="All Event"
-                        /> */}
                         {dasharr}
                     </div>
                     <div className="pagination">

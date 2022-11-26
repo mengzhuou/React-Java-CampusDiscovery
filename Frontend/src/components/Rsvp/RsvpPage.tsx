@@ -1,8 +1,8 @@
-import "./Dashboard.css";
-import "./EventDescriptionPage.css";
+import "../Dashboard/Dashboard.css";
+import "../EventDescription/EventDescriptionPage.css";
 import "./RsvpPage.css";
 import React from 'react';
-import { updateRsvp } from '../helpers/connector';
+import { updateRsvp } from '../../helpers/connector';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
