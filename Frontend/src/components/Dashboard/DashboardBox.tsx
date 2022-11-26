@@ -24,10 +24,14 @@ class DashboardBox extends Component<any,any> {
     }
 
     render() {
+        const host : any[] = [];
+        if(this.props.username === this.props.host){
+            host.push(<p className='hostLabel'>Host</p>);
+        }
         return (
             <div className='box'>
                 <button className='descriptionButton' type="submit" onClick={this.passEventId}>Event Description</button>
-                <p className='hostLabel'>Host</p>
+                {host}
                 <div className='DashboardTitle'>
                     {this.props.title}
                 </div>

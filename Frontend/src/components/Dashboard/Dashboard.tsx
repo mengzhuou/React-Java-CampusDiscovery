@@ -18,7 +18,7 @@ class Dashboard extends React.Component<any,any>{
              beforeDate: new Date(), afterDate: new Date(), hostEmailFilter: "",
              distance: "", currentPage: 1, lastpage: 6, arr: [], 
              xpos:window.scrollX, ypos:window.scrollY, updateForced:false, 
-             ForceUpdateNow:false};
+             ForceUpdateNow:false, username:""};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
@@ -35,12 +35,6 @@ class Dashboard extends React.Component<any,any>{
 
     userEventScreen = () => {
         this.props.navigate("/yourEvent")
-    }
-
-    display() {
-        getinfo().then((content)=>{
-            alert(content.data);
-        }).catch(()=>(alert("error getting info")));
     }
 
     pagelogout = ()=>{
@@ -73,8 +67,10 @@ class Dashboard extends React.Component<any,any>{
                         content.data[key].location, content.data[key].description, content.data[key].id]);
                 }
                 this.setState({arr:array});
-                this.forceUpdate();
             })
+            getinfo().then((content)=>{
+                this.setState({username:content.data.username});
+            });
             this.setState({ForceUpdateNow:false});
         }
     }
@@ -140,6 +136,7 @@ class Dashboard extends React.Component<any,any>{
                 key ={this.state.arr[i][5]}
                 update={this.forceup}
                 setEventID={this.passEventId}
+                username={this.state.username}
                 />);
         }
 
@@ -147,7 +144,6 @@ class Dashboard extends React.Component<any,any>{
             <div className="html">
                 <div className="topnav">
                     <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
-                    <button className="topnavButton" onClick={this.display}>Display</button>
                     <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
                     <button className="topnavButton" onClick={this.userEventScreen}>Your Events</button>
 

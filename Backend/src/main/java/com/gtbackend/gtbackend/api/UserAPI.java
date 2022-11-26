@@ -32,9 +32,12 @@ public class UserAPI {
     //related to User Service
     @GetMapping("/info")
     @ResponseBody
-    public User getUser(Principal principal){
+    public Map<String, String> getUser(Principal principal){
         User user = userService.getUser(principal.getName()).get();
-        return user;
+        Map<String, String> ret = new HashMap<>();
+        ret.put("username", user.getUsername());
+        ret.put("role", user.getRole().toString());
+        return ret;
     }
 
     @PostMapping("/logout")

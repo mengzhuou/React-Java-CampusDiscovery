@@ -3,12 +3,13 @@ import "./EventDescriptionPage.css";
 import "../Dashboard/Dashboard.css";
 import { withRouter } from "../withRouter";
 import { Component } from 'react';
-import { geteventbyid, getRsvpStatus, getCount } from '../../helpers/connector';
+import { geteventbyid, getRsvpStatus, getCount, getinfo } from '../../helpers/connector';
   
 class EventDescriptionPage extends Component<any,any> {
   constructor(props:any){
     super(props);
-    this.state = {id: this.props.eventNum(), currentCapacity:0, arr: [], updateForced:false, ForceUpdateNow:false, status:"NORSVP"};
+    this.state = {id: this.props.eventNum(), currentCapacity:0, arr: [], updateForced:false, 
+      ForceUpdateNow:false, status:"NORSVP", username: ""};
     this.forceup = this.forceup.bind(this);
   }
   
@@ -18,21 +19,25 @@ class EventDescriptionPage extends Component<any,any> {
 
   async updateNow(){
     let array: any[] = [];
-    let stat: any = this.state.status;
+    let status: any = this.state.status;
     let curr: number = this.state.currentCapacity;
+    let username: string = this.state.username;
     await geteventbyid(this.state.id).then((content)=>{
         array = [content.data.title, content.data.email, content.data.time, 
             content.data.location, content.data.description, content.data.capacity, content.data.inviteOnly];
     })
     await getRsvpStatus(this.state.id).then((content)=>{
-      stat = content.data;
+      status = content.data;
     }).catch(()=>console.log("Failed to get Status"));
 
     await getCount(this.state.id).then((content)=>{
       curr = content.data;
     })
+    await getinfo().then((content)=> {
+      username = content.data.username;
+    });
     
-    this.setState({currentCapacity: curr, arr: array, ForceUpdateNow:false, status:stat});
+    this.setState({currentCapacity: curr, arr: array, ForceUpdateNow:false, status:status, username: username});
   }
   
   componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
@@ -50,6 +55,18 @@ class EventDescriptionPage extends Component<any,any> {
   }
 
   render(){
+    const rsvp:any[] = [];
+    const hostmgmt: any[] = [];
+    if(!this.state.arr[6] || (this.state.status !== "NORSVP")){
+      rsvp.push(<button className='DescriptionPageRsvpButton' onClick={this.rsvpNav}> RSVP </button>);
+    }
+    if(this.state.arr[1] === this.state.username){
+      hostmgmt.push(
+        <Link to = "/HostManagementPage">
+          <button className="ManageButton">Host Management</button>
+        </Link>
+      );
+    }
     return (
       <div className = "App">
         <header>
@@ -57,7 +74,7 @@ class EventDescriptionPage extends Component<any,any> {
         </header>
         <div className='eventBody'>
           <label className="desName" htmlFor='title'>Event title : {this.state.arr[0]}</label>
-          <button className='DescriptionPageRsvpButton' onClick={this.rsvpNav}> RSVP </button>
+          {rsvp}
 
           <div className="desName">
             <label htmlFor ='host'>Event host : {this.state.arr[1]}</label>
@@ -87,14 +104,6 @@ class EventDescriptionPage extends Component<any,any> {
             <p>Your RSVP Status : {this.state.status}</p>
           </div>
 
-          {/* <div className="desName">
-            <label htmlFor ='Capacity'>Total Capacity : {this.state.arr[5]}</label>
-          </div>
-
-          <div className="desName">
-            <label htmlFor ='Capacity'>Current Capacity : {this.state.currentCapacity}</label>
-          </div> */}
-
           
         </div>
         <div className='bottomnav'>
@@ -104,9 +113,7 @@ class EventDescriptionPage extends Component<any,any> {
             <Link to = "/Dashboard">
               <button className="buttomnavButton">Dashboard</button>
             </Link>
-            <Link to = "/HostManagementPage">
-              <button className="ManageButton">Host Management</button>
-            </Link>
+            {hostmgmt}
             <Link to = "/yourEvent">
               <button className="ManageButton">Your Events</button>
             </Link>
