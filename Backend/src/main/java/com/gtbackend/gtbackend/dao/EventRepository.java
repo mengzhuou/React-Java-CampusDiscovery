@@ -1,8 +1,6 @@
 package com.gtbackend.gtbackend.dao;
 
 import com.gtbackend.gtbackend.model.Event;
-import net.bytebuddy.asm.Advice;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
