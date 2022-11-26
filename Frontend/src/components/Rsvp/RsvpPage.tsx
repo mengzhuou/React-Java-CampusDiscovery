@@ -2,7 +2,7 @@ import "../Dashboard/Dashboard.css";
 import "../EventDescription/EventDescriptionPage.css";
 import "./RsvpPage.css";
 import React from 'react';
-import { updateRsvp } from '../../helpers/connector';
+import { updateRsvp, getPersonalRsvp } from '../../helpers/connector';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 
@@ -26,6 +26,10 @@ function RsvpPage(props:any){
 
     const handleConfirm = ()=>{
       if(window.confirm("Are you Sure?")){
+        getPersonalRsvp().then(()=>{
+
+          // alert("RSVP Conflict! Your status will be not-attend.")
+        });
         updateRsvp(props.eventNum(), value).then(()=>{
           alert("Successful Update!");
           navigate("/EventDescriptionPage")
