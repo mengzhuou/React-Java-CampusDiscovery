@@ -14,9 +14,13 @@
 
 .body{
     margin-bottom: 30px;
+    left: 100px;
+    padding: 0;
+    position: relative;
+    width: calc(100% - 200px);
     height: 100%;
-    position: sticky;
-    margin-left: 200px;
+    display:flex;
+    flex-wrap: wrap;
 }
 
 .header{
