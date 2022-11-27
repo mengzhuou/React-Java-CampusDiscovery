@@ -48,7 +48,7 @@ class Dashboard extends React.Component<any,any>{
     }
 
     mapPage = () => {
-        this.props.navigate("/LoadMapApi")
+        this.props.navigate("/InitMap")
     }
 
     forceup(){
@@ -150,6 +150,9 @@ class Dashboard extends React.Component<any,any>{
                     <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
                     <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
                     <button className="ManageButton" onClick={this.yourEvenrPage}>Your Events</button>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA&callback=initMap&v=weekly"
+                        defer>
+                    </script>
                     <button className="topnavButton" onClick={this.mapPage}>Map</button>
                 </div>
                 <div className="AppDashboard"> 
