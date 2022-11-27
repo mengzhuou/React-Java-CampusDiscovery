@@ -84,7 +84,7 @@ function EventCreationPage() {
                 <label htmlFor ='location'>Event location : </label>
                 <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
                 
-                <label htmlFor ='location'>state : </label>
+                <label htmlFor ='location'>city/state/country : </label>
                 <Autocomplete
                   apiKey='AIzaSyDhRRpoUjKUIgn9jqI6prKRaQKHJ9e6bQ0'
                   onPlaceSelected={(place) => {
