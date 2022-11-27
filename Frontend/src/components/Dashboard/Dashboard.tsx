@@ -48,7 +48,7 @@ class Dashboard extends React.Component<any,any>{
     }
 
     mapPage = () => {
-        this.props.navigate("/Map")
+        this.props.navigate("/LoadMapApi")
     }
 
     forceup(){

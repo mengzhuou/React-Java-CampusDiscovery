@@ -1,19 +1,13 @@
-export const LoadMapApi = () => {
-    // const mapsURL = 'https://maps.googleapis.com/maps/api/js?key==&libraries=places$language=no&v=quarterly';
-    const mapsURL = 'https://www.google.com/maps/embed/v1/MAP_MODE?key=AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA&Space+Needle,Seattle+WA'
-    const scripts = document.getElementsByTagName('script');
+import { useLoadScript } from "@react-google-maps/api";
+import Map from "./Map";
 
-    for (let i =0; i < scripts.length; i++) {
-        if (scripts[i].src.indexOf(mapsURL) === 0) {
-            return scripts[i];
-        }
-    }
+export default function LoadMapApi() {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY !== undefined? process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY : '',
+    libraries: ["places"],
+  });
 
-    const googleMapScript = document.createElement('script');
-    googleMapScript.src = mapsURL;
-    googleMapScript.async = true;
-    googleMapScript.defer = true;
-    window.document.body.appendChild(googleMapScript);
-
-    return googleMapScript;
+  console.log("mapehere ")
+  if (!isLoaded) return <div>Loading...</div>;
+  return <Map />;
 }
