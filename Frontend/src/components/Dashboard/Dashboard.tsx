@@ -47,6 +47,10 @@ class Dashboard extends React.Component<any,any>{
         this.props.navigate("/yourEvent")
     }
 
+    mapPage = () => {
+        this.props.navigate("/Map")
+    }
+
     forceup(){
         this.setState({ForceUpdateNow:true});
         
@@ -146,6 +150,7 @@ class Dashboard extends React.Component<any,any>{
                     <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
                     <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
                     <button className="ManageButton" onClick={this.yourEvenrPage}>Your Events</button>
+                    <button className="topnavButton" onClick={this.mapPage}>Map</button>
                 </div>
                 <div className="AppDashboard"> 
                     <header>

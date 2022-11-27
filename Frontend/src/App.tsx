@@ -16,6 +16,8 @@ import YourEvent from "./components/YourEvent/YourEvent";
 import Map from "./components/EventMap/Map";
 import React from "react";
 
+//google-map API key: AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA
+//Website: UniversityCanvasProject.com
 
 class App extends React.Component<any,any>{
   constructor(props:any){
