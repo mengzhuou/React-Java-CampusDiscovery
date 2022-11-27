@@ -52,13 +52,16 @@ class AttendeeListPage extends Component<any,any> {
 
     render(){
         let attendarr: any[] = [];
+        let countArr : number[] = [];
         for (let i = 0; i < this.state.arr.length; i++){
+            countArr.push(i+1);
             attendarr.push(<AttendeeBox
                 email={this.state.arr[i][0]}
                 status={this.state.arr[i][1]}
                 eventNum={this.props.eventNum}
             />)
         }
+
         return (
             <div className='App'>
                 <header>
@@ -71,8 +74,13 @@ class AttendeeListPage extends Component<any,any> {
                         placeholder="Select"
                         />
                 </header>
-                <div>
-                    {attendarr}
+                <div className="IndexAndList">
+                    <div className='indexList'>
+                        {countArr.map(index => <div>{index}</div>)}
+                    </div>
+                    <div>
+                        {attendarr}
+                    </div>
                 </div>
                 <div className='bottomnav'>
                     <Link to = "/EventDescriptionPage">
