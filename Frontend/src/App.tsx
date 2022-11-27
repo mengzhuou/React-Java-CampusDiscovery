@@ -13,6 +13,7 @@ import RsvpPage from "./components/Rsvp/RsvpPage";
 import AttendeeBox from "./components/Attendee/AttendeeBox";
 import AttendeeBoxForHostManagement from "./components/Attendee/AttendeeBoxForHostManagement";
 import YourEvent from "./components/YourEvent/YourEvent";
+import Map from "./components/EventMap/Map";
 import React from "react";
 
 
@@ -56,6 +57,7 @@ class App extends React.Component<any,any>{
           <Route path="/HostManagementPage" element={<HostManagementPage eventNum={this.getEventID}/>}/>
           <Route path="/RsvpPage" element={<RsvpPage eventNum={this.getEventID}/>}/>
           <Route path="/yourEvent" element={<YourEvent setEventID={this.setEventID}/>}/>
+          <Route path="/map" element={<Map />}/>
         </Routes>
       </Router>
     );
