@@ -9,8 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css'
 import moment from 'moment';
-
-
+import Autocomplete from "react-google-autocomplete";
+import { LoadScriptNext } from '@react-google-maps/api';
 
   
 function EventCreationPage() {
@@ -83,7 +83,18 @@ function EventCreationPage() {
               <div className="text">
                 <label htmlFor ='location'>Event location : </label>
                 <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
+                
+                <label htmlFor ='location'>city/state/country : </label>
+                <Autocomplete
+                  apiKey='AIzaSyDhRRpoUjKUIgn9jqI6prKRaQKHJ9e6bQ0'
+                  onPlaceSelected={(place) => {
+                    console.log(place);
+                  }}
+                  
+                />
+
               </div>
+
 
               <div className="text">
                 <label htmlFor ='description'>Event description : </label>

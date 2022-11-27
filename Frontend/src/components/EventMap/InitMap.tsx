@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import "./InitMap.css"
+import { withRouter } from "../withRouter";
 
 const containerStyle = {
-  width: '400px',
-  height: '400px'
+  width: '100%',
+  height: '100vh',
+  margin: '30px 0px 0px 0px'
 };
 
 const center = {
@@ -11,22 +14,51 @@ const center = {
   lng: -38.523
 };
 
-class InitMap extends Component {
+class InitMap extends React.Component<any,any> {
+  constructor(props:any){
+    super(props);
+    this.state = {
+      currentLocation: { latitude: 0, longitude: 0},
+      
+    };
+    this.onMapLoad = this.onMapLoad.bind(this);
+  }
+
+  dashboardNav = ()=>{
+    this.props.navigate("/Dashboard")
+  }
+
+  onMapLoad = () => {
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(({coords: {latitude: lat, longitude: lng}})=>{
+        const pos = {lat, lng}
+        this.setState({ currentLocation: pos })
+      })
+    }
+  };
+  
   render() {
     return (
-      <LoadScript
-        googleMapsApiKey="AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA"
-      >
-        <GoogleMap
-          mapContainerStyle={containerStyle}
-          center={center}
-          zoom={10}
+      <div>
+        <div className="topnav">
+                    <button className="topnavButton" onClick={this.dashboardNav}>Dashboard</button>
+        </div>
+        <LoadScript
+          googleMapsApiKey="AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA"
         >
-          { /* Child components, such as markers, info windows, etc. */ }
-          <></>
-        </GoogleMap>
-      </LoadScript>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            center={center}
+            zoom={10}
+            onLoad={this.onMapLoad}
+          >
+          <p className='mapTitle'>Event Map</p>
+            { /* Child components, such as markers, info windows, etc. */ }
+            <></>
+          </GoogleMap>
+        </LoadScript>
+      </div>
     )
   }
 }
-export default InitMap;
+export default withRouter(InitMap);

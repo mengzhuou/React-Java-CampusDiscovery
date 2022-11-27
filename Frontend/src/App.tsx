@@ -16,8 +16,9 @@ import YourEvent from "./components/YourEvent/YourEvent";
 import InitMap from "./components/EventMap/InitMap";
 import React from "react";
 
-//google-map API key: AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA
-//Website: UniversityCanvasProject.com
+//google-map API key (API key 1): AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA
+//google-autocomplete API key (API key 2): AIzaSyDhRRpoUjKUIgn9jqI6prKRaQKHJ9e6bQ0
+//Website: http://localhost:3000/InitMap
 
 class App extends React.Component<any,any>{
   constructor(props:any){
