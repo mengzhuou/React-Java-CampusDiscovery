@@ -31,6 +31,7 @@
 .eventEditPageButton{
     margin-right: 13px;
     margin-bottom: 10px;
+    margin-left: 10px;
     color: rgb(101, 58, 97);
     background-color:#e9b1bb;
     width: fit-content;

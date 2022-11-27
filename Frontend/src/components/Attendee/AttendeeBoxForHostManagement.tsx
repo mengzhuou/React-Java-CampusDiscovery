@@ -28,10 +28,13 @@ class AttendeeBoxForHostManagement extends Component<any,any> {
     render() {
         return (
             <div className='AttendeeBox'>
-                <p>
-                    Email : {this.props.email}  Status : {this.props.status}
+                <div className='listElementManagement'>
+                    Email : {this.props.email}  &nbsp;
+                </div>
+                <div className='listElementManagement'>
+                    Status : {this.props.status}
                     <button className="eventEditPageButton" onClick={this.attendeeDel}>X</button> 
-                </p>
+                </div>
             </div>
         )
     }
