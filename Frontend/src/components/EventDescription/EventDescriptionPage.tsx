@@ -54,6 +54,9 @@ class EventDescriptionPage extends Component<any,any> {
   rsvpNav = ()=>{
     this.props.navigate("/RsvpPage")
   }
+  yourEvenrPage = ()=>{
+    this.props.navigate("/yourEvent")
+  }
 
   render(){
     const rsvp:any[] = [];
@@ -118,6 +121,7 @@ class EventDescriptionPage extends Component<any,any> {
             <Link to = "/AttendeeListPage">
               <button className="buttomnavButton">Attendee List</button>
             </Link>
+            <button className="ManageButton" onClick={this.yourEvenrPage}>Your Events</button>
             <Link to = "/Dashboard">
               <button className="buttomnavButton">Dashboard</button>
             </Link>

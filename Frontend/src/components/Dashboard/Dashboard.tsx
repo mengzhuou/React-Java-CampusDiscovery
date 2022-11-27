@@ -33,10 +33,6 @@ class Dashboard extends React.Component<any,any>{
 
     }
 
-    userEventScreen = () => {
-        this.props.navigate("/yourEvent")
-    }
-
     pagelogout = ()=>{
         logout().then(()=>{
             this.props.navigate("/")
@@ -49,6 +45,10 @@ class Dashboard extends React.Component<any,any>{
 
     yourEvenrPage = ()=>{
         this.props.navigate("/yourEvent")
+    }
+
+    mapPage = () => {
+        this.props.navigate("/InitMap")
     }
 
     forceup(){
@@ -149,8 +149,11 @@ class Dashboard extends React.Component<any,any>{
                 <div className="topnav">
                     <button className="topnavButton" onClick={this.pagelogout}>Logout</button>
                     <button className="topnavButton" onClick={this.createEvent}>Create A Event</button>
-                    <button className="topnavButton" onClick={this.userEventScreen}>Your Events</button>
                     <button className="ManageButton" onClick={this.yourEvenrPage}>Your Events</button>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA&callback=initMap&v=weekly"
+                        defer>
+                    </script>
+                    <button className="topnavButton" onClick={this.mapPage}>Map</button>
                 </div>
                 <div className="AppDashboard"> 
                     <header>
