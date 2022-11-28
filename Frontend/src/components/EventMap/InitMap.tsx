@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import React from 'react';
+import { GoogleMap } from '@react-google-maps/api';
 import "./InitMap.css"
 import { withRouter } from "../withRouter";
 
@@ -19,7 +19,6 @@ class InitMap extends React.Component<any,any> {
     super(props);
     this.state = {
       currentLocation: { latitude: 0, longitude: 0},
-      firstload: true
       
     };
     this.onMapLoad = this.onMapLoad.bind(this);
@@ -42,12 +41,8 @@ class InitMap extends React.Component<any,any> {
     return (
       <div>
         <div className="topnav">
-                    <button className="topnavButton" onClick={this.dashboardNav}>Dashboard</button>
+          <button className="topnavButton" onClick={this.dashboardNav}>Dashboard</button>
         </div>
-        <LoadScript
-          googleMapsApiKey="AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA"
-          
-        >
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
@@ -58,7 +53,6 @@ class InitMap extends React.Component<any,any> {
             { /* Child components, such as markers, info windows, etc. */ }
             <></>
           </GoogleMap>
-        </LoadScript>
       </div>
     )
   }
