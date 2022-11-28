@@ -10,7 +10,6 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css'
 import moment from 'moment';
 import Autocomplete from "react-google-autocomplete";
-import { LoadScriptNext } from '@react-google-maps/api';
 
   
 function EventCreationPage() {
