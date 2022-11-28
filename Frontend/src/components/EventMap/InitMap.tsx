@@ -10,8 +10,8 @@ const containerStyle = {
 };
 
 const center = {
-  lat: -3.745,
-  lng: -38.523
+  lat: 33.7756,
+  lng: -84.3963
 };
 
 class InitMap extends React.Component<any,any> {
@@ -19,6 +19,7 @@ class InitMap extends React.Component<any,any> {
     super(props);
     this.state = {
       currentLocation: { latitude: 0, longitude: 0},
+      firstload: true
       
     };
     this.onMapLoad = this.onMapLoad.bind(this);
@@ -45,6 +46,7 @@ class InitMap extends React.Component<any,any> {
         </div>
         <LoadScript
           googleMapsApiKey="AIzaSyCqcmw27n2Z66yVih4M47FZGLj2vKcJnkA"
+          
         >
           <GoogleMap
             mapContainerStyle={containerStyle}

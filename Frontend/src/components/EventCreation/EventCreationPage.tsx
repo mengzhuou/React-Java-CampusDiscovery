@@ -10,9 +10,10 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css'
 import moment from 'moment';
 import Autocomplete from "react-google-autocomplete";
-import { LoadScriptNext } from '@react-google-maps/api';
-
+import { GoogleMap, StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
   
+const lib = ['places'];
+
 function EventCreationPage() {
   const navigate = useNavigate();
   const formik = useFormik({
@@ -44,6 +45,11 @@ function EventCreationPage() {
     const TimeZone = (new Date()).getTimezoneOffset;
     const [ timeValue, setTimeValue ] = useState(moment(0).utcOffset(TimeZone.toString()));
     const timeResult = JSON.stringify(timeValue).substring(11,20);
+
+    const [searchBox, setSearchBox ] = useState(null);
+    const onSBLoad = (ref:any) => {
+      setSearchBox(ref);
+    };
 
     return (
         <div className = "App">
@@ -85,13 +91,16 @@ function EventCreationPage() {
                 <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
                 
                 <label htmlFor ='location'>city/state/country : </label>
-                <Autocomplete
-                  apiKey='AIzaSyDhRRpoUjKUIgn9jqI6prKRaQKHJ9e6bQ0'
-                  onPlaceSelected={(place) => {
-                    console.log(place);
-                  }}
-                  
-                />
+                <LoadScript
+                  googleMapsApiKey="AIzaSyDhRRpoUjKUIgn9jqI6prKRaQKHJ9e6bQ0"
+                >
+                  <>
+                    <StandaloneSearchBox>
+                      
+                    </StandaloneSearchBox>
+                  </>
+                </LoadScript>
+                
 
               </div>
 
