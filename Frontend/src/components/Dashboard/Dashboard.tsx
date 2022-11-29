@@ -1,5 +1,5 @@
 import "./Dashboard.css";
-import { withRouter } from "../withRouter";
+import { withFuncProps } from "../withFuncProps";
 import React from 'react';
 import { getinfo, getevent, logout} from '../../helpers/connector';
 import DashboardBox from './DashboardBox';
@@ -61,16 +61,16 @@ class Dashboard extends React.Component<any,any>{
             after = this.state.isFilterAfterChecked ? after: "none";
             let before = JSON.stringify(this.state.beforeDate).substring(1,11)+"T00:00:00";
             before = this.state.isFilterBeforeChecked ? before: "none";
-            console.log(before);
-            console.log(after);
             getevent(this.state.currentPage,after,before,"-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
                 let key;
                 let array = [];
                 for(key in content.data){
                     array.push([content.data[key].title, content.data[key].email, content.data[key].time, 
-                        content.data[key].location, content.data[key].description, content.data[key].id]);
+                        content.data[key].location, content.data[key].description, content.data[key].id,
+                        content.data[key].latitude, content.data[key].longitude]);
                 }
                 this.setState({arr:array});
+                this.props.setarr(array);
             })
             getinfo().then((content)=>{
                 this.setState({username:content.data.username});
@@ -92,14 +92,12 @@ class Dashboard extends React.Component<any,any>{
     }
 
     dateBeforeChange(date: Date){
-        console.log('date before!', date);
         this.setState({
             beforeDate: date
         });
     }
 
     dateAfterChange(date: Date){
-        console.log('date after: ', date);
         this.setState({
             afterDate: date
         });
@@ -225,4 +223,4 @@ class Dashboard extends React.Component<any,any>{
 }
 
 
-export default withRouter(Dashboard);
+export default withFuncProps(Dashboard);

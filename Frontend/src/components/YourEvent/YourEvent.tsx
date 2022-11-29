@@ -1,5 +1,5 @@
 import "./YourEvent.css";
-import { withRouter } from "../withRouter";
+import { withFuncProps } from "../withFuncProps";
 import React from 'react';
 import { getPersonalRsvp} from '../../helpers/connector';
 import YourEventBox from "./YourEventBox";
@@ -96,4 +96,4 @@ class YourEvent extends React.Component<any,any>{
 }
 
 
-export default withRouter(YourEvent);
+export default withFuncProps(YourEvent);

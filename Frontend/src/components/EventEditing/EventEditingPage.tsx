@@ -7,7 +7,7 @@ import { getinfo, eventdel, eventdeladmin, geteventbyid,
   updatelocation, updatelocationadmin, updatetime, updateInviteOnly,
   updatetimeadmin, updatetitle, updatetitleadmin, updateEmailadmin} from '../../helpers/connector'
 import "./EventEditingPage.css"
-import { withRouter } from '../withRouter';
+import { withFuncProps } from '../withFuncProps';
 
 class EventEditingPage extends Component<any,any> {
   constructor(props:any){
@@ -218,4 +218,4 @@ class EventEditingPage extends Component<any,any> {
   }
 }
 
-export default withRouter(EventEditingPage);
+export default withFuncProps(EventEditingPage);
