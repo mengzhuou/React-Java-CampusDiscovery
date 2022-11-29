@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import "./EventDescriptionPage.css";
 import "../Dashboard/Dashboard.css";
-import { withRouter } from "../withRouter";
+import { withFuncProps } from "../withFuncProps";
 import { Component } from 'react';
 import { geteventbyid, getRsvpStatus, getCount, getinfo } from '../../helpers/connector';
   
@@ -130,4 +130,4 @@ class EventDescriptionPage extends Component<any,any> {
     );
   }
 }
-export default withRouter(EventDescriptionPage);
+export default withFuncProps(EventDescriptionPage);

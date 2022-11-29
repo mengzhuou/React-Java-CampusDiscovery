@@ -23,11 +23,11 @@ import React from "react";
 class App extends React.Component<any,any>{
   constructor(props:any){
     super(props);
-    this.state = {EventID: -1};
+    this.state = {EventID: -1, arr:[]};
     this.getEventID = this.getEventID.bind(this);
     this.setEventID = this.setEventID.bind(this);
-    this.getAttendeeID = this.getAttendeeID.bind(this);
-    this.setAttendeeID = this.setAttendeeID.bind(this);
+    this.setarr = this.setarr.bind(this);
+    this.getarr = this.getarr.bind(this);
 
   }
   setEventID(id:number){
@@ -37,18 +37,23 @@ class App extends React.Component<any,any>{
     return this.state.EventID;
   }
 
-  setAttendeeID(id:number){
-    this.setState({EventID: id});
+  setarr(arr:any[]){
+    let tmp:any[] = [];
+    for(let i in arr){
+      tmp.push(arr[i]);
+    }
+    this.setState({arr:tmp});
   }
-  getAttendeeID(){
-    return this.state.EventID;
+  getarr(){
+    return this.state.arr;
   }
+
   render() {
     return (
       <Router>
         <Routes>
           <Route path="/first" element={<First />}/>
-          <Route path="/dashboard" element={<Dashboard setEventID={this.setEventID}/>}/>
+          <Route path="/dashboard" element={<Dashboard setEventID={this.setEventID} setarr={this.setarr}/>}/>
           <Route path="/second" element={<Second />}/>
           <Route path="/" element={<Main/>}/>
           <Route path="/EventCreationPage" element={<EventCreationPage/>}/>
@@ -60,7 +65,7 @@ class App extends React.Component<any,any>{
           <Route path="/HostManagementPage" element={<HostManagementPage eventNum={this.getEventID}/>}/>
           <Route path="/RsvpPage" element={<RsvpPage eventNum={this.getEventID}/>}/>
           <Route path="/yourEvent" element={<YourEvent setEventID={this.setEventID}/>}/>
-          <Route path="/InitMap" element={<InitMap />}/>
+          <Route path="/InitMap" element={<InitMap getarr={this.getarr} setEventID={this.setEventID}/>}/>
         </Routes>
       </Router>
     );
