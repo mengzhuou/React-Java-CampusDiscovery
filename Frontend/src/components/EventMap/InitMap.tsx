@@ -60,7 +60,7 @@ class InitMap extends React.Component<any,any> {
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={this.state.currentLocation}
-            zoom={5}
+            zoom={15}
             onLoad={this.onMapLoad}
           >
           <p className='mapTitle'>Event Map</p>

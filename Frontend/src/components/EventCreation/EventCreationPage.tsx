@@ -9,13 +9,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css'
 import moment from 'moment';
-import Autocomplete from "react-google-autocomplete";
+import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
+import { withFuncProps } from '../withFuncProps';
 
-import { GoogleMap, StandaloneSearchBox, LoadScript } from "@react-google-maps/api";
-  
-const lib = ['places'];
-
-function EventCreationPage() {
+function EventCreationPage(props:any) {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues:{
@@ -31,23 +28,46 @@ function EventCreationPage() {
         textContent += dateResult + timeResult + "\nEvent location: " + values.location + 
                       "\nEvent description: " + values.description + "\nEvent Capacity: " + values.capacity + "\nEvent Invite-Only: " + values.inviteonly;
         if(window.confirm(textContent)){
-          addevent(values.title, values.description, values.location, "-1", "-1", dateResult + timeResult, (values.inviteonly?"true":"false"), values.capacity).then(()=>{
+          addevent(values.title, values.description, values.location, longitude , latitude, dateResult + timeResult, (values.inviteonly?"true":"false"), values.capacity).then(()=>{
             alert("Confirmation: your changes have been saved")
             navigate("/dashboard")
           }).catch(()=>console.log("failed"))
         }
       }
-    })
-   
+    })  
 
     const [date, setDate] = useState("");
+    const [latitude, setLatitude] = useState("-1");
+    const [longitude, setLongitude] = useState("-1");
+    const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete>();
     const dateResult = JSON.stringify(date).substring(1,11);
 
     const TimeZone = (new Date()).getTimezoneOffset;
     const [ timeValue, setTimeValue ] = useState(moment(0).utcOffset(TimeZone.toString()));
     const timeResult = JSON.stringify(timeValue).substring(11,20);
 
-    return (
+    const onPlaceChanged = ()=>{
+      if(autocomplete !== undefined && autocomplete?.getPlace() !== undefined && autocomplete?.getPlace().geometry !== undefined &&
+       autocomplete?.getPlace().geometry !== undefined && autocomplete?.getPlace().geometry?.location !== undefined){
+        let tmp = autocomplete?.getPlace().geometry?.location;
+        let addrtmp = autocomplete.getPlace().address_components
+        var addy = '';
+        if(addrtmp){
+          addy = [
+            ((addrtmp[0] && addrtmp[0].short_name) || ''),
+            ((addrtmp[1] && addrtmp[1].short_name) || ''),
+            ((addrtmp[2] && addrtmp[2].short_name) || '')
+        ].join(' ');
+        }
+        if(tmp !== undefined && addy !== undefined){
+          setLatitude(tmp["lat"]().toString());
+          setLongitude(tmp["lng"]().toString());
+          formik.setFieldValue("location", addy)
+        }
+      }
+    }
+
+    return props.isLoaded? (
         <div className = "App">
             <header className="App-header">
             <p>Event Creation</p>
@@ -84,7 +104,12 @@ function EventCreationPage() {
 
               <div className="text">
                 <label htmlFor ='location'>Event location : </label>
+                <Autocomplete
+                  onLoad={(autocomplete:google.maps.places.Autocomplete)=>setAutocomplete(autocomplete)}
+                  onPlaceChanged={onPlaceChanged}
+                >
                 <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
+                </Autocomplete>
               </div>
 
 
@@ -118,7 +143,7 @@ function EventCreationPage() {
               </Link>
           </div>
         </div>
-    );
+    ) : <></> ;
 }
   
-export default EventCreationPage;
+export default withFuncProps(EventCreationPage);
