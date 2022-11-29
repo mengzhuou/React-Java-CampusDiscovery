@@ -1,5 +1,8 @@
 package com.gtbackend.gtbackend.api;
 
+import com.gtbackend.gtbackend.dao.EventRepository;
+import com.gtbackend.gtbackend.dao.RsvpRepository;
+import com.gtbackend.gtbackend.model.Event;
 import com.gtbackend.gtbackend.model.Role;
 import com.gtbackend.gtbackend.model.User;
 import com.gtbackend.gtbackend.service.UserService;
@@ -20,20 +23,30 @@ import java.util.*;
 @RequestMapping("/api/v1")
 public class UserAPI {
     private final UserService userService;
+    private final EventRepository eventRepository;
+    private final RsvpRepository rsvpRepository;
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserAPI(UserService userService,
-                   PasswordEncoder passwordEncoder) {
+                   PasswordEncoder passwordEncoder,
+                   EventRepository eventRepository,
+                   RsvpRepository rsvpRepository) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.eventRepository = eventRepository;
+        this.rsvpRepository = rsvpRepository;
     }
 
     //related to User Service
     @GetMapping("/info")
-    public String getUser(Principal principal){
-        User tmp = userService.getUser(principal.getName()).get();
-        return tmp.getRole().toString();
+    @ResponseBody
+    public Map<String, String> getUser(Principal principal){
+        User user = userService.getUser(principal.getName()).get();
+        Map<String, String> ret = new HashMap<>();
+        ret.put("username", user.getUsername());
+        ret.put("role", user.getRole().toString());
+        return ret;
     }
 
     @PostMapping("/logout")
@@ -71,6 +84,11 @@ public class UserAPI {
 
     @DeleteMapping("/deleteUser")
     public void deleteUser(Principal principal){
+        List<Event> events = eventRepository.findAllbyUser(principal.getName());
+        for(Event e : events){
+            rsvpRepository.deleteAllRsvp(e.getId());
+        }
+        eventRepository.deleteEventbyEmail(principal.getName());
         userService.removeUser(principal.getName());
     }
 

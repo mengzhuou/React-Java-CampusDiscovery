@@ -5,7 +5,6 @@ import{ CookieJar } from 'tough-cookie';
 const jar = new CookieJar();
 const client = wrapper(axios.create({ jar }));
 
-// Heroku deploy: https://cs4261todolist.herokuapp.com/
 var host = "http://localhost:8080";
 
 var url = host + "/api/v1/";
@@ -74,7 +73,8 @@ export async function getinfo(){
 
 //event API
 
-export async function addevent(title:string, description:string, location:string, time:string){
+export async function addevent(title:string, description:string, location:string, longitude:string, latitude:string,
+   time:string, invite:string, capacity: string){
 
   let content = await client({
       method: 'post',
@@ -84,17 +84,32 @@ export async function addevent(title:string, description:string, location:string
         title: title,
         description: description,
         location: location,
+        longitude:longitude,
+        latitude:latitude,
         time: time,
+        invite: invite,
+        capacity: capacity,
       }
     });
   return content;
 }
 
-export async function getevent(page:number){
+export async function getevent(page:number, dateAfter:string, dateBefore:string, latitude:string, longitude:string, miles:string, host: string){
 
   let content = await client({
       method: 'get',
-      url: url+"getEvent?page="+page.toString(),
+      url: url+"getEvent?page="+page.toString()+"&dateAfter="+dateAfter+"&dateBefore="+
+        dateBefore+"&latitude="+latitude+"&longitude="+longitude+"&miles="+miles+"&host="+host,
+      withCredentials: true
+    });
+  return content;
+}
+
+export async function geteventbyid(id:number){
+
+  let content = await client({
+      method: 'get',
+      url: url+"getEventById?id="+id.toString(),
       withCredentials: true
     });
   return content;
@@ -177,11 +192,26 @@ export async function updatetime(id:number, time:string){
   return content;
 }
 
+export async function updateInviteOnly(id:number, invite:string){
+
+  let content = await client({
+      method: 'patch',
+      url: url+"updateInvite",
+      withCredentials: true,
+      data: {
+        id: id.toString(),
+        invite: invite,
+      }
+    });
+  return content;
+}
+
 //admin API
 
 var urladmin = host + "/api/admin/";
 
-export async function addeventadmin(title:string, email:string, description:string, location:string, time:string){
+export async function addeventadmin(title:string, email:string, description:string, location:string, longitude:string, latitude:string,
+  time:string, invite:string, capacity:string){
 
   let content = await client({
       method: 'post',
@@ -192,7 +222,11 @@ export async function addeventadmin(title:string, email:string, description:stri
         email: email,
         description: description,
         location: location,
+        longitude: longitude,
+        latitude: latitude,
         time: time,
+        invite: invite,
+        capacity: capacity,
       }
     });
   return content;
@@ -281,55 +315,79 @@ export async function updateEmailadmin(id:number, email:string){
 
 // Rsvp API
 
-export async function addRsvp(email:string, status:string){
+export async function updateRsvp(eventid: number, status:string){
 
   let content = await client({
     method: 'patch',
-    url: url+"addRsvp",
+    url: url+"updateRsvp",
     withCredentials: true,
     data: {
-      email: email,
-      statis: status,
-    }
-  })
-  return content;
-}
-
-export async function getRsvp(email:string){
-
-  let content = await client({
-    method: 'patch',
-    url: url+"getRsvp",
-    withCredentials: true,
-    data: {
-      email: email,
-    }
-  })
-  return content;
-}
-
-export async function updateRsvpStatus(email:string, status:string){
-
-  let content = await client({
-    method: 'patch',
-    url: url+"updateStatus",
-    withCredentials: true,
-    data: {
-      email: email,
+      event_id: eventid.toString(),
       status: status,
     }
   })
   return content;
 }
 
-export async function rsvpDel(email:string){
+export async function getRsvp(eventid: number, status: string){
 
   let content = await client({
-    method: 'patch',
-    url: url+"removeRsvp",
+    method: 'get',
+    url: url+"getRsvp?id="+eventid.toString()+"&status="+status,
+    withCredentials: true,
+  })
+  return content;
+}
+
+export async function getPersonalRsvp(){
+
+  let content = await client({
+    method: 'get',
+    url: url+"getPersonalRsvp",
+    withCredentials: true,
+  })
+  return content;
+}
+
+export async function getCount(event_id: number){
+
+  let content = await client({
+    method: 'get',
+    url: url+"getCount?id="+event_id.toString(),
+    withCredentials: true,
+  })
+  return content;
+}
+
+export async function getRsvpStatus(event_id: number){
+
+  let content = await client({
+    method: 'get',
+    url: url+"getRsvpStatus?id="+event_id.toString(),
+    withCredentials: true,
+  })
+  return content;
+}
+
+export async function hostRemove(event_id: number, email: string){
+
+  let content = await client({
+    method: 'delete',
+    url: url+"hostRemove?id="+event_id.toString()+"&email="+email,
+    withCredentials: true,
+  })
+  return content;
+}
+
+export async function hostInvite(event_id: number, email: string){
+
+  let content = await client({
+    method: 'post',
+    url: url+"hostInvite",
     withCredentials: true,
     data: {
       email: email,
+      event_id: event_id
     }
   })
   return content;
@@ -341,20 +399,22 @@ export async function runall(){ //for testing only
     await register("dobigstuff@gmail.com", "big stuff","big","guy","student").then(()=>console.log("success reg")).catch(()=>console.log("unsuc reg"));
     await login("dobigstuff@gmail.com", "big stuff").then(()=>console.log("success login")).catch(()=>console.log("unsuc login"));
     await getinfo().then((content)=>console.log(content.data)).catch((err)=>console.log("uncomfy"));
-    await addevent("big stuff","unique","stuff","student").then(()=>console.log("add suc")).catch(()=>console.log("add fail"));
-    await getevent(1).then((content)=>console.log(content.data)).catch((err)=>console.log("uncomfy"));
+    await addevent("big stuff","unique","stuff","-1","-1","student", "FALSE", "2020-08-12T12:00:30").then(()=>console.log("add suc")).catch(()=>console.log("add fail"));
+    await getevent(1,"none","none","-1","-1","none","none").then((content)=>console.log(content.data)).catch((err)=>console.log("uncomfy"));
     await eventdel(3).then(()=>console.log("event del suc")).catch(()=>console.log("del event err"));
     await updatetitle(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatedescription(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatelocation(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatetime(1, "order of big guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await geteventsize().then((content)=>console.log(content.data)).catch(()=>console.log("size fail"));
+    await updateRsvp(1, "WillAttend").then(()=>console.log("successful update Attend")).catch(()=>console.log("unsuc update Attend"));
+    
     await userdel().then(()=>console.log("del suc")).catch(()=>console.log("del err"));
 
     await register("dobigstuff@gmail.com", "big stuff","big","guy","admin").then(()=>console.log("success admin reg")).catch(()=>console.log("unsuc reg"));
     await login("dobigstuff@gmail.com", "big stuff").then(()=>console.log("success login")).catch(()=>console.log("unsuc login"));
     await getinfo().then((content)=>console.log(content.data)).catch((err)=>console.log("uncomfy"));
-    await addeventadmin("big stuff", "bigboi@boi.com","unique","stuff","student").then(()=>console.log("add suc")).catch(()=>console.log("add fail"));
+    await addeventadmin("big stuff", "bigboi@boi.com","unique","stuff","-1","-1","student", "True","2020-08-12T12:00:30").then(()=>console.log("add suc")).catch(()=>console.log("add fail"));
     await eventdeladmin(5).then(()=>console.log("event del suc")).catch(()=>console.log("del event err"));
     await updatetitleadmin(4, "pho guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));
     await updatedescriptionadmin(4, "pho guy").then(()=>console.log("successful update")).catch(()=>console.log("unsuc update"));

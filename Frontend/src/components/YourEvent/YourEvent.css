@@ -1,0 +1,29 @@
+.RsvpBody{
+    margin-bottom: 30px;
+    left: 0%;
+    padding: 0;
+    position: relative;
+    width: calc(100% - 150px);
+    height: 100%;
+    display:flex;
+    flex-wrap: wrap;
+
+}
+
+.header{
+    position: relative;
+    font-size: 300%;
+    color: white;
+}
+
+.AppDashboard{
+    width: auto;
+    height: auto;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    background-color:rgb(235, 146, 146);
+    font-family: "Neucha", cursive;
+    min-height: 100vh;
+    padding-bottom: 3%;
+}

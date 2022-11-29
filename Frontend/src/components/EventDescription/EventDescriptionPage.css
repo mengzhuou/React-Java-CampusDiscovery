@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Neucha&display=swap');
+
+.LoginPage-header{
+    margin-top: 5%;
+    font-weight: bolder;
+}
+
+
+.descriptionPageTitle{
+    margin-top: 15%;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #6e3232;
+    z-index: 1;
+    text-align: center;
+    font-weight: bolder;
+    margin-right: 20px;
+}
+
+.desName{
+    margin: 3% 3% 3% 3%;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
+    word-wrap: break-word;
+    letter-spacing: 2px;
+    float: inline-start;
+}
+
+.eventBody{
+    border-radius: 5%;
+    box-shadow: rgba(0, 0, 255, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    background:  #ffced6;
+    width: 500px;
+    height: fit-content;
+    margin-bottom: 50px;
+}
+
+
+.test{
+    width: 60px;
+    height: 50px;
+    margin-right: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;    
+    text-align: center;
+    vertical-align: middle;
+    background: rgb(255, 101, 101);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+}
+
+.DescriptionPageRsvpButton{
+    float: right;
+    margin-top: 2%;
+    margin-right: 2%;
+    color: rgb(101, 58, 97);
+    background-color: #f9b5c0;
+    border-radius: 10%;
+    text-align: center;
+    width: fit-content;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
+    position: relative;
+}
+
+.ManageButton{
+    /* visibility: hidden; */
+    float: left;
+    color: black;
+    text-align: center;
+    padding: 10px 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    background-color: #ddd;
+    cursor: pointer;
+    font-family: "Neucha", cursive;
+    border-radius: 5%;
+    font-weight: bold;
+}

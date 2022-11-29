@@ -1,0 +1,9 @@
+.mapTitle{
+    z-index: 1;
+    color:black;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 30px;
+    position: relative;
+    text-align: center;
+}

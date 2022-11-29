@@ -2,6 +2,8 @@ package com.gtbackend.gtbackend.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "event_table")
@@ -12,23 +14,33 @@ public class Event {
     @NotBlank
     private String title;
 
-    @NotBlank
-    private String email;
+    @ManyToOne
+    private User user;
     @Lob
     private String description;
     private String location;
-    private String time;
+    private double longitude;
+    private double latitude;
+    private LocalDateTime time;
+    private int capacity;
+
+    private boolean inviteOnly;
 
     public Event(){
 
     }
 
-    public Event(String title, String email, String description, String location, String time) {
+    public Event(String title, User user, String description, String location, double longitude, double latitude,
+                 LocalDateTime time, boolean inviteOnly, int capacity) {
         this.title = title;
-        this.email = email;
+        this.user = user;
         this.description = description;
         this.location = location;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.time = time;
+        this.inviteOnly = inviteOnly;
+        this.capacity = capacity;
     }
 
     public long getId() {
@@ -44,11 +56,7 @@ public class Event {
     }
 
     public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        return user.getUsername();
     }
 
     public String getDescription() {
@@ -67,11 +75,48 @@ public class Event {
         this.location = location;
     }
 
-    public String getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(String time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public boolean isInviteOnly() {
+        return inviteOnly;
+    }
+
+    public void setInviteOnly(boolean inviteOnly) {
+        this.inviteOnly = inviteOnly;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
 }
