@@ -62,6 +62,15 @@ class AttendeeListPage extends Component<any,any> {
             />)
         }
 
+        const cssBox: any[] = [];
+        if(attendarr.length!=0){
+            cssBox.push(
+                <div className='indexList'>
+                    {countArr.map(index => <div>{index}</div>)}
+                </div>
+            )
+        }
+
         return (
             <div className='App'>
                 <header>
@@ -75,9 +84,7 @@ class AttendeeListPage extends Component<any,any> {
                         />
                 </header>
                 <div className="IndexAndList">
-                    <div className='indexList'>
-                        {countArr.map(index => <div>{index}</div>)}
-                    </div>
+                    {cssBox}
                     <div>
                         {attendarr}
                     </div>

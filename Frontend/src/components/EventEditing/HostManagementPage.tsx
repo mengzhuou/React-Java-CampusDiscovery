@@ -88,6 +88,17 @@ class HostManagementPage extends Component<any,any> {
                 update={this.forceup}
             />)
         }
+
+        const cssBox: any[] = [];
+        if(attendarr.length!=0){
+            cssBox.push(
+                
+                <div className='indexListManagement'>
+                    {countArr.map(index => <div>{index}</div>)}
+                </div>
+            )
+        }
+
         return (
             <div className='App'>
                 <header>
@@ -106,14 +117,11 @@ class HostManagementPage extends Component<any,any> {
                     <button className='inviteButton' type='submit' onClick={this.onClick}>Submit</button>
                 </div>
                 <div className="IndexAndList">
-                    <div className='indexListManagement'>
-                        {countArr.map(index => <div>{index}</div>)}
-                    </div>
+                    {cssBox}
                     <div>
                         {attendarr}
                     </div>
                 </div>
-
                 <div className='bottomnav'>
                     <Link to = "/EventDescriptionPage">
                         <button className="buttomnavButton">Description</button>

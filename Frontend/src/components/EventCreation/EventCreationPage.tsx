@@ -47,11 +47,6 @@ function EventCreationPage() {
     const [ timeValue, setTimeValue ] = useState(moment(0).utcOffset(TimeZone.toString()));
     const timeResult = JSON.stringify(timeValue).substring(11,20);
 
-    const [searchBox, setSearchBox ] = useState(null);
-    const onSBLoad = (ref:any) => {
-      setSearchBox(ref);
-    };
-
     return (
         <div className = "App">
             <header className="App-header">
@@ -90,19 +85,6 @@ function EventCreationPage() {
               <div className="text">
                 <label htmlFor ='location'>Event location : </label>
                 <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
-                
-                <label htmlFor ='location'>city/state/country : </label>
-                <LoadScript
-                  googleMapsApiKey="AIzaSyDhRRpoUjKUIgn9jqI6prKRaQKHJ9e6bQ0"
-                >
-                  <>
-                    <StandaloneSearchBox>
-                      
-                    </StandaloneSearchBox>
-                  </>
-                </LoadScript>
-                
-
               </div>
 
 
