@@ -44,11 +44,14 @@ class InitMap extends React.Component<any,any> {
     let arr = this.props.getarr();
     let marker = [];
     for(let i = 0; i < arr.length; i++){
+      if(arr[i][6] === -1 && arr[i][7] === -1){
+        continue;
+      }
       marker.push(<Marker 
         key={i} 
         position={{lat:arr[i][6],lng:arr[i][7]}} 
         onClick={()=>this.handleclick(arr[i][5])}
-        label={arr[i][0].substring(0,200)}
+        label={arr[i][0].length > 20 ? arr[i][0].substring(0,20-3) + "..." : arr[i][0]}
         />);
     }
     
