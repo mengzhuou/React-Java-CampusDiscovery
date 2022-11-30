@@ -9,7 +9,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css'
 import moment from 'moment';
-import { Autocomplete, useJsApiLoader } from "@react-google-maps/api";
+import { Autocomplete } from "@react-google-maps/api";
 import { withFuncProps } from '../withFuncProps';
 
 function EventCreationPage(props:any) {

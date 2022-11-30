@@ -18,7 +18,7 @@ class Dashboard extends React.Component<any,any>{
              beforeDate: new Date(), afterDate: new Date(), hostEmailFilter: "",
              distance: "", currentPage: 1, lastpage: 6, arr: [], 
              xpos:window.scrollX, ypos:window.scrollY, updateForced:false, 
-             ForceUpdateNow:false, username:""};
+             ForceUpdateNow:false, username:"", location: [33.77777410980573, -84.39852918539553]};
         this.setCurrentPage = this.setCurrentPage.bind(this);
         this.forceup = this.forceup.bind(this);
         this.pagelogout = this.pagelogout.bind(this);
@@ -57,11 +57,20 @@ class Dashboard extends React.Component<any,any>{
     }
     componentDidUpdate(prevProps: Readonly<any>, prevState: Readonly<any>, snapshot?: any): void {
         if(this.state.ForceUpdateNow){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(({coords: {latitude: lat, longitude: lng}})=>{
+                  const pos = [lat, lng]
+                  this.setState({ location: pos})
+                })
+              }
             let after = JSON.stringify(this.state.afterDate).substring(1,11)+"T00:00:00";
             after = this.state.isFilterAfterChecked ? after: "none";
             let before = JSON.stringify(this.state.beforeDate).substring(1,11)+"T00:00:00";
             before = this.state.isFilterBeforeChecked ? before: "none";
-            getevent(this.state.currentPage,after,before,"-1","-1",this.state.distance,this.state.hostEmailFilter).then((content)=>{
+            getevent(this.state.currentPage,after,before,
+                this.state.location[0].toString(),this.state.location[1].toString(),
+                this.state.distance,this.state.hostEmailFilter).then((content)=>{
+                
                 let key;
                 let array = [];
                 for(key in content.data){
