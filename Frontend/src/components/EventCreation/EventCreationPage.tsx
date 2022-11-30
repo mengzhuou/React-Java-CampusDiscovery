@@ -75,7 +75,7 @@ function EventCreationPage(props:any) {
           <form className="eventCreationForm" onSubmit={formik.handleSubmit}>
               <div className="text">
                 <label htmlFor='title'>Event title : </label>
-                <input size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
+                <input  className="inputStyle" size={54.5} onChange={formik.handleChange} value={formik.values.title} id='title' name='title'></input>
               </div>
 
               <div className="text" >
@@ -86,8 +86,8 @@ function EventCreationPage(props:any) {
                   <DatePicker
                     dateFormat="yyyy-MM-dd"
                     selected={date}
-                    
                     onChange={setDate}
+                    placeholderText="YYYY/MM/DD"
                   />
                 </div>
                 <div className='datetime'>
@@ -95,7 +95,6 @@ function EventCreationPage(props:any) {
                     format='HH:mm'
                     value={timeValue}
                     onChange={setTimeValue}
-                    placeholder="00:00"
                     showSecond={false}
                   />
                 </div>
@@ -103,35 +102,39 @@ function EventCreationPage(props:any) {
               </div>
 
               <div className="text">
-                <label htmlFor ='location'>Event location : </label>
-                <Autocomplete
-                  onLoad={(autocomplete:google.maps.places.Autocomplete)=>setAutocomplete(autocomplete)}
-                  onPlaceChanged={onPlaceChanged}
-                >
-                <input size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
-                </Autocomplete>
+                <div className="text" >
+                 <label htmlFor ='location'>Event location : </label>
+                </div>
+                <div>
+                  <Autocomplete
+                    onLoad={(autocomplete:google.maps.places.Autocomplete)=>setAutocomplete(autocomplete)}
+                    onPlaceChanged={onPlaceChanged}
+                  >
+                  <input className="inputInside" size={51} onChange={formik.handleChange} value = {formik.values.location} id='location' name='location'></input>
+                  </Autocomplete>
+                </div>
               </div>
 
 
               <div className="text">
                 <label htmlFor ='description'>Event description : </label>
-                <input size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
+                <input  className="inputStyle" size={48} onChange={formik.handleChange} value = {formik.values.description} id='description' name='description'></input>
               </div>
 
               <div className="text">
                 <label htmlFor ='capacity'>Event Capacity : </label>
-                <input size={48} onChange={formik.handleChange} value = {formik.values.capacity} id='capacity' name='capacity'></input>
+                <input className="inputStyle" size={48} onChange={formik.handleChange} value = {formik.values.capacity} id='capacity' name='capacity'></input>
               </div>
              
               <div className = "text">
                 <label>
-                  <input size={48} type="checkbox" onChange={formik.handleChange} id='inviteonly' name = 'inviteonly'/>
+                  <input  className="inputStyle" size={48} type="checkbox" onChange={formik.handleChange} id='inviteonly' name = 'inviteonly'/>
                      Invite Only
                 </label>
               </div>
 
 
-              <button className="button" type="submit">Create Event</button>
+              <button className="creationButton" type="submit">Create Event</button>
 
               
 
